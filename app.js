@@ -907,7 +907,7 @@ function renderDualsCharts() {
 
   // Chart 1: Gap
   Plotly.newPlot('chart_duals_gap',[
-    {x:['Duals who LIVE in Puerto Rico','Duals the federal data COUNTS'],y:[302000,13255],type:'bar',
+    {x:['Duals who LIVE in Puerto Rico','Duals the federal data COUNTS (CY2023)'],y:[302000,13255],type:'bar',
      marker:{color:[GRN,RED]},
      text:['~302,000','13,255'],textposition:'outside',textfont:{size:14,family:'JetBrains Mono',weight:700},
      hovertemplate:'<b>%{x}</b><br>%{y:,.0f} duals<extra></extra>'}
