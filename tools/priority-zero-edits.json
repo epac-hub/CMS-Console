@@ -1,0 +1,177 @@
+[
+ {
+  "file": "index.html",
+  "old_string": "    <div class=\"lbl\">PR Hospital Net Margin</div>\n    <div class=\"val accent\">1.1%</div>\n    <div class=\"sub\">vs 8.0% US national · one-seventh</div>",
+  "new_string": "    <div class=\"lbl\">PR Patient-Care Operating Margin</div>\n    <div class=\"val accent\">−10.1%</div>\n    <div class=\"sub\">vs −3.4% mainland · FY2023 CMS cost reports</div>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "    <div class=\"step-d\">1.1% margin vs 8.0% nationally.</div>",
+  "new_string": "    <div class=\"step-d\">Patient-care operating margin −10.1% vs −3.4% mainland.</div>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "  <h2 class=\"h2\" style=\"font-size:22px\">Margins squeezed to <em>near zero</em></h2>",
+  "new_string": "  <h2 class=\"h2\" style=\"font-size:22px\">Losing money on <em>patient care</em></h2>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "  <p class=\"h2-sub\" style=\"margin-bottom:18px\">Low benchmarks compress hospital margins to 1.1% versus 8.0% nationally, while medical-loss ratios run higher across Medicare and Medicaid lines. Individual comprehensive insurance is underwater.</p>",
+  "new_string": "  <p class=\"h2-sub\" style=\"margin-bottom:18px\">Low benchmarks push hospitals into the red on patient care: patient-care operating margin −10.1% in Puerto Rico versus −3.4% mainland (FY2023 CMS Hospital Provider Cost Report). Hospitals lose roughly 10 cents of every patient-revenue dollar and approach breakeven only through non-patient income — the distribution is wide, with Menonita Cayey at +22.2% and San Lucas Ponce at +14.0% while most run negative. Medical-loss ratios run higher across Medicare and Medicaid lines, and individual comprehensive insurance is underwater.</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "      <div class=\"lbl\">PR Hospital Net Margin (2021)</div>\n      <div class=\"val accent\">1.1%</div>\n      <div class=\"sub\">US: 8.0% — PR margin is one-seventh</div>",
+  "new_string": "      <div class=\"lbl\">PR Patient-Care Operating Margin (FY2023)</div>\n      <div class=\"val accent\">−10.1%</div>\n      <div class=\"sub\">mainland: −3.4% — (patient revenue − operating expense) / patient revenue</div>"
+ },
+ {
+  "file": "index.html",
+  "old_string": ">CMS Hospital Cost Report</a>, 2021 · [4]",
+  "new_string": ">CMS Hospital Cost Report</a>, 2021 · margins: FY2023 (HCRIS) · [4]"
+ },
+ {
+  "file": "index.html",
+  "old_string": "[3]</span> CMS Hospital Provider Cost Report, 2021.",
+  "new_string": "[3]</span> CMS Hospital Provider Cost Report (HCRIS), 2021 &amp; FY2023."
+ },
+ {
+  "file": "index.html",
+  "old_string": "<p class=\"kicker\">The invisible duals · CY2023</p>",
+  "new_string": "<p class=\"kicker\">The invisible duals · CY2023 → March 2026</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "<h2 class=\"h2\">The duals federal data <em>cannot see</em></h2>",
+  "new_string": "<h2 class=\"h2\">The duals Medicare’s data <em>cannot see</em></h2>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "in its monthly MMA state file. <strong>Puerto Rico is statutorily exempt from operating those programs</strong> — §1905(p)(4)(A) of the Social Security Act. No MSP categories, no MMA flags — and therefore no duals, as far as the federal dataset is concerned.</p>",
+  "new_string": "in its monthly MMA state file — an exchange the statute mandates for <em>“the fifty states and the District of Columbia”</em> only. <strong>Puerto Rico is statutorily exempt from operating those programs</strong> — §1905(p)(4)(A) of the Social Security Act. No MSP categories, no MMA flags — and therefore no duals, as far as <strong>Medicare’s dual-status accounting</strong> is concerned. The blindness is precise, not general: CMS’s own T-MSIS-derived Medicaid files count <strong>355,720</strong> Puerto Rico full duals (2022 monthly average). CMS cannot claim the data doesn’t exist — its other ledger has it.</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "in CY2023 — <strong>dead last</strong> among the 50 states and DC. The island’s actual dual population, the <strong>Platinos</strong>, stands at",
+  "new_string": "in CY2023 — <strong>dead last</strong> among the 50 states and DC — and CY2023 was the high-water mark: the Medicare-side count has since collapsed to <strong>7,283</strong> (2024), <strong>6,187</strong> (2025), and <strong>5,581</strong> (March 2026). Against the <strong>307,571</strong> D-SNP enrollees verified in CMS’s own SNP report, the undercount now runs <strong>~55×</strong> — and the volatility is itself the tell: a real population does not halve in a year. The island’s actual dual population, the <strong>Platinos</strong>, stands at"
+ },
+ {
+  "file": "index.html",
+  "old_string": "A jurisdiction whose poorest, sickest 39.5% are recorded as 1.7% enters every one of those calculations",
+  "new_string": "A jurisdiction whose poorest, sickest 39.5% are recorded as 1.7% (CY2023 — lower still today) enters every one of those calculations"
+ },
+ {
+  "file": "index.html",
+  "old_string": "    <div class=\"lbl\">Federal dual count</div>\n    <div class=\"val accent\">13,255</div>\n    <div class=\"sub\">1.7% · last of 50 states + DC + PR</div>",
+  "new_string": "    <div class=\"lbl\">Medicare-side dual count</div>\n    <div class=\"val accent\">5,581</div>\n    <div class=\"sub\">March 2026 · down from 13,255 (CY2023) → 7,283 (2024) → 6,187 (2025)</div>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "    <div class=\"lbl\">Federal visibility</div>\n    <div class=\"val accent\">4.4%</div>\n    <div class=\"sub\">fewer than 1 in 20 duals carry a flag</div>",
+  "new_string": "    <div class=\"lbl\">Medicare-side undercount</div>\n    <div class=\"val accent\">~55×</div>\n    <div class=\"sub\">5,581 flagged vs 307,571 verified D-SNP enrollees · March 2026</div>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "Federal dual tables count 13,255. That's a 96% undercount — 288,745 people the data never sees.</p>",
+  "new_string": "Federal dual tables count 13,255 (CY2023) — a figure that has since fallen to 7,283 (2024), 6,187 (2025), and 5,581 (March 2026). That's a 96% undercount on the CY2023 books alone — 288,745 people the data never sees.</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "The <strong>~22× gap</strong> between bar 1 and bars 2–3 is the finding: the population is real and counted twice over — just not in the dataset that defines who counts as “dual.”</p>",
+  "new_string": "The <strong>~22× gap</strong> between bar 1 and bars 2–3 is the finding — and it has only widened since CY2023: the Medicare-side count slid to <strong>7,283</strong> (2024), <strong>6,187</strong> (2025), and <strong>5,581</strong> (March 2026), an undercount of <strong>~55×</strong> against the <strong>307,571</strong> D-SNP enrollees verified in CMS’s own SNP report. The population is real and counted twice over — just not in the dataset that defines who counts as “dual.”</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "last place.</strong> <strong>Striped red bar (top)",
+  "new_string": "last place.</strong> (And the CY2023 bar is the peak — the Medicare-side count has since fallen to 7,283 in 2024, 6,187 in 2025, and 5,581 by March 2026.) <strong>Striped red bar (top)"
+ },
+ {
+  "file": "index.html",
+  "old_string": "  <h3>Puerto Rico’s duals are invisible to federal data</h3>",
+  "new_string": "  <h3>Puerto Rico’s duals are invisible in Medicare’s dual-status systems — even though CMS’s own Medicaid files count ~300–375K</h3>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "  <p>CMS’s dual-enrollment tables show Puerto Rico with <strong>13,255 dual eligibles (1.7%)</strong>\n     in CY2023 — <strong>dead last</strong> among the 50 states and DC (national average: ~19%).\n     The real population is",
+  "new_string": "  <p>CMS’s dual-enrollment tables show Puerto Rico with <strong>13,255 dual eligibles (1.7%)</strong>\n     in CY2023 — <strong>dead last</strong> among the 50 states and DC (national average: ~19%) —\n     and the count has kept falling: <strong>7,283</strong> (2024), <strong>6,187</strong> (2025),\n     <strong>5,581</strong> (March 2026). Against the <strong>307,571</strong> D-SNP enrollees verified\n     in CMS’s own SNP report, the undercount now runs <strong>~55×</strong> — volatility that is itself\n     evidence of measurement failure, not measurement.\n     The real population is"
+ },
+ {
+  "file": "index.html",
+  "old_string": "(KFF, 2021) — carry no federal\n     dual coding. MedPAC excludes PR from its dual analyses for exactly this reason:",
+  "new_string": "(KFF, 2021) — carry no federal\n     dual coding — the MMA state-file exchange that creates those flags is mandated for <em>“the fifty\n     states and the District of Columbia”</em> only. The invisibility is specific to Medicare’s ledger:\n     CMS’s own T-MSIS-derived Medicaid files count <strong>355,720</strong> PR full duals (2022 monthly\n     average) — the population is fully documented inside the very agency whose dual tables cannot see it.\n     MedPAC excludes PR from its dual analyses for exactly this reason:"
+ },
+ {
+  "file": "index.html",
+  "old_string": "x:['DUALS WHO LIVE IN PUERTO RICO', 'DUALS THE FEDERAL DATA COUNTS'],",
+  "new_string": "x:['DUALS WHO LIVE IN PUERTO RICO', 'DUALS THE FEDERAL DATA COUNTS (CY2023)'],"
+ },
+ {
+  "file": "app.js",
+  "old_string": "{x:['Duals who LIVE in Puerto Rico','Duals the federal data COUNTS'],y:[302000,13255],type:'bar',",
+  "new_string": "{x:['Duals who LIVE in Puerto Rico','Duals the federal data COUNTS (CY2023)'],y:[302000,13255],type:'bar',"
+ },
+ {
+  "file": "index.html",
+  "old_string": "<div><span class=\"meta-val\">95.8%</span> PR MA penetration</div>",
+  "new_string": "<div title=\"CMS MA/Part D penetration files — MA enrollees as a share of Medicare eligibles\"><span class=\"meta-val\">95.8%</span> PR MA penetration</div>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "MA penetration stands at <strong>95.8%</strong>, the highest in the nation, against 63.4% on the mainland.",
+  "new_string": "MA penetration stands at <strong>95.8%</strong> — MA enrollees as a share of Medicare eligibles, per the CMS penetration files — the highest in the nation, against 63.4% on the mainland."
+ },
+ {
+  "file": "index.html",
+  "old_string": "<strong style=\"font-style:normal\">How to read it:</strong> the share of Medicare beneficiaries who choose Medicare Advantage, computed from the same CMS enrollment files: <strong>95.8% in Puerto Rico vs 63.4% on the mainland</strong> (2026). On the island, MA is not one option among several — it <em>is</em> the healthcare system.</p>",
+  "new_string": "<strong style=\"font-style:normal\">How to read it:</strong> the share of Medicare eligibles enrolled in Medicare Advantage — MA enrollees ÷ Medicare eligibles, the CMS penetration-file denominator: <strong>95.8% in Puerto Rico vs 63.4% on the mainland</strong> (2026). Computed instead as a share of beneficiaries with both Part A and Part B (Medicare Monthly Enrollment), the comparison reads <strong>96.2% PR vs 55.9% mainland</strong> — and puts the USVI at <strong>33.4%</strong>. Either construction, one conclusion: on the island, MA is not one option among several — it <em>is</em> the healthcare system.</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "With <strong>95.8% of PR's\n     Medicare population in MA</strong>",
+  "new_string": "With <strong>95.8% of PR's\n     Medicare-eligible population in MA</strong>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "<p>MA penetration in PR is <strong>95.8%</strong> (mainland: 63.4%). When CMS sets PR rates",
+  "new_string": "<p>MA penetration in PR is <strong>95.8%</strong> of Medicare eligibles (mainland: 63.4%). When CMS sets PR rates"
+ },
+ {
+  "file": "index.html",
+  "old_string": "approximately <strong>95.8% MA penetration</strong> versus roughly <strong>63.4%</strong> on the mainland — while",
+  "new_string": "approximately <strong>95.8% MA penetration</strong> (MA enrollees as a share of Medicare eligibles) versus roughly <strong>63.4%</strong> on the mainland — while"
+ },
+ {
+  "file": "index.html",
+  "old_string": "U.S. OIG (2020)</a> and the <a href=\"https://crsreports.congress.gov/product/pdf/R/R47006\" target=\"_blank\" rel=\"noopener\">Congressional Research Service (2021)</a>.</p>",
+  "new_string": "U.S. OIG (2020)</a> and the <a href=\"https://crsreports.congress.gov/product/pdf/R/R46702\" target=\"_blank\" rel=\"noopener\">Congressional Research Service (2021)</a>.</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": ">OIG 2020</a>, <a href=\"https://crsreports.congress.gov/product/pdf/R/R47006\" target=\"_blank\" rel=\"noopener\">CRS 2021</a>.</p>",
+  "new_string": ">OIG 2020</a>, <a href=\"https://crsreports.congress.gov/product/pdf/R/R46702\" target=\"_blank\" rel=\"noopener\">CRS 2021</a>.</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "Office of Inspector General (2020)</a> and the <a href=\"https://crsreports.congress.gov/product/pdf/R/R47006\" target=\"_blank\" rel=\"noopener\">Congressional Research Service (2021)</a> have identified",
+  "new_string": "Office of Inspector General (2020)</a> and the <a href=\"https://crsreports.congress.gov/product/pdf/R/R46702\" target=\"_blank\" rel=\"noopener\">Congressional Research Service (2021)</a> have identified"
+ },
+ {
+  "file": "index.html",
+  "old_string": "Geographic Area Wages.\" <a href=\"https://crsreports.congress.gov/product/pdf/R/R47006\" target=\"_blank\" rel=\"noopener\">crsreports.congress.gov</a>",
+  "new_string": "Geographic Area Wages.\" <a href=\"https://crsreports.congress.gov/product/pdf/R/R46702\" target=\"_blank\" rel=\"noopener\">crsreports.congress.gov</a>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "[7] <a href=\"https://content.naic.org/sites/default/files/inline-files/2022-Annual-Health-Insurance-Industry-Analysis-Report.pdf\" target=\"_blank\" rel=\"noopener\">NAIC 2022</a>, Tables 2 &amp; 5.</p>",
+  "new_string": "[7] <a href=\"https://content.naic.org/sites/default/files/inline-files/Health%202022%20Annual%20Industry%20Report.pdf\" target=\"_blank\" rel=\"noopener\">NAIC 2022</a>, Tables 2 &amp; 5.</p>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "<span class=\"fn-id\">[7]</span> NAIC 2022 Health Insurance Industry Analysis Report. <a href=\"https://content.naic.org/sites/default/files/inline-files/2022-Annual-Health-Insurance-Industry-Analysis-Report.pdf\" target=\"_blank\" rel=\"noopener\">content.naic.org</a></div>",
+  "new_string": "<span class=\"fn-id\">[7]</span> NAIC 2022 Health Insurance Industry Analysis Report. <a href=\"https://content.naic.org/sites/default/files/inline-files/Health%202022%20Annual%20Industry%20Report.pdf\" target=\"_blank\" rel=\"noopener\">content.naic.org</a></div>"
+ },
+ {
+  "file": "index.html",
+  "old_string": "\"page_url\":\"https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-advantagepart-d-contract-and-enrollment-data/monthly-enrollment-contract/plan/state/county/monthly-enrollment-cpsc-2024-03\"",
+  "new_string": "\"page_url\":\"https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-advantagepart-d-contract-and-enrollment-data/monthly-enrollment-contract/plan/state/county\""
+ }
+]
