@@ -303,7 +303,7 @@ nav.tabs {
 nav.tabs .inner {
   max-width: 1320px; margin: 0 auto;
   padding: 0 20px;
-  display: flex; gap: 0; overflow-x: auto;
+  display: flex; gap: 0; flex-wrap: wrap; overflow-x: auto;
   scrollbar-width: none;
 }
 nav.tabs::-webkit-scrollbar, nav.tabs .inner::-webkit-scrollbar { display: none; }
@@ -1022,6 +1022,8 @@ footer a:hover { text-decoration: underline; }
 /* ============================================================ MOBILE */
 @media (max-width: 720px) {
   header .inner, nav.tabs .inner, main { padding-left: 18px; padding-right: 18px; }
+  nav.tabs { position: static; }
+  nav.tabs button { padding: 9px 0; margin-right: 12px; }
   header .inner { flex-direction: column; align-items: flex-start; }
   header .meta-stack { text-align: left; }
   .hero { grid-template-columns: 1fr; gap: 24px; }
