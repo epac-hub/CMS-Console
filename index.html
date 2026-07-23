@@ -1012,6 +1012,7 @@ h2.h2 {
     <button data-tab="muni">Enrollment by Municipio</button>
     <button data-tab="duals">The Invisible Duals</button>
     <button data-tab="circularity">The Circularity Trap</button>
+    <button data-tab="territories">The Territories&rsquo; Perspective</button>
     <button data-tab="partd">Part D · Drug Use &amp; Cost</button>
     <button data-tab="findings">Findings</button>
     <button data-tab="policy">Policy Position</button>
@@ -2002,6 +2003,7 @@ h2.h2 {
   <div class="fn-item"><span class="fn-id">[19]</span> MA RADV final rule, 88 FR 6643 (CMS-4185-F2, Feb 1, 2023): extrapolation from PY2018, no FFS adjuster, PY2011&ndash;2017 enrollee-level only. <a href="https://www.federalregister.gov/documents/2023/02/01/2023-01942/" target="_blank" rel="noopener">federalregister.gov</a> · CMS audit expansion, May 21, 2025 (all eligible contracts annually). <a href="https://www.cms.gov/newsroom/press-releases/cms-rolls-out-aggressive-strategy-enhance-accelerate-medicare-advantage-audits" target="_blank" rel="noopener">cms.gov</a> · Vacated on APA grounds Sept 25, 2025, <em>Humana v. Becerra</em> (N.D. Tex.); DOJ appeal to the Fifth Circuit pending — audits and enrollee-level recoveries continue, extrapolation paused. · HHS-OIG A-04-20-07090 (Aug 2024), MMM Healthcare H4003: 108/688 sampled HCCs unsupported, $165,312 net sampled refund. <a href="https://oig.hhs.gov/reports/all/2024/medicare-advantage-compliance-audit-of-diagnosis-codes-that-mmm-healthcare-llc-contract-h4003-submitted-to-cms/" target="_blank" rel="noopener">oig.hhs.gov</a> · MedPAC coding intensity ~16% (March 2025, ch. 11); the March 2026 revision under v28 is cited directionally only — the exact revised figure awaits primary verification and is deliberately not printed.</div>
   <div class="fn-item"><span class="fn-id">[20]</span> PR Medicaid financing: &sect;1108(g) annual cap (<a href="https://www.gao.gov/products/b-333602" target="_blank" rel="noopener">GAO B-333602</a>); FMAP 55% baseline (&sect;1905(b)), 76% through FY2027 (&sect;1905(ff), CAA 2023 &sect;5101(b); <a href="https://www.congress.gov/crs-product/R47821" target="_blank" rel="noopener">CRS R47821</a>); cap dollar levels are quoted only where attributed to KFF&rsquo;s reading of 42 U.S.C. &sect;1308(g)(6) — statutory text not independently fetched. MACPAC: not all 17 mandatory benefits (no nursing facility, no NEMT). <a href="https://www.macpac.gov/wp-content/uploads/2020/08/Medicaid-and-CHIP-in-Puerto-Rico.pdf" target="_blank" rel="noopener">macpac.gov</a> · Plan Vital ~1.3M enrollees, medicaid.gov PR overview, Jan 2026 (figure surfaced via search index; page fetch blocked from this environment — vintage labeled). · ASES role per CMS, <a href="https://www.medicaid.gov/Medicaid/downloads/puerto-rico-mcp.pdf" target="_blank" rel="noopener">Managed Care in Puerto Rico</a>.</div>
   <div class="fn-item"><span class="fn-id">[21]</span> Medicare FFS Public Provider Enrollment (PECOS), January 2026 snapshot (dataset 2457ea29). <a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" target="_blank" rel="noopener">data.cms.gov</a> · Currently-enrolled practitioners, PECOS types 14-01 (general practice), 14-08 (family practice), 14-11 (internal medicine), bucketed by the enrollment-record date embedded in ENRLMT_ID; counted server-side via the stats API, per-year sums reconciling exactly to filtered totals (PR 4,833 · MS 1,948 · CT 3,357). Disclosed limits: survivor-only (departures invisible in every state equally); record-date, not license date; enrollment supports FFS billing and ordering/referring, so PR&rsquo;s level understates a 96%-MA market — the cohort shape is the claim, not the head-count. Chart shows 2005&ndash;2025; 2003&ndash;04 entries and the partial 2026 month are in totals and medians but not charted.</div>
+  <div class="fn-item"><span class="fn-id">[22]</span> Territories tab provenance, three tiers. Tier 1 (this console&rsquo;s own live verifications): all benchmark series and growth figures (ratebooks CY2018&ndash;CY2027 — PR $777.98 / USVI $967.31 / Guam $1,134.86 / mainland $1,312.52 in CY2027), PR enrollment/penetration (Monthly Enrollment API), PR star ratings and five-star enrollment (550,687 across H5577/H4004/H4003, console vintage 2026). Tier 2 (same primary files, rows not independently re-pulled): USVI/Guam Monthly-Enrollment rows and Census counts, links in-line. Tier 3 (companion console&rsquo;s verification of 2026-07-15 against the cited CMS files; live re-check pending network access): Risk2027.csv internals — raw costs 48.4/49.1, risk scores 0.963 vs 0.71&ndash;0.75, AGA 49.9/68.0/88.0, cap binds (22/22 Guam, 1/2 USVI, 0/78 PR; San Juan $1,178.82 vs $824.42), USPCC $1,297.74, and the 0.70 model ($1,045 uncapped &rarr; $997 after 37/78 caps; construction reproduces the published PR average to the cent at current indices) — plus the twelve Rate Announcement quotes, which carry page-anchored links to the published PDFs for direct inspection. <a href="https://www.cms.gov/files/zip/2027-rate-calculation-data.zip" target="_blank" rel="noopener">cms.gov Risk2027</a></div>
   <div class="fn-item fn-note">All figures verified against primary sources. Wage index shown rounded to 0.40 (CMS files list ~0.405; MedPAC cites ~0.38 for the initial hospital index). Derived figures are arithmetic from the cited primary data; full verification register available on request.</div>
 </div>
 
@@ -2226,9 +2228,172 @@ function renderCircularityCharts(){
 
   window._circChartsRendered = true;
 }
+
+function renderTerritoriesCharts() {
+  if (typeof Plotly === 'undefined' || !document.getElementById('chart_terr_inversion')) return;
+  const T = D.pr_vs_us_ts, last = T[T.length - 1], first = T[0];
+  const lay = (extra) => Object.assign({
+    paper_bgcolor: 'white', plot_bgcolor: 'white',
+    font: { color: '#3a3a3a', family: 'Inter, sans-serif', size: 12 },
+    xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b' } },
+    yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b' } },
+    legend: { x: 0.02, y: 0.98, bgcolor: 'rgba(255,255,255,0.92)',
+              bordercolor: '#d8d4c8', borderwidth: 1, font: { size: 11 } },
+    margin: { t: 18, l: 60, r: 20, b: 46 },
+  }, extra);
+  const cfg = { displaylogo: false, responsive: true };
+
+  // 1. the inversion: five-star PR contracts vs zero-star territories
+  const S = {}; D.pr_star_ratings.forEach(r => S[r['Contract Number']] = r);
+  const bars = [
+    { l: 'MMM H4003 ★★★★★', v: last.pr, c: '#9b2c2c' },
+    { l: 'MMM H4004 ★★★★★', v: last.pr, c: '#9b2c2c' },
+    { l: 'MCS H5577 ★★★★★', v: last.pr, c: '#9b2c2c' },
+    { l: 'USVI (0 five-star)', v: last.vi, c: '#8a8574' },
+    { l: 'Guam (0 five-star)', v: last.gu, c: '#8a8574' },
+  ];
+  Plotly.newPlot('chart_terr_inversion', [{
+    x: bars.map(b => b.l), y: bars.map(b => b.v), type: 'bar',
+    marker: { color: bars.map(b => b.c) },
+    text: bars.map(b => '$' + Math.round(b.v)), textposition: 'outside',
+    textfont: { family: 'JetBrains Mono', size: 11 },
+    hovertemplate: '%{x}: $%{y:.2f}<extra></extra>',
+  }], lay({
+    xaxis: { type: 'category', tickfont: { color: '#6b6b6b', size: 10.5 }, showgrid: false },
+    yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b' },
+             title: 'CY2027 benchmark $ / member-month', rangemode: 'tozero' },
+    showlegend: false, hovermode: 'closest',
+  }), cfg);
+
+  // 2. cumulative growth since 2018
+  const yrs = T.map(r => r.year);
+  const growth = k => T.map(r => (r[k] / first[k] - 1) * 100);
+  const gTr = (k, name, color, w) => ({ x: yrs, y: growth(k), name, mode: 'lines+markers',
+    line: { color, width: w, shape: 'spline' }, marker: { size: 5, color },
+    hovertemplate: name + ' %{x}: +%{y:.0f}%<extra></extra>' });
+  Plotly.newPlot('chart_terr_growth', [
+    gTr('gu', 'Guam', '#b8893a', 2.5), gTr('us', 'US mainland', '#2c5f4b', 1.8),
+    gTr('pr', 'Puerto Rico', '#9b2c2c', 2.5), gTr('vi', 'USVI', '#2563eb', 1.8),
+  ], lay({ yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b' },
+                    title: 'cumulative growth since 2018 (%)', zeroline: true, zerolinecolor: '#d8d4c8' },
+           hovermode: 'x unified' }), cfg);
+
+  // 3. benchmark as % of mainland
+  const rel = k => T.map(r => r[k] / r.us * 100);
+  const rTr = (k, name, color, w) => ({ x: yrs, y: rel(k), name, mode: 'lines+markers',
+    line: { color, width: w, shape: 'spline' }, marker: { size: 5, color },
+    hovertemplate: name + ' %{x}: %{y:.1f}% of US<extra></extra>' });
+  Plotly.newPlot('chart_terr_relrate', [
+    rTr('gu', 'Guam · 1.4% in MA', '#b8893a', 2.5),
+    rTr('vi', 'USVI · 33.4% in MA', '#2563eb', 1.8),
+    rTr('pr', 'PR · 96.2% in MA', '#9b2c2c', 2.5),
+  ], lay({ yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b' },
+                    title: '% of US mainland benchmark' },
+           legend: { x: 0.02, y: 0.98, bgcolor: 'rgba(255,255,255,0.92)',
+                     bordercolor: '#d8d4c8', borderwidth: 1, font: { size: 10.5 } },
+           hovermode: 'x unified' }), cfg);
+
+  window._terrRendered = true;
+}
 </script>
 
 
+</section>
+
+<!-- ============================================================ TERRITORIES -->
+<section class="tab" id="tab-territories">
+<p class="kicker">The territories&rsquo; perspective · PR · USVI · Guam · one statute, three engines</p>
+<h2 class="h2">Three territories, one statute — and only one <em>left unprotected</em></h2>
+<p class="h2-sub">Puerto Rico, the US Virgin Islands, and Guam all receive Medicare Advantage benchmarks under the same law — §1853 of the Social Security Act — and all three sit in the identical <strong>115% quartile</strong>, the statute&rsquo;s maximum multiplier. Thirteen years of Rate Announcements (CY2015–CY2027) contain <strong>zero</strong> USVI- or Guam-specific rate provisions. Yet by CY2027, Guam&rsquo;s average benchmark reached <strong>$1,135</strong> (+127% since 2018) and USVI&rsquo;s <strong>$967</strong> (+48%), while Puerto Rico&rsquo;s stands at <strong>$778</strong> (+61%) — the lowest in the nation. With the multiplier already maxed for all three, the entire gap is manufactured upstream, in the FFS cost estimate the formula multiplies — the one step that belongs entirely to CMS. The machinery protected USVI and Guam <em>automatically, with no law commanding it</em> — and a protection no statute had to command is a protection CMS can extend to Puerto Rico without waiting for one [22].</p>
+<p class="h2-sub"><strong>Getting the comparison honest:</strong> Guam diverged in <em>growth</em> (+127% vs the mainland&rsquo;s +54%); USVI diverged in <em>level</em> (24% above PR, from a base already ~35% higher); Puerto Rico is the outlier at the bottom on both dimensions — and it is the only one of the three whose benchmark prices care for a large population: <strong>~678,000</strong> MA members, versus ~6,400 in USVI and <strong>202</strong> in Guam. The formula quietly protected the two markets where Medicare Advantage barely operates, and left unprotected the one place where it is the healthcare system itself, at <strong>96.2%</strong> A+B penetration — the nation&rsquo;s highest.</p>
+
+<h3>Five-star outcomes, last-place payment — the inversion, in one table</h3>
+<div class="scroll-box"><table class="spec-table">
+  <thead><tr><th></th><th>Puerto Rico</th><th>US Virgin Islands</th><th>Guam</th></tr></thead>
+  <tbody>
+    <tr><td>Five-star MA contracts, 2026 Star Ratings</td><td><strong>3</strong> — MCS H5577, MMM H4004, MMM H4003</td><td><strong>0</strong></td><td><strong>0</strong></td></tr>
+    <tr><td>Members in those five-star contracts</td><td><strong>550,687</strong> (console enrollment vintage, 2026) · ~82% of PR MA enrollment</td><td>—</td><td>—</td></tr>
+    <tr><td>Average CY2027 benchmark (0% bonus)</td><td><strong>$778</strong> — lowest in the nation</td><td>$967</td><td>$1,135</td></tr>
+    <tr><td>Paid vs Puerto Rico, per member-month</td><td>—</td><td><strong>+$189</strong> (+24%)</td><td><strong>+$357</strong> (+46%)</td></tr>
+  </tbody>
+</table></div>
+<p class="h2-sub" style="margin-top:12px">The quality system and the payment system point in opposite directions: the territory holding three of the nation&rsquo;s five-star contracts — the densest MA market in the country — is paid <strong>$189 a month less per member</strong> than a territory with zero five-star contracts, and <strong>$357 less</strong> than a territory with 202 enrollees. For the territories, the more stars a market earns, the less it is paid.</p>
+<div class="plot-box"><div id="chart_terr_inversion" style="width:100%;height:380px;"></div><p class="src-line">Sources: <a href="https://www.cms.gov/files/document/2026-star-ratings-fact-sheet.pdf" target="_blank" rel="noopener">CMS 2026 Star Ratings Fact Sheet</a>, Table A1 (five-star roster; none based in USVI or Guam) · benchmarks: CMS ratebooks, CY2027 (this console&rsquo;s own verified series — Trajectory tab) · enrollment: CMS CPSC via this console&rsquo;s stars integration [22].</p></div>
+
+<h3 style="margin-top:28px">Who the benchmark actually pays for</h3>
+<div class="scroll-box"><table class="spec-table">
+  <thead><tr><th></th><th>Puerto Rico</th><th>US Virgin Islands</th><th>Guam</th></tr></thead>
+  <tbody>
+    <tr><td>Total population</td><td>3,184,835 <span class="muted">(Census est., Jul 2025)</span></td><td>87,146 <span class="muted">(2020 Census)</span></td><td>153,836 <span class="muted">(2020 Census)</span></td></tr>
+    <tr><td>Medicare beneficiaries (Mar 2026)</td><td><strong>782,793</strong></td><td>21,133</td><td>20,931</td></tr>
+    <tr><td>— in MA &amp; other plans</td><td><strong>678,245</strong></td><td>6,420</td><td>202</td></tr>
+    <tr><td>MA penetration, A+B basis</td><td><strong>96.2%</strong></td><td>33.4%</td><td>1.4%</td></tr>
+    <tr><td>FFS measurement base (A+B lives the benchmark is computed from)</td><td><strong>26,961</strong></td><td>12,770</td><td>14,198</td></tr>
+    <tr><td>CY2027 average benchmark</td><td><strong>$778</strong></td><td>$967</td><td>$1,135</td></tr>
+  </tbody>
+</table></div>
+<p class="src-line">Population: <a href="https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv" target="_blank" rel="noopener">Census Vintage-2025 estimates</a> (PR) · <a href="https://data.census.gov/table/DECENNIALDPVI2020.DP1?g=040XX00US78" target="_blank" rel="noopener">2020 Census USVI</a> · <a href="https://data.census.gov/table/DECENNIALDPGU2020.DP1?g=040XX00US66" target="_blank" rel="noopener">2020 Census Guam</a> (no post-2020 official estimates; vintage uncertainty labeled). Enrollment &amp; penetration: <a href="https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment" target="_blank" rel="noopener">CMS Medicare Monthly Enrollment</a>, March 2026 — PR figures verified live by this console ([12]); USVI/Guam rows from the same file [22]. The benchmark CMS sets for Guam prices coverage for fewer people than fit in a movie theater; the benchmark it sets for Puerto Rico prices coverage for 678,245.</p>
+
+<h3 style="margin-top:28px">The trajectory: growth and relative value, 2018–2027</h3>
+<div class="chart-grid" style="grid-template-columns:1fr 1fr">
+  <div class="chart-card">
+    <h4>Cumulative benchmark growth since 2018</h4>
+    <div id="chart_terr_growth" class="plot" style="height:340px"></div>
+    <div class="chart-explain"><strong>How to read it.</strong> Guam +127%, mainland +54%, USVI +48%, Puerto Rico +61% — yet PR both started and finished last in dollars: $483 → $778, vs Guam&rsquo;s $499 → $1,135. Two territories that began within $16 of each other are now $357 apart.</div>
+  </div>
+  <div class="chart-card">
+    <h4>Benchmark as % of the US mainland average</h4>
+    <div id="chart_terr_relrate" class="plot" style="height:340px"></div>
+    <div class="chart-explain"><strong>How to read it.</strong> The twist: where MA fills (PR: 96.2% penetration), the relative rate sinks and stays at ~59% — computed from whoever stays behind in FFS. Where MA is absent (Guam: 1.4%), the relative rate soared to 86%. USVI (33.4%, MA only since 2021) is already sliding. Join MA and the formula turns on you.</div>
+  </div>
+</div>
+<p class="src-line">Both charts: this console&rsquo;s own verified ratebook series, CY2018–CY2027 (same data as the Trajectory tab) · penetration: CMS Monthly Enrollment, March 2026 [12][22].</p>
+
+<h3 style="margin-top:28px">The engine room: why one formula produces three results</h3>
+<p><strong>Engine A — risk-score standardization manufactures the PR–USVI gap.</strong> The AGA divides each area&rsquo;s raw per-capita cost by its FFS population&rsquo;s average risk score. On raw cost, Puerto Rico (48.4% of national) and USVI (49.1%) are nearly identical — but USVI&rsquo;s and Guam&rsquo;s tiny FFS populations carry risk scores of just 0.71–0.75, so the division inflates their cost indices 33–41%. Puerto Rico&rsquo;s FFS risk score is 0.963 — a ~4% lift. One division step converts two near-identical raw costs into a 24% payment gap: cost indices <strong>49.9 (PR) vs 68.0 (USVI) vs 88.0 (Guam)</strong>. (CMS would answer that PR&rsquo;s higher score reflects a sicker residual FFS population; the counter — that 0.71–0.75 scores on sparse FFS claims likely reflect thin diagnosis coding — is an argument, not a settled fact, and is presented as such.)</p>
+<p><strong>Engine B — Guam&rsquo;s own measured costs genuinely tripled, on a growing FFS base.</strong> Guam&rsquo;s per-capita FFS cost went $285/month (2016) → $847/month (2024), on an FFS base that <em>grew</em> to ~13,700 because Guam has essentially no MA market to drain it — and Guam is priced as one island-wide rate area, while Puerto Rico is priced municipio-by-municipio from 78 thin cells, 69 of them below CMS&rsquo;s own 1,000-enrollee credibility threshold.</p>
+<p><strong>Engine C — the pre-ACA ratchet shapes their growth; it never reaches PR.</strong> Every county&rsquo;s benchmark is capped at its pre-ACA rate, trended forward at the <em>national</em> growth factor. That cap binds for all 22 Guam villages (every year since CY2021) and one of USVI&rsquo;s two rate areas (every year 2018–2027) — while capped, growth tracks the national series instead of local data. Puerto Rico is subject to the identical rule; it just never binds, because PR&rsquo;s benchmark collapsed ~26–27% below its own pre-ACA trajectory. San Juan&rsquo;s protective cap sits at <strong>$1,178.82</strong>; its actual benchmark is <strong>$824.42</strong> — $354 of unused safety net. Every protective mechanism in the formula binds somewhere, except in Puerto Rico: 0 of 78 municipios capped.</p>
+<p class="src-line">Engine figures: <a href="https://www.cms.gov/files/zip/2027-rate-calculation-data.zip" target="_blank" rel="noopener">CMS CY2027 Rate Calculation Data (Risk2027.csv)</a> — raw cost, AVG5SCOR risk score, AGA, pre-ACA and cap columns; division step per <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data/2027" target="_blank" rel="noopener">Medicare FFS Glossary 2027</a>, formula #10; Guam FFS costs per <a href="https://www.cms.gov/files/zip/ffs-data-2024.zip" target="_blank" rel="noopener">CMS FFS county files</a>. Provenance tier disclosed in register [22].</p>
+
+<h3 style="margin-top:28px">The outcome: CY2028 Territory Stabilization at a 0.70 cost index</h3>
+<p><strong>The ask, stated precisely:</strong> in the CY2028 Rate Announcement, CMS adopts a uniform <em>Territory Stabilization</em> methodology — where a jurisdiction&rsquo;s FFS population fails representativeness (measurable triggers this console documents: FFS below 5% of A+B beneficiaries — PR: 3.8%; or a majority of rate cells under CMS&rsquo;s own 1,000-enrollee credibility line — PR: 69 of 78), the effective cost index shall be developed by similar-area estimation and shall be no less than <strong>0.70 of national</strong>. One rule, all three territories: Guam (0.88) untouched, USVI (0.68) moves marginally, Puerto Rico (0.51) is repaired. Drafted as <em>estimation methodology</em> under §1876(a)(4)&rsquo;s similar-area clause — never as a benchmark floor, the formulation CMS has refused on the record and courts have vacated elsewhere (<em>Bridgeport Hosp. v. Becerra</em>, D.C. Cir. 2024).</p>
+<div class="scroll-box"><table class="spec-table">
+  <thead><tr><th>Measure</th><th style="text-align:right">Value</th></tr></thead>
+  <tbody>
+    <tr><td>PR average benchmark today (CY2027)</td><td style="text-align:right"><strong>$778</strong></td></tr>
+    <tr><td>Under 0.70 stabilization, uncapped</td><td style="text-align:right">$1,045</td></tr>
+    <tr><td>Municipios where the statutory pre-ACA cap binds and trims the fix</td><td style="text-align:right">37 of 78</td></tr>
+    <tr><td><strong>Under 0.70 stabilization, after statutory caps</strong></td><td style="text-align:right"><strong>$997 (+28%)</strong></td></tr>
+    <tr><td>USVI average benchmark (the parity target)</td><td style="text-align:right">$967 — within ~3%</td></tr>
+    <tr><td>US mainland average (still far above stabilized PR)</td><td style="text-align:right">$1,313 — PR remains 24% below</td></tr>
+  </tbody>
+</table></div>
+<p class="h2-sub" style="margin-top:10px"><strong>The statute polices its own outcome.</strong> Because every benchmark remains capped at the pre-ACA trajectory — the same ceiling that already sets Guam&rsquo;s and half of USVI&rsquo;s rates — the stabilization <em>cannot overshoot</em>: it lands Puerto Rico at USVI parity and stops. SSA §1853(n)(4) (<a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title42-section1395w-23&amp;num=0&amp;edition=prelim" target="_blank" rel="noopener">42 U.S.C. §1395w-23(n)(4)</a>), verbatim: <em>&ldquo;In no case shall the blended benchmark amount for an area for a year (determined taking into account subsection (o)) be greater than the applicable amount that would (but for the application of this subsection) be determined under subsection (k)(1) for the area for the year.&rdquo;</em> Modeled figures are the companion computation from the published Risk2027 file (effective index = max(current, 0.70); benchmark = min(index × USPCC $1,297.74 × 1.15, pre-ACA cap); unweighted across 78 municipios — the same construction that reproduces the published CY2027 average to the cent, $777.98, at current indices) [22].</p>
+
+<h3 style="margin-top:28px">&ldquo;The Ask,&rdquo; year by year — twelve cycles, in CMS&rsquo;s own words</h3>
+<p class="h2-sub">A minimum benchmark has been on the administrative record since <strong>CY2016</strong>; an explicit &ldquo;AGA floor&rdquo; since <strong>CY2019</strong>; the specific <strong>0.70</strong> figure since <strong>CY2020</strong> — restated by CMS every year, adopted in none, and never once answered on the terms of §1876(a)(4)&rsquo;s similar-area clause. Each year links to the published PDF at the cited page.</p>
+<div class="scroll-box" style="max-height:460px"><table class="spec-table">
+  <thead><tr><th>CY</th><th>The request, as CMS restated it</th><th>CMS&rsquo;s response, verbatim</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Downloads/Announcement2016.pdf#page=22" target="_blank" rel="noopener">2016</a></td><td>&ldquo;establish a minimum benchmark level for the lowest cost counties in Puerto Rico&hellip; at 85% or 90% of the lowest average MA benchmarks among states&rdquo;</td><td>&ldquo;we do not believe the approach suggested by these comments would be permissible under statute&rdquo;</td></tr>
+    <tr><td><a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Downloads/Announcement2017.pdf#page=22" target="_blank" rel="noopener">2017</a></td><td>&ldquo;establish a minimum benchmark level&rdquo;; &ldquo;use another jurisdiction as a proxy&rdquo;</td><td>&ldquo;the FFS data in Puerto Rico is sufficient for establishing accurate MA benchmarks&hellip;&rdquo;</td></tr>
+    <tr><td><a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Downloads/Announcement2018.pdf#page=29" target="_blank" rel="noopener">2018</a></td><td>no rebasing reductions; ESRD: &ldquo;using the US Virgin Islands rate as a proxy&rdquo;</td><td>&ldquo;We believe that the FFS data in Puerto Rico is sufficient&hellip;&rdquo;</td></tr>
+    <tr><td><a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Downloads/Announcement2019.pdf#page=25" target="_blank" rel="noopener">2019</a></td><td>&ldquo;establishing an AGA floor, using a proxy benchmark, and/or applying a hold harmless minimum benchmark&rdquo; — the first explicit &ldquo;AGA floor&rdquo;</td><td>&ldquo;We will continue to analyze these issues&hellip;&rdquo; (pure deferral)</td></tr>
+    <tr><td><a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Downloads/Announcement2020.pdf#page=29" target="_blank" rel="noopener">2020</a></td><td>the first explicit <strong>0.70</strong>: &ldquo;apply an AGA of 0.70 or apply a nationwide average AGA&rdquo;</td><td>&ldquo;the law requires that Medicare Advantage benchmarks be based on a county&rsquo;s average Medicare FFS per-capita cost, and there is no evidence that FFS costs in Puerto Rico are higher&rdquo;</td></tr>
+    <tr><td><a href="https://www.cms.gov/files/document/2021-announcement.pdf#page=35" target="_blank" rel="noopener">2021</a></td><td>&ldquo;establishing an AGA floor/proxy (e.g., applying an AGA of 0.70&hellip;)&rdquo;</td><td>same dual formula (statutory + no-evidence)</td></tr>
+    <tr><td><a href="https://www.cms.gov/files/document/2022-announcement.pdf#page=43" target="_blank" rel="noopener">2022</a></td><td>&ldquo;establishing an AGA minimum/floor (e.g., applying an AGA of 0.70)&rdquo;</td><td>same dual formula</td></tr>
+    <tr><td><a href="https://www.cms.gov/files/document/2023-announcement.pdf#page=34" target="_blank" rel="noopener">2023</a></td><td>&ldquo;&hellip;or applying a hold harmless minimum benchmark&rdquo;</td><td>same dual formula</td></tr>
+    <tr><td><a href="https://www.cms.gov/files/document/2024-announcement.pdf#page=53" target="_blank" rel="noopener">2024</a></td><td>&ldquo;establishing a minimum AGA of 0.70 for Puerto Rico&rdquo; — with the full §1876(a)(4) similar-area theory, USVI as the similar area</td><td>floor precedents &ldquo;are based on statutory provisions that are neither applicable to the MA program nor provide a direct analog&rdquo; — the similar-area clause itself: unaddressed</td></tr>
+    <tr><td><a href="https://www.cms.gov/files/document/2025-announcement.pdf#page=60" target="_blank" rel="noopener">2025</a></td><td>&ldquo;A large number of commenters requested&hellip; a minimum AGA of 0.70 for Puerto Rico (similar to the AGA level in the US Virgin Islands)&rdquo;</td><td>&ldquo;CMS has limited discretion to incorporate targeted adjustments or exceptions&rdquo;</td></tr>
+    <tr><td><a href="https://www.cms.gov/files/document/2026-announcement.pdf#page=52" target="_blank" rel="noopener">2026</a></td><td>&ldquo;establish a minimum AGA of 0.7 either as a national MA benchmark floor or specifically for Puerto Rico&rdquo;</td><td>same two formulations</td></tr>
+    <tr><td><a href="https://www.cms.gov/files/document/2027-announcement.pdf#page=46" target="_blank" rel="noopener">2027</a></td><td>&ldquo;use a proxy rate for Puerto Rico, establish a minimum floor benchmark (e.g., at USVI rates), and establish a minimum floor AGA of 0.7&rdquo;</td><td>&ldquo;limited discretion to incorporate targeted adjustments or exceptions, such as applying floors for specific locales&rdquo;</td></tr>
+  </tbody>
+</table></div>
+<p class="h2-sub" style="margin-top:10px"><strong>What the record shows.</strong> (1) The reasoning migrated — bare statutory refusal → &ldquo;the data is sufficient&rdquo; → deferral → the statute-plus-no-evidence dual formula → &ldquo;limited discretion.&rdquo; Across the same years CMS described the identical authority as an affirmative <em>&ldquo;exercise in discretion&rdquo;</em> whenever it was granting Puerto Rico&rsquo;s data adjustments (CY2020 p. 24, reprised verbatim CY2022 p. 41 and CY2023 p. 33). (2) The similar-area clause of §1876(a)(4) has never been construed — squarely presented once (CY2024) and answered around, never on. (3) The ask went congressional: in February 2026, Resident Commissioner Pablo José Hernández and 17 other Members pressed the USVI-level minimum, and <a href="https://hernandez.house.gov/media/press-releases/comisionado-resdiente-presenta-proyecto-para-mejorar-medicare-advantage" target="_blank" rel="noopener">H.R. 6031 (Medicare Advantage Integrity Act of 2025)</a> would legislate the floor CMS says it lacks discretion to adopt. Every refusal rejects a <em>floor</em>; none forecloses the estimation-methodology path — the lane the CY2028 outcome is drafted in.</p>
+
+<h3 style="margin-top:28px">The precedents: four PR-specific actions CMS already took without Congress</h3>
+<p><strong>CY2012 — the A+B-only claims base</strong> (implemented CY2014): PR is the only jurisdiction whose FFS rate uses only beneficiaries with both Part A and B, after CMS found their costs &ldquo;on average 5% higher.&rdquo; · <strong>CY2017 — the zero-claims adjustment</strong>: the Secretary directed OACT to reweight PR&rsquo;s FFS experience for the national proportion of zero-dollar claimants (13.9% in PR vs 6.1% nationally) — worth +4.1% to +4.7% every year since (CY2027: +4.4%), ~$320M/yr per CMS&rsquo;s own estimate — re-adopted annually, never made permanent. · <strong>CY2018 — the double-bonus reinterpretation</strong> of §1853(o)(3)(B), making 52 of 78 municipios double-bonus counties. · <strong>CY2020–CY2025 — the VBID model</strong> ran six years with a territory-specific accommodation (socioeconomic targeting by dual status, <em>because the LIS statute excludes the territories</em>). When CMS concluded PR&rsquo;s data misrepresented PR&rsquo;s costs, it adjusted the data — administratively, under §1853&rsquo;s existing estimation authority. Warning flag: CY2026 added that CMS will &ldquo;reassess the need for ongoing special adjustments&rdquo; — the concessions are re-adopted one year at a time.</p>
+<p class="src-line">[22] All Rate Announcement quotes: CMS final <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/announcements-and-documents" target="_blank" rel="noopener">Rate Announcements CY2016–CY2027</a>, page-anchored links above · §1853(d)(4) island-wide payment-area option (Governor&rsquo;s request due Feb 1; approval non-discretionary per 63 FR 35004; unused by any state since 1998 per 70 FR 4588) · full provenance and verification tiers in register [22], Circularity tab.</p>
 </section>
 
 <!-- ============================================================ PART D -->
@@ -2895,6 +3060,7 @@ document.querySelectorAll('nav.tabs button').forEach(b => {
     if (b.dataset.tab === 'muni' && !window._muniChartsRendered) renderMuniCharts();
     if (b.dataset.tab === 'duals' && !window._dualsRendered) { renderDualsCharts(); window._dualsRendered = true; }
     if (b.dataset.tab === 'circularity' && !window._circChartsRendered) { renderCircularityCharts(); window._circChartsRendered = true; }
+    if (b.dataset.tab === 'territories' && !window._terrRendered) { renderTerritoriesCharts(); window._terrRendered = true; }
     if (b.dataset.tab === 'circularity') { setTimeout(function(){ if (typeof Plotly !== 'undefined') { ['circ-wageindex','circ-occupations','circ-salarybar','circ-insurance','circ-salaryindex','circ-physage','circ-ffsbase','circ-unitprice','circ-pecos'].forEach(function(id){ var el=document.getElementById(id); if(el && el.data) Plotly.Plots.resize(el); }); } }, 60); }
     if (b.dataset.tab === 'partd' && !window._partdRendered) { renderPartDCharts(); window._partdRendered = true; }
     if (b.dataset.tab === 'stars' && !window._starsRendered) { renderStarsCharts(); window._starsRendered = true; }
@@ -2960,6 +3126,7 @@ function prepareForPrint() {
   try { if (!window._prChartsRendered) { renderPRCharts(); window._prChartsRendered = true; } } catch(e){}
   try { if (!window._muniChartsRendered) { renderMuniCharts(); } } catch(e){}
   try { renderMuniPlans(''); } catch(e){}
+  try { if (!window._terrRendered) { renderTerritoriesCharts(); window._terrRendered = true; } } catch(e){}
   // give Plotly a moment to lay out, then resize for print width and open dialog
   setTimeout(() => {
     try {
