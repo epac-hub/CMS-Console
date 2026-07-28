@@ -1,0 +1,100 @@
+{
+  "collection": "Auto-Star Star-Plus Documentation & Help Files",
+  "scrapedAt": "2026-07-28",
+  "method": "Apify Website Content Crawler via Zapier MCP (scrapeSingleUrl action)",
+  "crawlerTypes": ["cheerio", "playwright:firefox"],
+  "sitemapUrlsDiscovered": 257,
+  "documents": [
+    {
+      "file": "pages/star-plus-product-page.md",
+      "title": "POS Software for Retail | Star-Plus",
+      "url": "https://www.auto-star.com/star-plus-retail-inventory-management-pos-software/",
+      "type": "product-overview",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/ai-helpbot.md",
+      "title": "AI HelpBot | Auto-Star",
+      "url": "https://www.auto-star.com/ai-helpbot/",
+      "type": "help-feature",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/customer-service-and-support.md",
+      "title": "POS Customer Service and Support | Auto-Star",
+      "url": "https://www.auto-star.com/pos-customer-service-and-support/",
+      "type": "support",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/frequently-asked-questions.md",
+      "title": "Frequently Asked Questions - Auto-Star Compusystems Inc.",
+      "url": "https://www.auto-star.com/frequently-asked-questions/",
+      "type": "faq",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/release-8-5.md",
+      "title": "Star-Plus New Release 8.5 | Auto-Star",
+      "url": "https://www.auto-star.com/2026/05/20/star-plus-new-release-8-5-ai-powered-retail-innovation/",
+      "type": "release-notes-summary",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/release-8-4.md",
+      "title": "Star-Plus New Release 8.4 | Auto-Star",
+      "url": "https://www.auto-star.com/2025/06/20/star-plus-new-release-8-4-smarter-faster-and-more-powerful/",
+      "type": "release-notes-summary",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/release-8-3-5.md",
+      "title": "What's New in Auto-Star's Star-Plus 8.3.5 Release",
+      "url": "https://www.auto-star.com/2024/10/16/whats-new-in-auto-stars-star-plus-8-3-5-release/",
+      "type": "release-notes-summary",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/introducing-helpbot.md",
+      "title": "Introducing HelpBot: Your AI Powered Assistant | Auto-Star",
+      "url": "https://www.auto-star.com/2025/06/24/introducing-helpbot-your-ai-powered-assistant-for-star-plus/",
+      "type": "help-feature",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/local-inventory-on-google.md",
+      "title": "Local Inventory on Google in Star-Plus",
+      "url": "https://www.auto-star.com/local-inventory-on-google-in-star-plus/",
+      "type": "how-to-guide",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/warehouse-management-module.md",
+      "title": "Star-Plus Warehouse Management Module",
+      "url": "https://www.auto-star.com/warehouse-management-star-plus-module/",
+      "type": "module-documentation",
+      "status": "scraped"
+    },
+    {
+      "file": "pages/customer-portals.md",
+      "title": "Auto-Star Customer Login + Knowledgebase Wiki",
+      "url": "https://wiki.auto-star.com/wiki?topic=456",
+      "type": "gated-portal",
+      "status": "login-required",
+      "note": "Wiki (canonical release notes/manuals) requires an account request processed in 2-3 business days; www.auto-star.com/login/ requires customer credentials"
+    },
+    {
+      "file": "Auto-Star_Pharmacy-Buyers-Guide.pdf",
+      "title": "Auto-Star Pharmacy Buyers Guide (PDF, 4 pages)",
+      "url": "https://www.auto-star.com/wp-content/uploads/2018/06/Auto-Star_Pharmacy-Buyers-Guide.pdf",
+      "type": "buyers-guide-pdf",
+      "status": "downloaded"
+    }
+  ],
+  "gatedSources": {
+    "knowledgebaseWiki": "https://wiki.auto-star.com/",
+    "customerLogin": "https://www.auto-star.com/login/",
+    "releaseNotesTopic": "https://wiki.auto-star.com/wiki?topic=456",
+    "inSoftwareHelp": "HelpBot (Star-Plus 8.4+) searches user manuals, release notes, and table documents from inside the POS"
+  }
+}
