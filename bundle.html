@@ -2458,9 +2458,9 @@ function renderTerritoriesCharts() {
   const growth = k => T.map(r => (r[k] / first[k] - 1) * 100);
   const gTr = (k, name, color, w) => ({ x: yrs, y: growth(k), name, mode: 'lines+markers+text',
     line: { color, width: w, shape: 'spline' }, marker: { size: 5, color },
-    text: growth(k).map(v => '+' + v.toFixed(1) + '%'),
-    textposition: k === 'gu' ? 'top center' : 'bottom center',
-    textfont: { family: 'JetBrains Mono', size: 8, color },
+    text: growth(k).map((v, i, a) => i === a.length - 1 ? '+' + v.toFixed(1) + '%' : ''),
+    textposition: (k === 'gu' || k === 'pr') ? 'top center' : 'bottom center',
+    textfont: { family: 'JetBrains Mono', size: 9, color },
     hovertemplate: name + ' %{x}: +%{y:.0f}%<extra></extra>' });
   Plotly.newPlot('chart_terr_growth', [
     gTr('gu', 'Guam', '#b8893a', 2.5), gTr('us', 'US mainland', '#2c5f4b', 1.8),
@@ -2493,13 +2493,13 @@ function renderTerritoriesCharts() {
         mode: 'lines+markers+text', line: { color: CO[k], width: k === 'PR' ? 2.5 : 1.8 },
         marker: { size: 6, color: CO[k] },
         text: TR.aga[k].map(v => (v * 100).toFixed(1) + '%'),
-        textposition: k === 'VI' ? 'top center' : 'bottom center',
+        textposition: k === 'PR' ? 'bottom center' : 'top center',
         textfont: Object.assign({}, mono, { color: CO[k] }),
         hovertemplate: NM2[k] + ' CY%{x}: %{y:.1f}<extra></extra>',
       })), base({ yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
         tickfont: { color: '#6b6b6b' }, title: 'AGA cost index (% of national)' },
         xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickvals: TR.aga.years,
-        tickfont: { color: '#6b6b6b' } }, hovermode: 'x unified' }), cfg);
+        range: [2017.3, 2027.9], tickfont: { color: '#6b6b6b' } }, hovermode: 'x unified' }), cfg);
     }
     if (document.getElementById('chart_terr_money')) {
       const g = ['Raw per-capita FFS cost', 'After risk-score division (AGA)'];
@@ -2511,7 +2511,7 @@ function renderTerritoriesCharts() {
           marker: { color: CO.VI }, text: [TR.raw_pair.vi_raw + '%', TR.raw_pair.vi_idx + '%'],
           textposition: 'outside', textfont: Object.assign({}, mono, { color: CO.VI }) },
       ], base({ barmode: 'group', yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
-        tickfont: { color: '#6b6b6b' }, title: '% of national', rangemode: 'tozero' },
+        tickfont: { color: '#6b6b6b' }, title: '% of national', range: [0, 78] },
         hovermode: 'closest' }), cfg);
     }
     if (document.getElementById('chart_terr_safety')) {
@@ -2525,7 +2525,7 @@ function renderTerritoriesCharts() {
           text: cs.map(c => '$' + Math.round(c.cap).toLocaleString('en-US')), textposition: 'outside', textfont: Object.assign({}, mono, { color: '#b8893a' }) },
       ], base({ barmode: 'group', yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
         tickfont: { color: '#6b6b6b' }, tickprefix: '$', tickformat: ',',
-        title: '$ per member per month (CY2027)', rangemode: 'tozero' },
+        title: '$ per member per month (CY2027)', range: [0, 1330] },
         xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b', size: 10 } },
         hovermode: 'closest' }), cfg);
     }
@@ -2536,16 +2536,16 @@ function renderTerritoriesCharts() {
         { x: yrs, y: prFfs, name: 'Puerto Rico', mode: 'lines+markers+text', fill: 'tozeroy',
           line: { color: CO.PR, width: 2.5 }, marker: { size: 5, color: CO.PR },
           fillcolor: 'rgba(155,44,44,0.08)',
-          text: prFfs.map(v => v ? (v / 1000).toFixed(0) + 'k' : ''), textposition: 'top center',
+          text: prFfs.map((v, i, a) => v && (i === 0 || i === a.length - 1) ? (v / 1000).toFixed(0) + 'k' : ''), textposition: 'top center',
           textfont: Object.assign({}, mono, { color: CO.PR }) },
         { x: yrs, y: TR.ffs_bases.VI, name: 'US Virgin Islands', mode: 'lines+markers+text',
           line: { color: CO.VI, width: 1.8 }, marker: { size: 5, color: CO.VI },
-          text: TR.ffs_bases.VI.map(v => (v / 1000).toFixed(1) + 'k'), textposition: 'top center',
-          textfont: Object.assign({}, mono, { color: CO.VI, size: 8 }) },
+          text: TR.ffs_bases.VI.map((v, i, a) => i === a.length - 1 ? (v / 1000).toFixed(1) + 'k' : ''), textposition: 'bottom center',
+          textfont: Object.assign({}, mono, { color: CO.VI, size: 9 }) },
         { x: yrs, y: TR.ffs_bases.GU, name: 'Guam', mode: 'lines+markers+text',
           line: { color: CO.GU, width: 1.8 }, marker: { size: 5, color: CO.GU },
-          text: TR.ffs_bases.GU.map(v => (v / 1000).toFixed(1) + 'k'), textposition: 'bottom center',
-          textfont: Object.assign({}, mono, { color: CO.GU, size: 8 }) },
+          text: TR.ffs_bases.GU.map((v, i, a) => i === a.length - 1 ? (v / 1000).toFixed(1) + 'k' : ''), textposition: 'top center',
+          textfont: Object.assign({}, mono, { color: CO.GU, size: 9 }) },
       ], base({ yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
         tickfont: { color: '#6b6b6b' }, title: 'FFS beneficiaries with Part A + B (March)', rangemode: 'tozero' },
         xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b' }, dtick: 2 },
@@ -2696,7 +2696,7 @@ function renderTerritoriesCharts() {
 <p class="src-line">Chart sources: <a href="https://www.cms.gov/files/document/2026-star-ratings-fact-sheet.pdf" target="_blank" rel="noopener">CMS 2026 Star Ratings Fact Sheet</a>, Table A1 (star ratings; complete national five-star roster) · CMS CY2027 Rate Calculation Data (benchmarks) · CMS CPSC Monthly Enrollment, July 2026 (members) [22].</p></div>
 
 <h3 style="margin-top:28px">Who lives there, who is on Medicare, and who the benchmark actually pays for</h3>
-<div class="scroll-box"><table class="spec-table">
+<div class="scroll-box" style="max-height:none"><table class="spec-table">
   <thead><tr><th></th><th>Puerto Rico</th><th>US Virgin Islands</th><th>Guam</th></tr></thead>
   <tbody>
     <tr><td>Total population</td><td><strong>3,184,835</strong> <span class="muted">July 2025 Census estimate</span></td><td><strong>87,146</strong> <span class="muted">2020 Census (latest official count)</span></td><td><strong>153,836</strong> <span class="muted">2020 Census (latest official count)</span></td></tr>
@@ -2801,7 +2801,7 @@ function renderTerritoriesCharts() {
 <div class="tpanel"><p class="teyebrow">The record · Twelve cycles of the ask · CY2016&ndash;CY2027</p>
 <p class="tphead">&ldquo;The Ask,&rdquo; year by year — in CMS&rsquo;s own words</p>
 <p class="h2-sub">Every quote below is from the final Rate Announcement for the year shown — each year is linked to the published PDF and opens on the first cited page (all twelve documents verified in full; all twelve links tested live). The request this console documents has been on the administrative record continuously: a minimum benchmark since <strong>CY2016</strong>; an explicit &ldquo;AGA floor&rdquo; since <strong>CY2019</strong>; the specific <strong>0.70</strong> figure since <strong>CY2020</strong> — restated by CMS every year, adopted in none, and never once answered on the terms of §1876(a)(4)&rsquo;s similar-area clause.</p>
-<div class="scroll-box" style="max-height:560px"><table class="spec-table">
+<div class="scroll-box" style="max-height:none"><table class="spec-table">
   <thead><tr><th>CY (pages)</th><th>The request, as CMS itself restated it</th><th>CMS&rsquo;s response, verbatim</th><th>Grounds</th></tr></thead>
   <tbody>
     <tr><td style="white-space:nowrap"><a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Downloads/Announcement2016.pdf#page=22" target="_blank" rel="noopener"><strong>2016</strong></a><br><span class="muted">pp. 22&ndash;23</span></td><td>&ldquo;establish a minimum benchmark level for the lowest cost counties in Puerto Rico&hellip; at 85% or 90% of the lowest average MA benchmarks among states&rdquo;<br><span class="muted" style="font-size:11px">Document: <a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Downloads/Announcement2016.pdf#page=22" target="_blank" rel="noopener">CY2016 Final Rate Announcement (Apr 6, 2015) — PDF, opens at p. 22</a></span></td><td>&ldquo;we do not believe the approach suggested by these comments would be permissible under statute&rdquo;</td><td>Statutory only</td></tr>
