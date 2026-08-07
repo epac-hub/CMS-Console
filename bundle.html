@@ -2555,30 +2555,50 @@ function renderTerritoriesCharts() {
         tickfont: { color: '#6b6b6b' }, title: 'A+B FFS lives (March)', rangemode: 'tozero' },
         hovermode: 'x unified' }), cfg);
     }
-    // twist panels: penetration area + benchmark-as-%-of-US line
-    const T2 = D.pr_vs_us_ts, ty = TR.ffs_bases.years;
-    const rel = k => ty.map(y => { const r = T2.find(q => q.year === y);
-      return r && r[k] && r.us ? r[k] / r.us * 100 : null; });
-    const el2 = D.enroll_live;
-    const prPen = ty.map(y => { const i = el2.years.indexOf(y);
-      return i >= 0 ? (el2.pr.ab_ma[i] / el2.pr.ab_total[i] * 100) : null; });
-    const twist = (id, pen, relv, color) => {
-      if (!document.getElementById(id)) return;
-      Plotly.newPlot(id, [
-        { x: ty, y: pen, name: 'MA penetration', fill: 'tozeroy', mode: 'lines',
-          line: { color, width: 1 }, fillcolor: color + '33',
-          hovertemplate: 'pen %{x}: %{y:.1f}%<extra></extra>' },
-        { x: ty, y: relv, name: '% of US benchmark', mode: 'lines+markers',
+    // twist: one chart, three subplots (penetration area + benchmark-as-%-of-US line)
+    if (document.getElementById('chart_terr_twist')) {
+      const T2 = D.pr_vs_us_ts, ty = TR.ffs_bases.years;
+      const rel = k => ty.map(y => { const r = T2.find(q => q.year === y);
+        return r && r[k] && r.us ? r[k] / r.us * 100 : null; });
+      const el2 = D.enroll_live;
+      const prPen = ty.map(y => { const i = el2.years.indexOf(y);
+        return i >= 0 ? (el2.pr.ab_ma[i] / el2.pr.ab_total[i] * 100) : null; });
+      const panels = [
+        ['Puerto Rico', prPen, rel('pr'), CO.PR, ''],
+        ['US Virgin Islands', TR.pen.VI, rel('vi'), CO.VI, '2'],
+        ['Guam', TR.pen.GU, rel('gu'), CO.GU, '3'],
+      ];
+      const traces = [], annotations = [];
+      panels.forEach(([nm, pen, relv, color, sfx]) => {
+        traces.push({ x: ty, y: pen, xaxis: 'x' + sfx, yaxis: 'y' + sfx,
+          fill: 'tozeroy', mode: 'lines', name: nm + ' pen',
+          line: { color, width: 1 }, fillcolor: color + '33', showlegend: false,
+          hovertemplate: nm + ' penetration %{x}: %{y:.1f}%<extra></extra>' });
+        traces.push({ x: ty, y: relv, xaxis: 'x' + sfx, yaxis: 'y' + sfx,
+          mode: 'lines+markers', name: nm + ' rate',
           line: { color: '#3a3a3a', width: 2.2 }, marker: { size: 4, color: '#3a3a3a' },
-          hovertemplate: 'rate %{x}: %{y:.1f}% of US<extra></extra>' },
-      ], base({ yaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
-        tickfont: { color: '#6b6b6b', size: 9.5 }, range: [0, 100] },
-        xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b', size: 9 }, dtick: 2 },
-        showlegend: false, margin: { t: 8, l: 34, r: 10, b: 30 }, hovermode: 'x' }), cfg);
-    };
-    twist('chart_terr_twist_pr', prPen, rel('pr'), CO.PR);
-    twist('chart_terr_twist_vi', TR.pen.VI, rel('vi'), CO.VI);
-    twist('chart_terr_twist_gu', TR.pen.GU, rel('gu'), CO.GU);
+          showlegend: false,
+          hovertemplate: nm + ' rate %{x}: %{y:.1f}% of US<extra></extra>' });
+      });
+      const doms = [[0, 0.30], [0.35, 0.65], [0.70, 1]];
+      const lay = {
+        paper_bgcolor: 'white', plot_bgcolor: 'white',
+        font: { color: '#3a3a3a', family: 'Inter, sans-serif', size: 11 },
+        margin: { t: 30, l: 40, r: 12, b: 34 }, hovermode: 'closest',
+      };
+      panels.forEach(([nm, , , color, sfx], i) => {
+        lay['xaxis' + sfx] = { domain: doms[i], gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
+          tickfont: { color: '#6b6b6b', size: 9.5 }, dtick: 4, anchor: 'y' + sfx };
+        lay['yaxis' + sfx] = { range: [0, 100], gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
+          tickfont: { color: '#6b6b6b', size: 9.5 }, anchor: 'x' + sfx,
+          domain: [0, 1] };
+        annotations.push({ x: (doms[i][0] + doms[i][1]) / 2, y: 1.06, xref: 'paper', yref: 'paper',
+          text: '<b>' + nm + '</b>', showarrow: false,
+          font: { size: 12, color, family: 'Inter, sans-serif' } });
+      });
+      lay.annotations = annotations;
+      Plotly.newPlot('chart_terr_twist', traces, lay, cfg);
+    }
   }
 
   window._terrRendered = true;
@@ -2671,10 +2691,8 @@ function renderTerritoriesCharts() {
   </div>
 </div>
 <h3 style="margin-top:28px">The twist, proven across all three territories: join MA and the formula turns on you</h3>
-<div class="chart-grid" style="grid-template-columns:1fr 1fr 1fr">
-  <div class="chart-card"><h4>Puerto Rico</h4><div id="chart_terr_twist_pr" class="plot" style="height:260px"></div></div>
-  <div class="chart-card"><h4>US Virgin Islands</h4><div id="chart_terr_twist_vi" class="plot" style="height:260px"></div></div>
-  <div class="chart-card"><h4>Guam</h4><div id="chart_terr_twist_gu" class="plot" style="height:260px"></div></div>
+<div class="chart-grid" style="grid-template-columns:1fr">
+  <div class="chart-card"><h4>Puerto Rico · US Virgin Islands · Guam — penetration (shaded) vs benchmark as % of US (dark line)</h4><div id="chart_terr_twist" class="plot" style="height:300px"></div></div>
 </div>
 <p class="h2-sub" style="font-size:12.5px"><strong style="font-style:normal">How to read them — one scale, everything in percent.</strong> The shaded area is the share of each territory&rsquo;s A+B beneficiaries enrolled in MA; the dark line is its benchmark as a percent of the US mainland average. Where the area fills (PR: 96.2%), the line sinks and stays at ~59%; where the area stays empty (Guam: 1.4%), the line climbed from 59% to 86%; USVI joined MA in 2021 (2.8% → 30.5% in one year) and its line is already sliding. The rate is computed from whoever stays behind in FFS — territory stabilization at 0.70 ends exactly this [12][22].</p>
 
