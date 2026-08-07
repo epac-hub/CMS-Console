@@ -2579,38 +2579,40 @@ function renderTerritoriesCharts() {
     // twist: three separately-headed panels (design parity); endpoint labels; HTML legend
     if (document.getElementById('chart_terr_twist_pr')) {
       const T2 = D.pr_vs_us_ts, ty = TR.pen.pen_years;
-      const rel = k => ty.map(y => { const r = T2.find(q => q.year === y);
+      const yrs = ty.concat(T2.map(q => q.year).filter(y => y > ty[ty.length - 1]));
+      const pad = a => a.concat(new Array(yrs.length - a.length).fill(null));
+      const rel = k => yrs.map(y => { const r = T2.find(q => q.year === y);
         return r && r[k] && r.us ? r[k] / r.us * 100 : null; });
       const el2 = D.enroll_live;
       const prPen = ty.map(y => { const i = el2.years.indexOf(y);
         return i >= 0 ? (el2.pr.ab_ma[i] / el2.pr.ab_total[i] * 100) : null; });
       const panels = [
-        ['chart_terr_twist_pr', 'Puerto Rico', prPen, rel('pr'), CO.PR, '96.2% in MA', '59.3% of US', true],
-        ['chart_terr_twist_vi', 'US Virgin Islands', TR.pen.VI, rel('vi'), CO.VI, '33.4% in MA', '73.7% of US', false],
-        ['chart_terr_twist_gu', 'Guam', TR.pen.GU, rel('gu'), CO.GU, '1.4% in MA', '86.5% of US', false],
+        ['chart_terr_twist_pr', 'Puerto Rico', pad(prPen), rel('pr'), CO.PR, '96.2% in MA', '59.3% of US', true],
+        ['chart_terr_twist_vi', 'US Virgin Islands', pad(TR.pen.VI), rel('vi'), CO.VI, '33.4% in MA', '73.7% of US', false],
+        ['chart_terr_twist_gu', 'Guam', pad(TR.pen.GU), rel('gu'), CO.GU, '1.4% in MA', '86.5% of US', false],
       ];
       panels.forEach(([id, nm, pen, relv, color, penL, relL, showY]) => {
         if (!document.getElementById(id)) return;
         Plotly.newPlot(id, [
-          { x: ty, y: pen, fill: 'tozeroy', mode: 'lines', name: '% in MA',
+          { x: yrs, y: pen, fill: 'tozeroy', mode: 'lines', name: '% in MA',
             line: { color, width: 1 }, fillcolor: color + '33', showlegend: false,
             hovertemplate: nm + ' penetration %{x}: %{y:.1f}%<extra></extra>' },
-          { x: ty, y: relv, mode: 'lines+markers', name: '% of US',
+          { x: yrs, y: relv, mode: 'lines+markers', name: '% of US',
             line: { color: '#1a1a1a', width: 2.2 }, marker: { size: 4, color: '#1a1a1a' }, showlegend: false,
             hovertemplate: nm + ' rate %{x}: %{y:.1f}% of US<extra></extra>' },
         ], {
           paper_bgcolor: 'white', plot_bgcolor: 'white',
           font: { color: '#3a3a3a', family: 'Inter, sans-serif', size: 10.5 },
           xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickvals: [2018, 2022, 2027],
-                   tickfont: { color: '#6b6b6b', size: 9.5 } },
+                   range: [2017.4, 2027.6], tickfont: { color: '#6b6b6b', size: 9.5 } },
           yaxis: { range: [0, 105], gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
                    tickfont: { color: '#6b6b6b', size: 9.5 }, showticklabels: showY },
           margin: { t: 14, l: showY ? 36 : 14, r: 12, b: 30 }, hovermode: 'closest',
           annotations: [
-            { x: 2026.8, y: (pen[pen.length - 1] || 2) + 7, xref: 'x', yref: 'y',
+            { x: 2027, y: (pen.filter(v => v != null).slice(-1)[0] || 2) + 7, xref: 'x', yref: 'y',
               text: '<b>' + penL + '</b>', showarrow: false, xanchor: 'right',
               font: { size: 9.5, color, family: 'JetBrains Mono' } },
-            { x: 2026.8, y: relv[relv.length - 1] + 8, xref: 'x', yref: 'y',
+            { x: 2027, y: relv[relv.length - 1] + 8, xref: 'x', yref: 'y',
               text: relL, showarrow: false, xanchor: 'right',
               font: { size: 9.5, color: '#1a1a1a', family: 'JetBrains Mono' } },
           ],
