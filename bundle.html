@@ -2576,48 +2576,71 @@ function renderTerritoriesCharts() {
         xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickfont: { color: '#6b6b6b', size: 10 }, showgrid: false },
         showlegend: false, hovermode: 'closest', margin: { t: 14, l: 60, r: 20, b: 44 } }), cfg);
     }
-    // twist: three separately-headed panels (design parity); endpoint labels; HTML legend
-    if (document.getElementById('chart_terr_twist_pr')) {
-      const T2 = D.pr_vs_us_ts, ty = TR.pen.pen_years;
-      const yrs = ty.concat(T2.map(q => q.year).filter(y => y > ty[ty.length - 1]));
-      const pad = a => a.concat(new Array(yrs.length - a.length).fill(null));
-      const rel = k => yrs.map(y => { const r = T2.find(q => q.year === y);
-        return r && r[k] && r.us ? r[k] / r.us * 100 : null; });
+    // twist: one chart, three boxed subplots (companion-exact); series live-verified
+    if (document.getElementById('chart_terr_twist')) {
+      const ty = TR.pen.pen_years;
       const el2 = D.enroll_live;
       const prPen = ty.map(y => { const i = el2.years.indexOf(y);
-        return i >= 0 ? (el2.pr.ab_ma[i] / el2.pr.ab_total[i] * 100) : null; });
-      const panels = [
-        ['chart_terr_twist_pr', 'Puerto Rico', pad(prPen), rel('pr'), CO.PR, '96.2% in MA', '59.3% of US', true],
-        ['chart_terr_twist_vi', 'US Virgin Islands', pad(TR.pen.VI), rel('vi'), CO.VI, '33.4% in MA', '73.7% of US', false],
-        ['chart_terr_twist_gu', 'Guam', pad(TR.pen.GU), rel('gu'), CO.GU, '1.4% in MA', '86.5% of US', false],
-      ];
-      panels.forEach(([id, nm, pen, relv, color, penL, relL, showY]) => {
-        if (!document.getElementById(id)) return;
-        Plotly.newPlot(id, [
-          { x: yrs, y: pen, fill: 'tozeroy', mode: 'lines', name: '% in MA',
-            line: { color, width: 1 }, fillcolor: color + '33', showlegend: false,
-            hovertemplate: nm + ' penetration %{x}: %{y:.1f}%<extra></extra>' },
-          { x: yrs, y: relv, mode: 'lines+markers', name: '% of US',
-            line: { color: '#1a1a1a', width: 2.2 }, marker: { size: 4, color: '#1a1a1a' }, showlegend: false,
-            hovertemplate: nm + ' rate %{x}: %{y:.1f}% of US<extra></extra>' },
-        ], {
-          paper_bgcolor: 'white', plot_bgcolor: 'white',
-          font: { color: '#3a3a3a', family: 'Inter, sans-serif', size: 10.5 },
-          xaxis: { gridcolor: '#ebe8e0', linecolor: '#d8d4c8', tickvals: [2018, 2022, 2027],
-                   range: [2017.4, 2027.6], tickfont: { color: '#6b6b6b', size: 9.5 } },
-          yaxis: { range: [0, 105], gridcolor: '#ebe8e0', linecolor: '#d8d4c8',
-                   tickfont: { color: '#6b6b6b', size: 9.5 }, showticklabels: showY },
-          margin: { t: 14, l: showY ? 36 : 14, r: 12, b: 30 }, hovermode: 'closest',
-          annotations: [
-            { x: 2027, y: (pen.filter(v => v != null).slice(-1)[0] || 2) + 7, xref: 'x', yref: 'y',
-              text: '<b>' + penL + '</b>', showarrow: false, xanchor: 'right',
-              font: { size: 9.5, color, family: 'JetBrains Mono' } },
-            { x: 2027, y: relv[relv.length - 1] + 8, xref: 'x', yref: 'y',
-              text: relL, showarrow: false, xanchor: 'right',
-              font: { size: 9.5, color: '#1a1a1a', family: 'JetBrains Mono' } },
-          ],
-        }, cfg);
+        return i >= 0 ? Math.round(el2.pr.ab_ma[i] / el2.pr.ab_total[i] * 1000) / 10 : null; });
+      const P = { pr: prPen, vi: TR.pen.VI, gu: TR.pen.GU };
+      const ts = D.pr_vs_us_ts.filter(r => r.year >= 2018 && r.vi && r.gu && r.us);
+      const relY = ts.map(r => r.year);
+      const rel = key => ts.map(r => Math.round(r[key] / r.us * 1000) / 10);
+      const CC = { pr: CO.PR, vi: CO.VI, gu: CO.GU };
+      const FILL = { pr: 'rgba(155,44,44,0.16)', vi: 'rgba(37,99,235,0.13)', gu: 'rgba(184,137,58,0.16)' };
+      const colDom = [[0, 0.30], [0.35, 0.65], [0.70, 1]];
+      const keys = ['pr', 'vi', 'gu'];
+      const tw2 = document.getElementById('chart_terr_twist').getBoundingClientRect().width || window.innerWidth;
+      const narrow2 = tw2 < 640;
+      const traces = [];
+      keys.forEach((key, i) => {
+        const xn = 'x' + (i ? i + 1 : '');
+        traces.push({ x: ty, y: P[key], xaxis: xn, yaxis: 'y',
+          name: '% of beneficiaries in MA', legendgroup: 'pen', showlegend: i === 0,
+          mode: 'lines', fill: 'tozeroy', fillcolor: FILL[key], line: { color: CC[key], width: 2.4 },
+          hovertemplate: '%{x} · in MA: %{y}%<extra></extra>' });
+        traces.push({ x: relY, y: rel(key), xaxis: xn, yaxis: 'y',
+          name: 'benchmark, as % of the US mainland average', legendgroup: 'rel', showlegend: i === 0,
+          mode: 'lines+markers', line: { color: '#1a1a1a', width: 2.2 }, marker: { size: 4, color: '#1a1a1a' },
+          hovertemplate: '%{x} · benchmark = %{y}% of the US average<extra></extra>' });
       });
+      const xa2 = i => ({ domain: colDom[i], anchor: 'y', tickvals: [2018, 2022, 2027], range: [2017.5, 2027.8],
+        tickfont: { size: 10, color: '#6b6b6b' }, showline: true, mirror: true,
+        linecolor: '#d8d4c8', gridcolor: 'transparent' });
+      const heads = [
+        ['PUERTO RICO', '96% in MA \u2192 rate stuck at <b>59% of US \u2014 LAST</b>', 0.15, CC.pr],
+        ['US VIRGIN ISLANDS', 'joins MA 2021 \u2192 relative rate <b>already falling</b>', 0.50, CC.vi],
+        ['GUAM', '1% in MA \u2192 rate soars to <b>86% of US \u2014 TOP</b>', 0.85, CC.gu],
+      ];
+      const ann2 = heads.map(([nm, sub, x, c]) => ({ xref: 'paper', yref: 'paper', x, y: 1.16,
+        xanchor: 'center', showarrow: false,
+        text: narrow2 ? '<b>' + nm + '</b>' : '<b>' + nm + '</b><br><span style="font-size:10.5px">' + sub + '</span>',
+        font: { size: narrow2 ? 8.5 : 13, color: c, family: 'Inter' } }));
+      const endPen = { pr: '96.2% in MA', vi: '33.4% in MA', gu: '1.4% in MA' };
+      keys.forEach((key, i) => {
+        const xn = 'x' + (i ? i + 1 : '');
+        const rv = rel(key);
+        const pv = P[key].filter(v => v != null);
+        ann2.push({ xref: xn, yref: 'y', x: 2026, y: pv[pv.length - 1],
+          text: '<b>' + endPen[key] + '</b>', showarrow: false, xanchor: 'right', yanchor: 'bottom', yshift: 4,
+          font: { size: 10.5, color: CC[key], family: 'JetBrains Mono' } });
+        ann2.push({ xref: xn, yref: 'y', x: 2027, y: rv[rv.length - 1],
+          text: '<b>' + rv[rv.length - 1] + '% of US</b>', showarrow: false, xanchor: 'right',
+          yanchor: 'top', yshift: key === 'gu' ? -16 : -5,
+          font: { size: 10.5, color: '#1a1a1a', family: 'JetBrains Mono' } });
+      });
+      Plotly.newPlot('chart_terr_twist', traces, {
+        paper_bgcolor: 'white', plot_bgcolor: '#ffffff',
+        font: { color: '#3a3a3a', family: 'Inter, sans-serif', size: 11 },
+        legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: -0.13, font: { size: 10.5 } },
+        xaxis: xa2(0), xaxis2: xa2(1), xaxis3: xa2(2),
+        yaxis: { range: [0, 108], tickvals: [0, 25, 50, 75, 100], ticksuffix: '%',
+          tickfont: { size: 10, color: '#6b6b6b' }, gridcolor: '#eceae2',
+          showline: true, mirror: true, linecolor: '#d8d4c8', automargin: true },
+        margin: { t: 66, l: 44, r: 10, b: 54 },
+        annotations: ann2, hovermode: 'closest',
+      }, cfg);
+      setTimeout(function () { try { Plotly.Plots.resize('chart_terr_twist'); } catch (e) {} }, 80);
     }
   }
 
@@ -2746,21 +2769,9 @@ function renderTerritoriesCharts() {
 </div>
 <h3 style="margin-top:28px">The twist, proven across all three territories: join MA and the formula turns on you (2018–2027)</h3>
 <p class="h2-sub" style="font-size:12.5px;font-style:italic"><strong style="font-style:normal">How to read them — one graph per territory, everything in percent, one shared scale.</strong> The colored area is the share of that territory&rsquo;s A+B beneficiaries enrolled in Medicare Advantage. The black line is the territory&rsquo;s benchmark expressed as a percent of the US mainland average — how the formula values it, relative to everyone else. <strong>Puerto Rico:</strong> 96.2% of people in MA, and its relative rate is stuck at 59% of the US average — last in the nation. <strong>USVI:</strong> it joined MA in 2021 (2.8% → 30.5% penetration in one year) — and its relative rate is already falling: 76.8% of US in 2018 → 73.7% by 2027, with its measured cost index down 73.1 → 68.0; only the pre-ACA cap softens the slide. <strong>Guam:</strong> barely 1% in MA, FFS intact — and its relative rate soared from 58.7% to 86.5% of the US average. That is the twist on one scale: where the area fills, the black line sinks; where the area stays empty, the black line climbs. The rate is computed from whoever stays behind in FFS — territory stabilization at 0.70 ends exactly this.</p>
-<div class="chart-grid" style="grid-template-columns:1fr 1fr 1fr;gap:14px">
-  <div class="chart-card" style="padding:14px 10px 8px">
-    <div class="twist-head"><span class="t1" style="color:#9b2c2c">PUERTO RICO</span><br><span class="t2">96% in MA &rarr; rate stuck at <strong style="color:#1a1a1a">59% of US</strong> — LAST</span></div>
-    <div id="chart_terr_twist_pr" class="plot" style="height:270px"></div>
-  </div>
-  <div class="chart-card" style="padding:14px 10px 8px">
-    <div class="twist-head"><span class="t1" style="color:#2563eb">US VIRGIN ISLANDS</span><br><span class="t2">joins MA 2021 &rarr; relative rate <strong style="color:#1a1a1a">already falling</strong></span></div>
-    <div id="chart_terr_twist_vi" class="plot" style="height:270px"></div>
-  </div>
-  <div class="chart-card" style="padding:14px 10px 8px">
-    <div class="twist-head"><span class="t1" style="color:#b8893a">GUAM</span><br><span class="t2">1% in MA &rarr; rate soars to <strong style="color:#1a1a1a">86% of US</strong> — TOP</span></div>
-    <div id="chart_terr_twist_gu" class="plot" style="height:270px"></div>
-  </div>
+<div class="chart-grid" style="grid-template-columns:1fr">
+  <div class="chart-card" style="width:100%"><div id="chart_terr_twist" class="plot" style="height:430px;width:100%"></div></div>
 </div>
-<div style="text-align:center;font-size:12px;color:#3a3a3a;margin-top:8px"><span style="display:inline-block;width:22px;height:10px;background:rgba(155,44,44,0.22);border:1px solid #9b2c2c;vertical-align:middle"></span> % of beneficiaries in MA &nbsp;&nbsp;&nbsp; <span style="display:inline-block;width:26px;height:2.5px;background:#1a1a1a;vertical-align:middle"></span> benchmark, as % of the US mainland average</div>
 <p class="src-line">Sources: CMS Medicare Monthly Enrollment (penetration = A+B MA &divide; A+B total) · CMS MA ratebooks and CY2027 Rate Calculation Data — benchmark averages per year and the USVI cost index (73.1 → 68.0) [12][22].</p>
 
 <h3 style="margin-top:28px">Territory stabilization: what the administration has done, and what it can still do</h3>
