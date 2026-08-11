@@ -107,9 +107,12 @@ reproduce that standard manually:
 - **Push to your session's designated branch only.** Do not push to `main` or
   another branch without explicit permission.
 - Open PRs as **drafts** unless told otherwise.
-- The repo has been renamed over its life (the app's own "Intelligent"/
-  "Intelligence" branding was removed); some GitHub metadata may show
-  `epac-hub/CMS-Console`. Treat `main` HEAD as ground truth over any stale name.
+- The project is named **CMS Console**. The repo was renamed from
+  `epac-hub/CMS-Intelligent-Console` to `epac-hub/CMS-Console`, and the app's
+  own "Intelligent"/"Intelligence" branding was removed; stale metadata, old
+  session labels, or old links may still show the former name. Treat
+  `epac-hub/CMS-Console` and `main` HEAD as ground truth. The public site is
+  `https://epac-hub.github.io/CMS-Console/` (the old URL 404s).
 
 ## Quick start for a new session
 
