@@ -3343,7 +3343,7 @@ const fmtPct = n => (n>=0?'+':'') + n.toFixed(1) + '%';
 
 document.getElementById('meta-files').textContent = D.n_files;
 document.getElementById('meta-rows').textContent = fmt(D.total_rows);
-document.getElementById('gen-ts').textContent = new Date().toISOString().substring(0,10);
+document.getElementById('gen-ts').textContent = '2026-08-07';  // last update date — bump on each data refresh (do NOT use new Date(): it mislabels the snapshot with the viewer's date)
 
 // R1: Overview benchmark stat cells — populate from payload data
 (function() {
