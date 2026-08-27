@@ -1192,7 +1192,7 @@ h2.h2 {
     <button data-tab="muni">Enrollment by Municipio</button>
     <button data-tab="duals">The Invisible Duals</button>
     <button data-tab="circularity">The Circularity Trap</button>
-    <button data-tab="nontucket">The Nontucket</button>
+    <button data-tab="nontucket">From Nantucket to Vieques</button>
     <button data-tab="territories">The Territories&rsquo; Perspective</button>
     <button data-tab="partd">Part D · Drug Use &amp; Cost</button>
     <button data-tab="findings">Findings</button>
@@ -2651,8 +2651,8 @@ function terrCtick(f) {
 <!-- ============================================================ NON-TUCKET -->
 <section class="tab" id="tab-nontucket">
 <p class="kicker">A tale of two islands, one wage index</p>
-<h2 class="h2">The <em>Nontucket</em></h2>
-<p class="h2-sub">Two American islands sit outside every metropolitan area. One of them turned that fact into hundreds of millions of dollars a year. The other one is Vieques. Every figure below carries its source; the irony is supplied free of charge.</p>
+<h2 class="h2">From <em>Nantucket</em> to <em>Vieques</em></h2>
+<p class="h2-sub">How one tiny island can reshape Medicare&rsquo;s formula across the nation. Two American islands sit outside every metropolitan area. One of them turned that fact into hundreds of millions of dollars a year. The other one is Vieques. Every figure below carries its source; the irony is supplied free of charge.</p>
 
 <div class="policy-doc">
   <p class="lead">Medicare&rsquo;s hospital wage index has a rule, since 1997, that no urban hospital may be paid below its state&rsquo;s rural hospitals &mdash; the &ldquo;rural floor.&rdquo; It was written to protect rural America. What follows is what two islands did with it, and what it did to them.</p>
@@ -3633,8 +3633,20 @@ document.querySelectorAll('nav.tabs button').forEach(b => {
     if (b.dataset.tab === 'stars' && !window._starsRendered) { renderStarsCharts(); window._starsRendered = true; }
     if (b.dataset.tab === 'findings' && !window._findingsRendered) { renderFindingsCharts(); window._findingsRendered = true; }
     if (b.dataset.tab === 'policy' && !window._policyRendered) { renderPolicyCharts(); window._policyRendered = true; }
+    // Each tab is addressable: reflect it in the URL without scrolling the page.
+    if (!window._tabFromHash) { try { history.replaceState(null, '', '#' + b.dataset.tab); } catch (e) {} }
   });
 });
+
+// Deep links: #<tab> opens that tab on load, and back/forward navigate tabs.
+function openTabFromHash() {
+  var t = (location.hash || '').replace('#', '');
+  if (!t) return;
+  var btn = document.querySelector('nav.tabs button[data-tab="' + t.replace(/[^a-z0-9]/g, '') + '"]');
+  if (btn && !btn.classList.contains('active')) { window._tabFromHash = true; btn.click(); window._tabFromHash = false; }
+}
+window.addEventListener('hashchange', openTabFromHash);
+openTabFromHash();
 
 // Sub-tabs inside Data & Sources
 document.querySelectorAll('.subnav-btn').forEach(b => {
