@@ -26,7 +26,7 @@ const COLS = [
 
 function fetchJson(params) {
   const url = `${API}?${params}&column=${COLS}&size=200`;
-  const out = execFileSync('curl', ['-sS', '--fail', '--max-time', '120', url], {
+  const out = execFileSync('curl', ['-sS', '--fail', '--globoff', '--max-time', '120', url], {
     encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   });
   return JSON.parse(out);
