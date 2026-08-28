@@ -1848,15 +1848,15 @@ h2.h2 {
 <div class="circ-sec">
   <p class="circ-eyebrow">04 · The widening gap</p>
   <h2 class="h2" style="font-size:22px">The salary gap is <em>accelerating</em></h2>
-  <p class="h2-sub" style="margin-bottom:18px">Over the past decade PR healthcare salary growth (23.2%) trailed the US mainland (34.5%) and even the USVI (40.0%). The PR/US ratio worsened from 0.527 to 0.483 — the gap is not closing.</p>
+  <p class="h2-sub" style="margin-bottom:18px">From 2014 to 2025, PR healthcare pay grew 36.4% while the US mainland grew 45.1% (USVI: 30.6%). The PR/US ratio worsened from 0.537 to 0.505 — eleven more years of data, same direction: the gap is not closing.</p>
   <div class="chart-grid" style="grid-template-columns:1fr">
     <div class="chart-card">
-      <h4>Healthcare Industry Average Salary Index (2012 = 100)</h4>
+      <h4>Healthcare Industry Average Salary Index (2014 = 100)</h4>
       <div id="circ-salaryindex" class="plot"></div>
-      <div class="chart-explain"><strong>How to read it.</strong> All three start at 100 in 2012; Puerto Rico's line rises slowest, widening the gap.</div>
+      <div class="chart-explain"><strong>How to read it.</strong> All three start at 100 in 2014; Puerto Rico's line stays below the US line throughout — 2025 average annual pay: $33,584 PR vs $66,520 US.</div>
     </div>
   </div>
-  <p class="src-line">[5] BLS QCEW, NAICS 62 (private), 2012–2022 — <a href="https://data.bls.gov/timeseries/ENU7200050562" target="_blank" rel="noopener">PR</a> · <a href="https://data.bls.gov/timeseries/ENU7800050562" target="_blank" rel="noopener">USVI</a> · <a href="https://data.bls.gov/timeseries/ENUUS00050562" target="_blank" rel="noopener">US</a>.</p>
+  <p class="src-line">[5] BLS QCEW, NAICS 62 (private), annual average pay 2014–2025, retrieved via the QCEW open-data API Aug. 28, 2026 — <a href="https://data.bls.gov/timeseries/ENU7200050562" target="_blank" rel="noopener">PR</a> · <a href="https://data.bls.gov/timeseries/ENU7800050562" target="_blank" rel="noopener">USVI</a> · <a href="https://data.bls.gov/timeseries/ENUUS00050562" target="_blank" rel="noopener">US</a>.</p>
 </div>
 
 <!-- Section 5: Physician cliff -->
@@ -1992,12 +1992,12 @@ h2.h2 {
 <div class="circ-fn">
   <h3>Sources &amp; verification register</h3>
   <div class="fn-item"><span class="fn-id">[1]</span> FY2027 IPPS final rule (CMS-1849-F), Tables 2–3 — PR computed wage indexes 0.3278–0.3655, transition values 0.5155–0.5301, rural floor 0.2511. <a href="https://www.cms.gov/medicare/payment/prospective-payment-systems/acute-inpatient-pps/fy-2027-ipps-final-rule-home-page" target="_blank" rel="noopener">cms.gov/&hellip;/fy-2027-ipps-final-rule-home-page</a></div>
-  <div class="fn-item"><span class="fn-id">[2]</span> BLS Occupational Employment &amp; Wage Statistics (OEWS), May 2021. <a href="https://www.bls.gov/oes/tables.htm" target="_blank" rel="noopener">bls.gov/oes/tables.htm</a></div>
+  <div class="fn-item"><span class="fn-id">[2]</span> BLS Occupational Employment &amp; Wage Statistics (OEWS), May 2021 &mdash; the latest vintage retrievable from this environment (BLS blocks non-browser downloads and the public API daily window was exhausted Aug. 28, 2026; refresh queued). <a href="https://www.bls.gov/oes/tables.htm" target="_blank" rel="noopener">bls.gov/oes/tables.htm</a></div>
   <div class="fn-item"><span class="fn-id">[3]</span> CMS Hospital Provider Cost Report (HCRIS), 2021 &amp; fiscal years ending 2023 (January 2026 release, recomputed live from the dataset API 2026-07). Margins are dollar-weighted aggregates and medians over rows reporting both net patient revenue and net income from patient service (PR n=38, mainland n=3,389); cost-report vintages revise as late reports arrive, so the release date is part of the citation. Medicare tiles: DRG + outlier payments ÷ Title XVIII discharges over paired IPPS rows; Title XVIII share of total inpatient days. A MedPAC-style all-in Medicare margin needs worksheet-level HCRIS and in PR would describe only the FFS remnant — deliberately not printed. <a href="https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report" target="_blank" rel="noopener">data.cms.gov/&hellip;/hospital-provider-cost-report</a></div>
   <div class="fn-item"><span class="fn-id">[4]</span> KFF Health Insurance Coverage, 2022 · OCI-PR. <a href="https://www.kff.org/state-health-policy-data/state-indicator/total-population/" target="_blank" rel="noopener">kff.org</a> · <a href="https://ocs.pr.gov/" target="_blank" rel="noopener">ocs.pr.gov</a></div>
-  <div class="fn-item"><span class="fn-id">[5]</span> BLS QCEW, NAICS 62 (private). PR <a href="https://data.bls.gov/timeseries/ENU7200050562" target="_blank" rel="noopener">ENU7200050562</a> · USVI <a href="https://data.bls.gov/timeseries/ENU7800050562" target="_blank" rel="noopener">ENU7800050562</a> · US <a href="https://data.bls.gov/timeseries/ENUUS00050562" target="_blank" rel="noopener">ENUUS00050562</a></div>
+  <div class="fn-item"><span class="fn-id">[5]</span> BLS QCEW, NAICS 62 (private), annual average pay 2014–2025, QCEW open-data API (data.bls.gov/cew), retrieved Aug. 28, 2026. PR <a href="https://data.bls.gov/timeseries/ENU7200050562" target="_blank" rel="noopener">ENU7200050562</a> · USVI <a href="https://data.bls.gov/timeseries/ENU7800050562" target="_blank" rel="noopener">ENU7800050562</a> · US <a href="https://data.bls.gov/timeseries/ENUUS00050562" target="_blank" rel="noopener">ENUUS00050562</a></div>
   <div class="fn-item"><span class="fn-id">[6]</span> AMA Physician Masterfile, Dec 31 2020 · AAMC State Physician Workforce. <a href="https://www.ama-assn.org/about/ama-physician-professional-data" target="_blank" rel="noopener">ama-assn.org</a> · <a href="https://www.aamc.org/data-reports/workforce/report/state-physician-workforce-data-report" target="_blank" rel="noopener">aamc.org</a></div>
-  <div class="fn-item"><span class="fn-id">[7]</span> NAIC 2022 Health Insurance Industry Analysis Report. <a href="https://content.naic.org/sites/default/files/inline-files/Health%202022%20Annual%20Industry%20Report.pdf" target="_blank" rel="noopener">content.naic.org</a></div>
+  <div class="fn-item"><span class="fn-id">[7]</span> NAIC 2022 Health Insurance Industry Analysis Report &mdash; the latest edition with Puerto Rico state tables: the 2024 national commentary (checked Aug. 28, 2026) carries no PR-specific rows. <a href="https://content.naic.org/sites/default/files/inline-files/Health%202022%20Annual%20Industry%20Report.pdf" target="_blank" rel="noopener">content.naic.org</a></div>
   <div class="fn-item"><span class="fn-id">[8]</span> U.S. OIG, Dec 2020 — "CMS Could Improve Its Wage Index Adjustment&hellip;" <a href="https://oig.hhs.gov/reports/all/2020/the-centers-for-medicare-medicaid-services-could-improve-its-wage-index-adjustment-for-hospitals-in-areas-with-the-lowest-wages/" target="_blank" rel="noopener">oig.hhs.gov</a></div>
   <div class="fn-item"><span class="fn-id">[9]</span> U.S. OIG, Nov 2018 — "Significant Vulnerabilities in the Hospital Wage Index System." <a href="https://oig.hhs.gov/reports/all/2018/significant-vulnerabilities-exist-in-the-hospital-wage-index-system-for-medicare-payments/" target="_blank" rel="noopener">oig.hhs.gov</a></div>
   <div class="fn-item"><span class="fn-id">[10]</span> Congressional Research Service, 2021 — "Medicare Hospital Payments: Adjusting for Variation in Geographic Area Wages." <a href="https://www.everycrsreport.com/reports/R46702.html" target="_blank" rel="noopener">crsreports.congress.gov</a></div>
@@ -2119,27 +2119,30 @@ function renderCircularityCharts(){
   ], baseLayout({ multi:true, barmode:'group', ytitle:'% of Population',
       yrange:[0,72], yticksuffix:'%' }), cfg);
 
-  // ---- 4. Healthcare Salary Index (line) ----
-  const sY=["2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
+  // ---- 4. Healthcare Salary Index (line; QCEW NAICS 62 private, 2014 = 100) ----
+  const sY=["2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"];
+  const sVI=[100,100.3,99,101.1,105.9,107.6,117.5,126.2,126.5,128.4,133.9,130.6];
+  const sUS=[100,103.1,104.6,107,109.7,112.9,120.1,126.6,133.2,137,140.9,145.1];
+  const sPR=[100,100.7,101.7,100.9,105.1,106.6,110.1,113.8,119.8,126.5,132.4,136.4];
   Plotly.newPlot('circ-salaryindex',[
-    { x:sY, y:[100,104.8,110.7,111,109.6,111.9,117.2,119,130.1,139.6,140], name:'USVI',
+    { x:sY, y:sVI, name:'USVI',
       mode:'lines+markers+text', line:{ color:VI, width:2.4, shape:'spline' }, marker:{ size:6, color:VI },
-      text:[100,104.8,110.7,111,109.6,111.9,117.2,119,130.1,139.6,140].map(v=>v.toFixed(1)),
+      text:sVI.map(v=>v.toFixed(1)),
       textposition:'top center', textfont:{ size:8.5, family:'JetBrains Mono', color:VI }, cliponaxis:false,
       hovertemplate:'USVI · %{x}: %{y:.1f}<extra></extra>' },
-    { x:sY, y:[100,98.9,101,104.2,105.6,108.1,110.8,114.1,121.3,127.9,134.5], name:'US',
+    { x:sY, y:sUS, name:'US',
       mode:'lines+markers+text', line:{ color:US, width:2.4, shape:'spline' }, marker:{ size:6, color:US },
-      text:[100,98.9,101,104.2,105.6,108.1,110.8,114.1,121.3,127.9,134.5].map(v=>v.toFixed(1)),
+      text:sUS.map(v=>v.toFixed(1)),
       textposition:'top center', textfont:{ size:8.5, family:'JetBrains Mono', color:US }, cliponaxis:false,
       hovertemplate:'US · %{x}: %{y:.1f}<extra></extra>' },
-    { x:sY, y:[100,100.9,102.8,103.5,104.5,103.7,108.1,109.6,113.2,117,123.2], name:'PR',
+    { x:sY, y:sPR, name:'PR',
       mode:'lines+markers+text', line:{ color:PR, width:2.4, shape:'spline' }, marker:{ size:6, color:PR },
-      text:[100,100.9,102.8,103.5,104.5,103.7,108.1,109.6,113.2,117,123.2].map(v=>v.toFixed(1)),
+      text:sPR.map(v=>v.toFixed(1)),
       textposition:'bottom center', textfont:{ size:8.5, family:'JetBrains Mono', color:PR }, cliponaxis:false,
       fill:'tozeroy', fillcolor:'rgba(155,44,44,0.06)',
       hovertemplate:'PR · %{x}: %{y:.1f}<extra></extra>' }
-  ], baseLayout({ multi:true, line:true, ytitle:'Index (2012 = 100)', xtitle:'Year',
-      yrange:[93,150] }), cfg);
+  ], baseLayout({ multi:true, line:true, ytitle:'Index (2014 = 100)', xtitle:'Year',
+      yrange:[93,152] }), cfg);
 
   // ---- 5. Physician Age Cliff (hbar) ----
   const spL=["Thoracic Surg","Preventive Med","Family Med/GP","Pediatrics","Ortho Surg","Pulmonary","OB/GYN","Urology","Psychiatry","Radiation Onc","Cardiovascular","General Surg","Otolaryngology"];
@@ -3253,7 +3256,7 @@ function terrCtick(f) {
     <li>Official wage indexes: <strong>San Juan&ndash;Bayam&oacute;n&ndash;Caguas 0.3500</strong>, Guayama 0.3654, Ponce 0.3303, with Aguadilla, Arecibo and Mayag&uuml;ez held at <strong>0.3278</strong> by the statutory imputed floor (ARPA &sect;9831). The lowest area anywhere else in the nation is rural Mississippi at <strong>0.7112</strong>. <em>Source: FY2027 IPPS final rule (CMS-1849-F, 91 FR 49570, Aug. 4, 2026), Table 3.</em></li>
     <li>What hospitals are actually paid on is a post-<em>Bridgeport</em> transitional exception &mdash; a payment-equivalent wage index of <strong>&asymp;0.5259</strong> (85.74% of FY2024), declining 5% per year. All 55 hospitals carrying an FY2027 transition value are in Puerto Rico. <em>Source: 91 FR 49570; FY2027 Table 2.</em></li>
     <li>If nothing replaces the protection, Medicare inpatient payments to the island&rsquo;s 52 IPPS hospitals settle <strong>&asymp;15.5% lower</strong> (the payment multiplier (0.62&times;WI+0.38) evaluated at 0.35 versus 0.5259) &mdash; reached not in one day but in 5%-a-year wage-index steps (<a href="https://www.law.cornell.edu/cfr/text/42/412.64" target="_blank" rel="noopener">42 CFR &sect;412.64(h)(7)</a>): a payment cut of roughly 2% compounding every October 1 for about eight years. <em>Computation from the statutory 62% labor-related share, 42 U.S.C. 1395ww(d)(3)(E)(ii).</em></li>
-    <li><strong>The political front is moving.</strong> On February 25, 2026, eighteen Members of Congress led by Rep. Pablo Jos&eacute; Hern&aacute;ndez asked HHS and CMS, in comments on the CY2027 MA Advance Notice, to set a <strong>minimum AGA factor of 0.70</strong> for Puerto Rico under SSA &sect;1876(a)(4) &mdash; noting benchmarks &asymp;41% below the national average, 674,000 seniors, and 94% MA enrollment (<a href="https://hernandez.house.gov/sites/evo-subsites/hernandez.house.gov/files/evo-media-document/rep-hernandez-letter-on-2027-medicare-advantage-and-part-d-advance-notice-version-2-02-25-2026-05-10-pm-final.pdf" target="_blank" rel="noopener">the letter</a>). On August 5, 2026, Gov. Gonz&aacute;lez-Col&oacute;n welcomed a fourteen-Member letter led by Rep. Greg Murphy asking HHS to establish, <strong>beginning in 2028</strong>, a minimum MA benchmark equal to 70% of the national AGA &mdash; the level the U.S. Virgin Islands already receives (<a href="https://www.prfaa.pr.gov/recent-press-releases/governor-gonzalez-colon-welcomes-congressional-support-to-advance-medicare-advantage-payment-improvements" target="_blank" rel="noopener">PRFAA release</a>). An AGA of 0.70 would sit above every one of Puerto Rico&rsquo;s 78 municipios today (median 0.503, highest 0.726).</li>
+    <li><strong>The political front is moving.</strong> On February 25, 2026, eighteen Members of Congress led by Rep. Pablo Jos&eacute; Hern&aacute;ndez asked HHS and CMS, in comments on the CY2027 MA Advance Notice, to set a <strong>minimum AGA factor of 0.70</strong> for Puerto Rico under SSA &sect;1876(a)(4) &mdash; noting benchmarks &asymp;41% below the national average, 674,000 seniors, and 94% MA enrollment (<a href="https://hernandez.house.gov/sites/evo-subsites/hernandez.house.gov/files/evo-media-document/rep-hernandez-letter-on-2027-medicare-advantage-and-part-d-advance-notice-version-2-02-25-2026-05-10-pm-final.pdf" target="_blank" rel="noopener">the letter</a>). On August 5, 2026, Gov. Gonz&aacute;lez-Col&oacute;n welcomed a fourteen-Member letter led by Rep. Greg Murphy asking HHS to establish, <strong>beginning in 2028</strong>, a minimum MA benchmark equal to 70% of the national AGA &mdash; the level the U.S. Virgin Islands already receives (<a href="https://www.prfaa.pr.gov/recent-press-releases/governor-gonzalez-colon-welcomes-congressional-support-to-advance-medicare-advantage-payment-improvements" target="_blank" rel="noopener">PRFAA release</a>). An AGA of 0.70 would sit above every one of Puerto Rico&rsquo;s 78 municipios today (median 0.503, highest 0.726). Coverage: <a href="https://www.einpresswire.com/article/931929434/governor-gonz-lez-col-n-welcomes-congressional-support-to-advance-medicare-advantage-payment-improvements" target="_blank" rel="noopener">EIN Presswire</a> &middot; <a href="https://www.elvocero.com/actualidad/congresistas-solicitan-al-gobierno-federal-aumentar-el-financiamiento-de-medicare-advantage-en-puerto-rico/article_75896b45-5374-4b86-8d37-d7252b3d8cb1.html" target="_blank" rel="noopener">El Vocero</a>.</li>
     <li>The wage arithmetic underneath: Puerto Rico hospital average hourly wages run <strong>$14.37&ndash;$31.77</strong> against a &asymp;$60 national average. The four highest-wage hospitals on the island are the public institutions of Centro M&eacute;dico &mdash; ASEM ($31.77), Centro Cardiovascular ($26.10), Centro Comprensivo del C&aacute;ncer ($24.03), Hospital Universitario ($24.02). <em>Source: FY2027 Table 2, Average Hourly Wage FY2027 column.</em></li>
     <li>Because CMS reprices all five historical claims years to current wage indexes when building the MA ratebook, the wage-index outcome of FY2028 reaches municipio benchmarks in the <strong>CY2029 ratebook</strong> (January 1, 2029) &mdash; all at once, no phase-in. <em>Source: CY2027 Advance Notice (Jan. 26, 2026), repricing methodology.</em></li>
   </ul>
