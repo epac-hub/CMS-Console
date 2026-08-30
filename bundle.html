@@ -1884,8 +1884,8 @@ h2.h2 {
   </div>
   <div class="stat-cell">
     <div class="lbl">All-Occupation PR/US Ratio</div>
-    <div class="val">0.52</div>
-    <div class="sub">economy-wide benchmark · 30% above the index</div>
+    <div class="val">0.56</div>
+    <div class="sub">May 2025 economy-wide benchmark · 60% above the 0.35 computed index</div>
   </div>
   <div class="stat-cell">
     <div class="lbl">PR Patient-Care Operating Margin</div>
@@ -1952,16 +1952,16 @@ h2.h2 {
 <!-- Section 2: Below every sector -->
 <div class="circ-sec">
   <p class="circ-eyebrow">02 · Healthcare below every sector</p>
-  <h2 class="h2" style="font-size:22px">Healthcare wages sit <em>below</em> every other occupation</h2>
-  <p class="h2-sub" style="margin-bottom:18px">If the low PR/US ratio merely reflected a lower-wage economy, healthcare would track other sectors. It doesn't — practitioners (0.42) and hospital staff (0.38) cluster below the 0.52 economy-wide average, evidence that the CMS-determined rate is the anchor.</p>
+  <h2 class="h2" style="font-size:22px">Practitioner pay sits near the <em>bottom</em> &mdash; the CMS index below everything</h2>
+  <p class="h2-sub" style="margin-bottom:18px">If the low PR/US ratio merely reflected a lower-wage economy, healthcare would track other sectors. It doesn't — practitioners (0.48) sit below the 0.56 economy-wide average and below all but two of the 21 published occupation groups, while hospital-staff pay (0.38, 2021 cost reports) and the CMS computed index (0.35) sit below every occupation in the economy — evidence that the CMS-determined rate is the anchor.</p>
   <div class="chart-grid" style="grid-template-columns:1fr">
     <div class="chart-card">
-      <h4>PR/US Salary Ratio by Occupation (2021)</h4>
+      <h4>PR/US Salary Ratio by Occupation (May 2025)</h4>
       <div id="circ-occupations" class="plot" style="height:440px"></div>
-      <div class="chart-explain"><strong>How to read it.</strong> Most occupations cluster near 0.52; healthcare and hospital staff fall to the CMS computed index line at 0.35 (dashed).</div>
+      <div class="chart-explain"><strong>How to read it.</strong> Most occupations cluster near 0.56; healthcare practitioners fall to 0.48 &mdash; third from the bottom &mdash; and the dashed CMS computed index line at 0.35 sits below every occupation in the economy.</div>
     </div>
   </div>
-  <p class="src-line">[2] <a href="https://www.bls.gov/oes/tables.htm" target="_blank" rel="noopener">BLS OEWS</a>, May 2021 · <a href="https://www.cms.gov/medicare/payment/prospective-payment-systems/acute-inpatient-pps/wage-index-files" target="_blank" rel="noopener">CMS IPPS</a> · <a href="https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report" target="_blank" rel="noopener">CMS Hospital Cost Report</a>, 2021.</p>
+  <p class="src-line">[2] <a href="https://www.bls.gov/oes/tables.htm" target="_blank" rel="noopener">BLS OEWS</a>, May 2025 (retrieved Aug. 30, 2026 via the registered BLS Public Data API; PR Legal group suppressed) · <a href="https://www.cms.gov/medicare/payment/prospective-payment-systems/acute-inpatient-pps/wage-index-files" target="_blank" rel="noopener">CMS IPPS</a> · <a href="https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report" target="_blank" rel="noopener">CMS Hospital Cost Report</a>, 2021.</p>
 </div>
 
 <!-- Section 3: Financial stress -->
@@ -2172,7 +2172,7 @@ h2.h2 {
 <div class="circ-fn">
   <h3>Sources &amp; verification register</h3>
   <div class="fn-item"><span class="fn-id">[1]</span> FY2027 IPPS final rule (CMS-1849-F), Tables 2–3 — PR computed wage indexes 0.3278–0.3655, transition values 0.5155–0.5301, rural floor 0.2511. <a href="https://www.cms.gov/medicare/payment/prospective-payment-systems/acute-inpatient-pps/fy-2027-ipps-final-rule-home-page" target="_blank" rel="noopener">cms.gov/&hellip;/fy-2027-ipps-final-rule-home-page</a></div>
-  <div class="fn-item"><span class="fn-id">[2]</span> BLS Occupational Employment &amp; Wage Statistics (OEWS), May 2021 &mdash; the latest vintage retrievable from this environment: BLS blocks non-browser downloads, and the public API&rsquo;s unkeyed quota is shared across this network&rsquo;s egress address and was found exhausted on both attempts (Aug. 28&ndash;29, 2026). A newer vintage (May 2024/2025) can be loaded when a registered BLS API key or a different network is available. <a href="https://www.bls.gov/oes/tables.htm" target="_blank" rel="noopener">bls.gov/oes/tables.htm</a></div>
+  <div class="fn-item"><span class="fn-id">[2]</span> BLS Occupational Employment &amp; Wage Statistics (OEWS), May 2025 &mdash; retrieved Aug. 30, 2026 via the registered BLS Public Data API v2 (44 series resolved: PR statewide and national annual mean wage, all-occupations plus 22 SOC major groups; the PR Legal group is suppressed in the published data and omitted from the chart). Hospital-staff pay retains its separately-labeled 2021 HCRIS vintage. <a href="https://www.bls.gov/oes/tables.htm" target="_blank" rel="noopener">bls.gov/oes/tables.htm</a></div>
   <div class="fn-item"><span class="fn-id">[3]</span> CMS Hospital Provider Cost Report (HCRIS), 2021 &amp; fiscal years ending 2023 (January 2026 release, recomputed live from the dataset API 2026-07). Margins are dollar-weighted aggregates and medians over rows reporting both net patient revenue and net income from patient service (PR n=38, mainland n=3,389); cost-report vintages revise as late reports arrive, so the release date is part of the citation. Medicare tiles: DRG + outlier payments ÷ Title XVIII discharges over paired IPPS rows; Title XVIII share of total inpatient days. A MedPAC-style all-in Medicare margin needs worksheet-level HCRIS and in PR would describe only the FFS remnant — deliberately not printed. <a href="https://data.cms.gov/provider-compliance/cost-report/hospital-provider-cost-report" target="_blank" rel="noopener">data.cms.gov/&hellip;/hospital-provider-cost-report</a></div>
   <div class="fn-item"><span class="fn-id">[4]</span> KFF Health Insurance Coverage, 2022 · OCI-PR. <a href="https://www.kff.org/state-health-policy-data/state-indicator/total-population/" target="_blank" rel="noopener">kff.org</a> · <a href="https://ocs.pr.gov/" target="_blank" rel="noopener">ocs.pr.gov</a></div>
   <div class="fn-item"><span class="fn-id">[5]</span> BLS QCEW, NAICS 62 (private), annual average pay 2014–2025, QCEW open-data API (data.bls.gov/cew), retrieved Aug. 28, 2026. PR <a href="https://data.bls.gov/timeseries/ENU7200050562" target="_blank" rel="noopener">ENU7200050562</a> · USVI <a href="https://data.bls.gov/timeseries/ENU7800050562" target="_blank" rel="noopener">ENU7800050562</a> · US <a href="https://data.bls.gov/timeseries/ENUUS00050562" target="_blank" rel="noopener">ENUUS00050562</a></div>
@@ -2259,8 +2259,8 @@ function renderCircularityCharts(){
       return L; })(), cfg);
 
   // ---- 2. PR/US Salary Ratio by Occupation (hbar) ----
-  const oL=["Food Prep","Personal Care","Farming","Life/Phys Sci","Architecture","Management","Bldg/Grounds","Office/Admin","Legal","Production","Community Svc","Transportation","Arts","Protective","ALL OCCUPATIONS","Sales","Install/Repair","Business/Fin","Computer/Math","Construction","HC Support","HC Practitioners","Hospital Staff","CMS Wage Index"];
-  const oV=[.68,.63,.62,.62,.62,.60,.60,.57,.56,.56,.55,.55,.54,.52,.52,.52,.51,.45,.42,.42,.59,.42,.38,.35];
+  const oL=["Education","Farming","Food Prep","HC Support","Management","Life/Phys Sci","Architecture","Office/Admin","Personal Care","Community Svc","Bldg/Grounds","Transportation","Production","Business/Fin","ALL OCCUPATIONS","Sales","Arts","Protective","Install/Repair","HC Practitioners","Construction","Computer/Math","Hospital Staff","CMS Wage Index"];
+  const oV=[.77,.75,.70,.68,.65,.63,.63,.63,.63,.62,.62,.60,.58,.57,.56,.55,.54,.54,.54,.48,.48,.47,.38,.35];
   Plotly.newPlot('circ-occupations',[{
     x:oV, y:oL, type:'bar', orientation:'h',
     marker:{ color:oL.map(l=> l==='CMS Wage Index'?GOLD : l==='ALL OCCUPATIONS'?US : PR) },
