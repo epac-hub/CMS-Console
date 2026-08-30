@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CMS Console</title>
+<meta name="description" content="CMS Console: Medicare Advantage benchmarks, hospital wage index, and enrollment analysis for Puerto Rico and the U.S. territories, built from CMS primary sources.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CMS Console">
+<meta property="og:description" content="CMS Console: Medicare Advantage benchmarks, hospital wage index, and enrollment analysis for Puerto Rico and the U.S. territories, built from CMS primary sources.">
+<meta property="og:url" content="https://epac-hub.github.io/CMS-Console/">
+<meta property="og:image" content="https://epac-hub.github.io/CMS-Console/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CMS Console">
+<meta name="twitter:description" content="CMS Console: Medicare Advantage benchmarks, hospital wage index, and enrollment analysis for Puerto Rico and the U.S. territories, built from CMS primary sources.">
+<meta name="twitter:image" content="https://epac-hub.github.io/CMS-Console/og-card.png">
 <style>
 /* latin-ext */
 @font-face {
@@ -3497,6 +3509,7 @@ function terrCtick(f) {
     <tr style="border-bottom:1px solid #eee"><td style="padding:6px 8px">USVI average benchmark (the parity target)</td><td style="padding:6px 8px;text-align:right">$967 (within &asymp;3%)</td></tr>
     <tr><td style="padding:6px 8px">US mainland average (still far above the stabilized PR)</td><td style="padding:6px 8px;text-align:right">$1,313 (PR remains 24% below)</td></tr>
   </table></div>
+  <div class="plot" id="rec_benchmarks" style="height:300px"></div>
   <p style="font-size:13.5px;line-height:1.6;margin:8px 0"><strong>The statute polices its own outcome.</strong> Every benchmark remains capped at the pre-ACA trajectory &mdash; the ceiling that already sets Guam&rsquo;s and half of USVI&rsquo;s rates &mdash; so the stabilization cannot overshoot: it lands Puerto Rico at USVI parity and stops. Verbatim, <a href="https://www.law.cornell.edu/uscode/text/42/1395w-23" target="_blank" rel="noopener">SSA &sect;1853(n)(4), 42 U.S.C. &sect;1395w-23(n)(4)</a>: &ldquo;In no case shall the blended benchmark amount for an area for a year (determined taking into account subsection (o)) be greater than the applicable amount that would (but for the application of this subsection) be determined under subsection (k)(1) for the area for the year.&rdquo; Because the cap applies <em>after</em> quality bonuses, nothing pierces it; CMS implements it in Risk2027.csv (&ldquo;All 2027 rates are capped at 2027 Pre-ACA rate&rdquo;), and this console&rsquo;s model honors it &mdash; the caps trim the uncapped $1,045 to $997.</p>
   <p style="font-size:13.5px;margin:8px 0"><strong>Who does what, by when:</strong> comments making this ask, with this record, in the CY2028 Advance Notice window (&asymp;late January &ndash; early March 2027) &middot; the &sect;1853(d)(4) island-wide payment-area request filed by the Governor by <strong>February 1, 2027</strong> as the structural companion &middot; plans and the congressional delegation carrying the same single formulation. CY2027 is final; CY2028 is the actionable year.</p>
   <p class="src-line">Modeled figures are this console&rsquo;s computation from CMS CY2027 Rate Calculation Data (FFS rate, pre-ACA cap, and 0%-bonus columns; USPCC $1,297.74; quartile 1.15): effective index = max(current, 0.70); benchmark = min(index &times; USPCC &times; 1.15, pre-ACA cap); averaged unweighted across 78 municipios &mdash; re-run live on the published file: uncapped $1,044.68, capped $996.53, 37 of 78 trimmed. Construction note, disclosed: the simplified formula yields $744 at current indices versus the published $777.98 (the published rate embeds GME/IME/KAC/VA-DOD factors), so the modeled $997 is the counterfactual under the same simplified construction &mdash; conservative relative to the full formula. Authorities: <a href="https://www.law.cornell.edu/uscode/text/42/1395mm" target="_blank" rel="noopener">42 U.S.C. &sect;1395mm(a)(4)</a>; CY2020 Rate Announcement p. 24 (reprised CY2022 p. 41, CY2023 p. 33); CY2027 Rate Announcement pp. 46&ndash;47; <em>Bridgeport Hosp. v. Becerra</em>, 108 F.4th 882 (D.C. Cir. 2024). Verification tiers: register [22], The Circularity Trap.</p></div>
@@ -3741,6 +3754,42 @@ document.getElementById('gen-ts').textContent = '2026-08-07';  // last update da
 // FY2027 IPPS final rule Tables 2-3; FY2027 Imputed Floors PUF; 72 FR 47323;
 // ACS/PRCS 2019-2023 5-yr (B19013/B19301/B25077/C17002/B22001/B19056/B28002/B27010);
 // CY2026 MA Rate Book CountyRate2026.csv; CMS Medicare Monthly Enrollment 2025.
+// ---- CMS on the Record: benchmark comparison chart ----
+// Figures match the modeled table above: CMS CY2027 Rate Calculation Data
+// (published FFS rates + quartile/bonus), console AGA-stabilization model.
+function renderRecordChart() {
+  if (typeof Plotly === 'undefined') return;
+  var GRN = '#2c5f4b', RED = '#9b2c2c', TEAL = '#0e6e73', GRAY = '#a8bfb2';
+  var rows = [
+    ['US mainland average', 1313, GRN],
+    ['Puerto Rico under 0.70 stabilization (capped)', 997, TEAL],
+    ['USVI \u2014 the parity target', 967, GRAY],
+    ['Puerto Rico today (CY2027)', 778, RED]
+  ];
+  Plotly.newPlot('rec_benchmarks', [{
+    type: 'bar', orientation: 'h',
+    y: rows.map(function(r){ return r[0]; }),
+    x: rows.map(function(r){ return r[1]; }),
+    marker: { color: rows.map(function(r){ return r[2]; }) },
+    text: rows.map(function(r){ return '$' + r[1].toLocaleString(); }),
+    textposition: 'outside',
+    hovertemplate: '%{y}: <b>$%{x:,.0f} PMPM</b><extra></extra>'
+  }], {
+    paper_bgcolor: 'white', plot_bgcolor: 'white',
+    font: { color: '#3a3a3a', family: 'Inter, sans-serif', size: 11 },
+    xaxis: { gridcolor: '#f0ede6', linecolor: '#d8d4c8',
+      tickfont: { color: '#6b6b6b' }, range: [0, 1480],
+      title: { text: 'Average monthly benchmark, $ PMPM (CY2027 modeled)', font: { size: 10 } } },
+    yaxis: { automargin: true, tickfont: { size: 10.5, color: '#6b6b6b' } },
+    margin: { t: 10, l: 10, r: 24, b: 44 }, showlegend: false, bargap: 0.35,
+    annotations: [{
+      x: 997, y: 1, xanchor: 'left', yanchor: 'middle', xshift: 56, showarrow: false,
+      text: '+28% \u2014 lands at USVI parity and stops',
+      font: { size: 10, color: '#0e6e73' }
+    }]
+  }, { displaylogo: false, responsive: true });
+}
+
 function renderNontucketCharts() {
   if (typeof Plotly === 'undefined') return;
   const GRN = '#2c5f4b', RED = '#9b2c2c', TEAL = '#0e6e73', GRAY = '#a8bfb2';
@@ -3905,6 +3954,7 @@ document.querySelectorAll('nav.tabs button').forEach(b => {
     if (b.dataset.tab === 'findings' && !window._findingsRendered) { renderFindingsCharts(); window._findingsRendered = true; }
     if (b.dataset.tab === 'policy' && !window._policyRendered) { renderPolicyCharts(); window._policyRendered = true; }
     if (b.dataset.tab === 'nontucket' && !window._nontucketRendered) { renderNontucketCharts(); window._nontucketRendered = true; }
+    if (b.dataset.tab === 'record' && !window._recordRendered) { renderRecordChart(); window._recordRendered = true; }
     // Each tab is addressable: reflect it in the URL without scrolling the page.
     if (!window._tabFromHash) { try { history.replaceState(null, '', '#' + b.dataset.tab); } catch (e) {} }
   });
