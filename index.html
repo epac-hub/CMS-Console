@@ -5119,9 +5119,7 @@ function renderMuniPlan12mo() {
     xaxis: { tickfont: { size: 10.5 }, linecolor: '#d8d4c8' },
     yaxis: { title: { text: 'MA enrollees', font: { size: 11 } }, tickformat: ',', gridcolor: '#e8e4da', rangemode: 'tozero' },
     margin: { l: 70, r: 20, t: 26, b: 66 },
-    shapes: [{ type: 'line', x0: 'Dec 25', x1: 'Dec 25', y0: 0, y1: 1, yref: 'paper', line: { color: '#9b2c2c', width: 1, dash: 'dot' } }],
     annotations: [
-      { x: 'Dec 25', y: 0.72, yref: 'paper', yanchor: 'middle', xanchor: 'right', xshift: -6, text: 'Humana exits 12/31/2025', showarrow: false, font: { size: 10.5, color: '#9b2c2c' } },
       { x: 'Jan 26', y: 346317, yanchor: 'top', yshift: -12, text: '+10,034', showarrow: false, font: { size: 9.5, color: '#008834', family: 'JetBrains Mono' } },
       { x: 'Jan 26', y: 202195, yanchor: 'bottom', yshift: 12, text: '\u22129,900', showarrow: false, font: { size: 9.5, color: '#0a3d1c', family: 'JetBrains Mono' } },
       { x: 'Jan 26', y: 116511, yanchor: 'top', yshift: -12, text: '+12,993', showarrow: false, font: { size: 9.5, color: '#0066a1', family: 'JetBrains Mono' } },
@@ -5161,7 +5159,6 @@ function renderMuniPlan12moShare() {
     margin: { l: 70, r: 20, t: 26, b: 66 },
     shapes: [
       { type: 'line', x0: 0, x1: 1, xref: 'paper', y0: 50, y1: 50, line: { color: '#b8893a', width: 1, dash: 'dot' } },
-      { type: 'line', x0: 'Dec 25', x1: 'Dec 25', y0: 0, y1: 1, yref: 'paper', line: { color: '#9b2c2c', width: 1, dash: 'dot' } },
     ],
     annotations: [{ x: 'Aug 26', y: 50, yanchor: 'top', xanchor: 'right', yshift: -3, text: '50% \u2014 majority line', showarrow: false, font: { size: 9.5, color: '#b8893a' } }],
   }, { displaylogo: false, responsive: true });
