@@ -5272,20 +5272,25 @@ function renderMuniPlan12mo() {
   const d = D.chart_pr_plan_12mo;
   const el = document.getElementById('muni_plan_12mo');
   if (!el || !d || el.data) return;
-  const mk = (name, y, color) => ({
-    x: d.months, y, name, mode: 'lines+markers',
-    line: { color, width: 2.4 }, marker: { size: 5, color },
+  const mk = (name, y, color, pos) => ({
+    x: d.months, y, name, mode: 'lines+markers+text',
+    line: { color, width: 2.4, shape: 'spline' }, marker: { size: 6, color },
     connectgaps: false,
-    hovertemplate: name + ' \u00b7 %{x}: %{y:,.0f}<extra></extra>',
+    text: y.map(v => v == null ? '' : (v/1000).toFixed(1).replace(/\.0$/, '') + 'k'),
+    textposition: pos,
+    textfont: { color, size: 9.5, family: 'JetBrains Mono', weight: 600 },
+    hovertemplate: '%{y:,.0f}',
   });
   Plotly.newPlot(el, [
-    mk('MCS Classicare', d.mcs, '#008834'),
-    mk('MMM (Elevance)', d.mmm, '#0a3d1c'),
-    mk('Triple-S (GuideWell)', d.ts, '#0066a1'),
-    mk('Humana \u2014 exited 12/31/2025', d.humana, '#9b2c2c'),
+    mk('MCS Classicare', d.mcs, '#008834', 'top center'),
+    mk('MMM (Elevance)', d.mmm, '#0a3d1c', 'bottom center'),
+    mk('Triple-S (GuideWell)', d.ts, '#0066a1', 'top center'),
+    mk('Humana \u2014 exited 12/31/2025', d.humana, '#9b2c2c', 'bottom center'),
   ], {
     paper_bgcolor: '#faf8f4', plot_bgcolor: '#faf8f4',
     font: { color: '#3a3a3a', family: 'Inter, sans-serif', size: 12 },
+    hovermode: 'x unified',
+    hoverlabel: { bgcolor: '#fffdf8', bordercolor: '#d8d4c8', font: { size: 12, family: 'Inter, sans-serif' } },
     showlegend: true,
     legend: { orientation: 'h', y: -0.22, font: { size: 10.5 } },
     xaxis: { tickfont: { size: 10.5 }, linecolor: '#d8d4c8' },
