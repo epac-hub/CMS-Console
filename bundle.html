@@ -3960,6 +3960,27 @@ document.querySelectorAll('nav.tabs button').forEach(b => {
     document.querySelectorAll('section.tab').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
     document.getElementById('tab-' + b.dataset.tab).classList.add('active');
+    // Self-heal: a chart drawn while this tab was hidden (e.g. by Export/Print) is laid out at the
+    // wrong width. Purge any mis-sized plot in the now-visible tab and clear the tab's rendered
+    // flag so its render function runs again (per-chart el.data guards skip the healthy plots).
+    (function(tab){
+      if (typeof Plotly === 'undefined') return;
+      var sec = document.getElementById('tab-' + tab);
+      if (!sec) return;
+      var purged = false;
+      sec.querySelectorAll('.js-plotly-plot').forEach(function(el){
+        if (el.offsetWidth === 0) return;
+        var svg = el.querySelector('svg.main-svg');
+        if (!svg || Math.abs(svg.clientWidth - el.offsetWidth) > 40) { Plotly.purge(el); purged = true; }
+      });
+      if (purged) {
+        var flag = { data: '_graphRendered', rates: '_ratesRendered', pr: '_prChartsRendered',
+          duals: '_dualsRendered', circularity: '_circChartsRendered', territories: '_terrRendered',
+          partd: '_partdRendered', stars: '_starsRendered', findings: '_findingsRendered',
+          policy: '_policyRendered', nontucket: '_nontucketRendered', record: '_recordRendered' }[tab];
+        if (flag) window[flag] = false;
+      }
+    })(b.dataset.tab);
     if (b.dataset.tab === 'data' && !window._graphRendered) renderGraph();
     if (b.dataset.tab === 'rates' && !window._ratesRendered) renderRates();
     if (b.dataset.tab === 'pr' && !window._prChartsRendered) renderPRCharts();
