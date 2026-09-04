@@ -5102,7 +5102,18 @@ function renderMuniPlan12mo() {
     textposition: pos,
     textfont: { color, size: 9.5, family: 'JetBrains Mono', weight: 600 },
     cliponaxis: false,
-    hovertemplate: '%{y:,.0f}',
+    customdata: y.map((v, i) => {
+      if (v == null || i === 0 || y[i-1] == null) return '';
+      const diff = v - y[i-1];
+      if (diff === 0) return '  \u00b7 0.0% (0)';
+      const up = diff > 0;
+      const pc = Math.abs(100 * diff / y[i-1]).toFixed(1);
+      const amt = Math.abs(diff).toLocaleString('en-US');
+      return up
+        ? '  <span style="color:#00c853"><b>\u25b2</b></span> ' + pc + '% (+' + amt + ')'
+        : '  <span style="color:#ff1744"><b>\u25bc</b></span> ' + pc + '% (\u2212' + amt + ')';
+    }),
+    hovertemplate: '%{y:,.0f}%{customdata}',
   });
   Plotly.newPlot(el, [
     mk('MCS Classicare', d.mcs, '#008834', 'top center'),
@@ -5119,11 +5130,7 @@ function renderMuniPlan12mo() {
     xaxis: { tickfont: { size: 10.5 }, linecolor: '#d8d4c8' },
     yaxis: { title: { text: 'MA enrollees', font: { size: 11 } }, tickformat: ',', gridcolor: '#e8e4da', rangemode: 'tozero' },
     margin: { l: 70, r: 20, t: 26, b: 66 },
-    annotations: [
-      { x: 'Jan 26', y: 346317, yanchor: 'top', yshift: -12, text: '+10,034', showarrow: false, font: { size: 9.5, color: '#008834', family: 'JetBrains Mono' } },
-      { x: 'Jan 26', y: 202195, yanchor: 'bottom', yshift: 12, text: '\u22129,900', showarrow: false, font: { size: 9.5, color: '#0a3d1c', family: 'JetBrains Mono' } },
-      { x: 'Jan 26', y: 116511, yanchor: 'top', yshift: -12, text: '+12,993', showarrow: false, font: { size: 9.5, color: '#0066a1', family: 'JetBrains Mono' } },
-    ],
+    
   }, { displaylogo: false, responsive: true });
 }
 function renderMuniPlan12moShare() {
