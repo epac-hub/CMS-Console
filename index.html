@@ -3782,7 +3782,7 @@ document.querySelectorAll('nav.tabs button').forEach(b => {
     if (b.dataset.tab === 'data' && !window._graphRendered) renderGraph();
     if (b.dataset.tab === 'rates' && !window._ratesRendered) renderRates();
     if (b.dataset.tab === 'pr' && !window._prChartsRendered) renderPRCharts();
-    if (b.dataset.tab === 'muni' && !window._muniChartsRendered) renderMuniCharts();
+    if (b.dataset.tab === 'muni') renderMuniCharts();
     if (b.dataset.tab === 'duals' && !window._dualsRendered) { renderDualsCharts(); window._dualsRendered = true; }
     if (b.dataset.tab === 'circularity' && !window._circChartsRendered) { renderCircularityCharts(); window._circChartsRendered = true; }
     if (b.dataset.tab === 'territories' && !window._terrRendered) { renderTerritoriesCharts(); window._terrRendered = true; }
@@ -5168,9 +5168,18 @@ function renderMuniPlan12moShare() {
 }
 function renderMuniCharts() {
   renderMuniByPlan();
+  // a chart drawn while this tab was hidden (e.g. by Export/Print) has zero width — purge it so it redraws at real size
+  if (typeof Plotly !== 'undefined') {
+    ['muni_plan_12mo', 'muni_plan_12mo_share'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.data && el.offsetWidth > 0) {
+        const svg = el.querySelector('svg.main-svg');
+        if (!svg || Math.abs(svg.clientWidth - el.offsetWidth) > 40) Plotly.purge(el);
+      }
+    });
+  }
   renderMuniPlan12mo();
   renderMuniPlan12moShare();
-  window._muniChartsRendered = true;
 }
 
 // Knowledge graph
