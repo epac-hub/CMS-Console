@@ -4008,7 +4008,8 @@ function openTabFromHash() {
   if (btn && !btn.classList.contains('active')) { window._tabFromHash = true; btn.click(); window._tabFromHash = false; }
 }
 window.addEventListener('hashchange', openTabFromHash);
-openTabFromHash();
+// Deferred: clicking a tab mid-script hits const declarations further down (TDZ) and kills the render.
+setTimeout(openTabFromHash, 0);
 
 // Sub-tabs inside Data & Sources
 document.querySelectorAll('.subnav-btn').forEach(b => {
