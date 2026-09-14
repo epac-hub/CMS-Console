@@ -4008,7 +4008,10 @@ function openTabFromHash() {
   if (btn && !btn.classList.contains('active')) { window._tabFromHash = true; btn.click(); window._tabFromHash = false; }
 }
 window.addEventListener('hashchange', openTabFromHash);
-openTabFromHash();
+// Run the deep link only after this whole script has been evaluated: the tab click
+// handlers call render functions that use `const` bindings declared further down
+// (e.g. MUNI_PLAN_COLORS), which are not initialized yet at this point in the file.
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', openTabFromHash); } else { setTimeout(openTabFromHash, 0); }
 
 // Sub-tabs inside Data & Sources
 document.querySelectorAll('.subnav-btn').forEach(b => {
