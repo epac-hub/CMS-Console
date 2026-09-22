@@ -1164,6 +1164,24 @@ h2.h2 {
   width: auto !important;
 }
 
+/* ── Nav group labels · 60-second band · data chips · next links ── */
+.tabs .navlab{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);opacity:.6;align-self:center;flex:0 0 auto;padding:14px 0;margin-right:12px;border-left:1px solid var(--rule);padding-left:14px}
+.tabs .inner .navlab:first-child{border-left:none;padding-left:0}
+@media (max-width:700px){.tabs .navlab{display:none}}
+.sixty{border:1px solid var(--rule);border-left:4px solid var(--accent);padding:16px 18px 14px;margin:0 0 30px}
+.sixty .s-kick{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.sixty .s-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media (max-width:900px){.sixty .s-grid{grid-template-columns:repeat(2,1fr)}}
+.sixty a.s-tile{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);padding:10px 12px;transition:border-color .15s}
+.sixty a.s-tile:hover{border-color:var(--accent)}
+.sixty .s-num{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;color:var(--accent);line-height:1.15;white-space:nowrap}
+.sixty .s-lab{font-size:11.5px;color:var(--ink-3);margin-top:5px;line-height:1.45}
+.sixty .s-note{font-size:10.5px;color:var(--ink-3);margin:11px 0 0}
+.datachip{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);display:inline-block;padding:3px 9px;border-radius:3px;margin:0 0 12px}
+.nextlink{margin:36px 0 4px;padding-top:14px;border-top:1px solid var(--rule)}
+.nextlink a{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:none}
+.nextlink a:hover{text-decoration:underline}
+
 </style>
 </head>
 <body>
@@ -1199,20 +1217,24 @@ h2.h2 {
 
 <nav class="tabs">
   <div class="inner">
+    <span class="navlab">The problem</span>
     <button class="active" data-tab="overview">Overview</button>
     <button data-tab="rates">Trajectory</button>
     <button data-tab="pr">Puerto Rico</button>
-    <button data-tab="stars">5-Star Plans</button>
+    <span class="navlab">The evidence</span>
     <button data-tab="muni">Enrollment</button>
     <button data-tab="duals">The Invisible Duals</button>
     <button data-tab="circularity">The Circularity Trap</button>
     <button data-tab="nontucket">From Nantucket to Vieques</button>
     <button data-tab="territories">The Territories&rsquo; Perspective</button>
+    <button data-tab="stars">5-Star Plans</button>
     <button data-tab="partd">Part D · Drug Use &amp; Cost</button>
+    <span class="navlab">The record</span>
+    <button data-tab="record">CMS on the Record</button>
+    <button data-tab="fy2028">FY2028 Watch</button>
+    <span class="navlab">The case</span>
     <button data-tab="findings">Findings</button>
     <button data-tab="policy">Policy Position</button>
-    <button data-tab="fy2028">FY2028 Watch</button>
-      <button data-tab="record">CMS on the Record</button>
     <button data-tab="data">Data &amp; Sources</button>
   </div>
 </nav>
@@ -1222,6 +1244,19 @@ h2.h2 {
 <!-- ============================================================ OVERVIEW -->
 <section class="tab active" id="tab-overview">
 
+<div class="sixty">
+  <p class="s-kick">The console in 60 seconds</p>
+  <div class="s-grid">
+    <a class="s-tile" href="#muni"><div class="s-num">681,672</div><div class="s-lab">MA enrollees &mdash; every one traced to the CMS SCC file, Sep 2026</div></a>
+    <a class="s-tile" href="#duals"><div class="s-num">~302,000</div><div class="s-lab">dual eligibles the federal tables record as 13,255</div></a>
+    <a class="s-tile" href="#stars"><div class="s-num">3 of 4</div><div class="s-lab">largest contracts hold 5-Star ratings (2026)</div></a>
+    <a class="s-tile" href="#circularity"><div class="s-num">3.8%</div><div class="s-lab">of beneficiaries remain in FFS &mdash; the base the benchmark is built on</div></a>
+    <a class="s-tile" href="#findings"><div class="s-num">9 years</div><div class="s-lab">of MedPAC warnings, 2017&ndash;2026 &mdash; unanswered</div></a>
+  </div>
+  <p class="s-note">Five numbers, five tabs &mdash; the full case. Every figure on this site is verified against its primary CMS or MedPAC file and carries a live source line.</p>
+</div>
+
+<div class="datachip">Primary sources: CMS Monthly Enrollment · SCC Sep 2026 · 2026 Star Ratings</div>
 <p class="kicker">Benchmark adequacy in the nation's highest-performing Medicare Advantage market</p>
 <h2 class="h2">Puerto Rico operates the highest quality, lowest cost Medicare Advantage market in the United States.</h2>
 <p class="h2-sub">By every performance measure CMS publishes, Puerto Rico's Medicare Advantage market leads the program. MA penetration stands at <strong>96.2%</strong> — MA enrollees as a share of beneficiaries with both Parts A and B (CMS Medicare Monthly Enrollment, May 2026) — the highest in the nation, against 55.5% on the mainland. <strong>Three of the island's four largest contracts hold 5-Star ratings</strong> under the 2026 Star Ratings. <strong>MCS Classicare (H5577) is the largest 5-Star MA contract in the United States.</strong> <strong>99.1% of Puerto Rico's MA enrollees are in plans rated 4.5 Stars or higher.</strong> No state combines this scale and this quality.</p>
@@ -1283,10 +1318,13 @@ h2.h2 {
 
 <p class="src-line" style="margin-top:18px">Sources: rates — <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data" target="_blank" rel="noopener">CMS CY2027 MA Ratebook</a> (final Rate Announcement, April 2026); star ratings — <a href="https://www.cms.gov/medicare/health-drug-plans/part-c-d-performance-data" target="_blank" rel="noopener">CMS 2026 Part C &amp; D Star Ratings</a>; enrollment &amp; penetration — <a href="https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-advantagepart-d-contract-and-enrollment-data/monthly-ma-enrollment-state/county/contract" target="_blank" rel="noopener">CMS MA Enrollment by State/County/Contract (SCC), September 2026</a>.</p>
 
+
+<div class="nextlink"><a href="#rates">Continue the argument → Trajectory</a></div>
 </section>
 
 <!-- ============================================================ RATES -->
 <section class="tab" id="tab-rates">
+<div class="datachip">Primary source: CMS MA Ratebooks · per-chart source lines below</div>
 <p class="kicker">Rate trajectory · 2018 to 2027</p>
 <h2 class="h2">Puerto Rico vs the US mainland, in <em>dollars</em> and <em>percent</em></h2>
 <p class="h2-sub">Both panels read left-to-right by ratebook year. Top: dollar amounts at each point — with the <strong>US Virgin Islands</strong> as the territorial comparator (USVI receives <strong>$967</strong> in 2027 vs Puerto Rico’s <strong>$778</strong>, despite both being territories). Bottom: PR as % of US and year-over-year growth.</p>
@@ -1387,8 +1425,11 @@ h2.h2 {
 
   <p class="src-foot">All ten ZIPs are catalogued with their SHA-256 checksums on the <strong>Inventory</strong> tab; the per-year parsing logic (drift-tolerant column matching across CMS's changing schemas) is documented on the <strong>Architecture</strong> tab and reproducible from the <strong>SQL</strong> tab. Figures last verified against the 2027 final ratebook, April 2026.</p>
 </div>
+
+<div class="nextlink"><a href="#pr">Continue the argument → Puerto Rico</a></div>
 </section>
 <section class="tab" id="tab-pr">
+<div class="datachip">Primary sources: CMS ratebooks &amp; enrollment files · source lines below</div>
 
 <div class="star-section">
   <div class="stars-display">★★★★★</div>
@@ -1490,11 +1531,14 @@ h2.h2 {
 </div>
 <p class="src-line">[17] CMS Mapping Medicare Disparities tool, prevalence datasource 2023-preliminary (<a href="https://www.cms.gov/priorities/health-equity/minority-health/research-data/mapping-medicare-disparities-tool-mmd" target="_blank" rel="noopener">cms.gov/MMD</a>) · pinned API snapshot, July 2026 · crosscheck: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11692657/" target="_blank" rel="noopener">PMC11692657</a>.</p>
 
+
+<div class="nextlink"><a href="#muni">Continue the argument → Enrollment</a></div>
 </section>
 
 <!-- ============================================================ MUNICIPIO ENROLLMENT -->
 <!-- ============================================================ 5-STAR PLANS -->
 <section class="tab" id="tab-stars">
+<div class="datachip">Primary source: CMS 2026 Star Ratings</div>
 <p class="kicker">Excellence at the lowest price · CMS 2026 Star Ratings</p>
 <h2 class="h2">The 5-star map of America runs through <em>Puerto Rico</em></h2>
 <p class="h2-sub">CMS rated <strong>516 Medicare Advantage contracts</strong> for 2026. It awarded its highest mark — <strong>5 stars overall</strong> — to <strong>18</strong>. Three are in Puerto Rico: <strong>MCS Classicare (H5577) and both MMM contracts (H4003, H4004)</strong>. And those three contracts do not merely appear on the honor roll — <strong>they dominate it</strong>: <strong>547,600 of the nation's 820,833 five-star enrollees — 66.7% — are on this island.</strong> Puerto Rico holds <strong>twice the five-star membership of the other fifteen contracts combined</strong> (273,233) — more than every state in the Union put together. Not California. Not Florida. <strong>Puerto Rico.</strong></p>
@@ -1609,9 +1653,12 @@ h2.h2 {
 <p class="src-line">Source: <a href="https://data.cms.gov/provider-data/dataset/xubh-q36u" target="_blank" rel="noopener">CMS Hospital General Information</a> (Provider Data Catalog), May 2026 vintage · counts tallied row-level via the datastore SQL API · footnote 16 text per CMS footnote reference.</p>
 <p class="h2-sub" style="margin-top:14px"><strong style="font-style:normal">The honest notes, before a critic writes them:</strong> of the 7 PR hospitals that are rated, Auxilio Mutuo holds 4 stars while most rate low; PR&rsquo;s reported ED median time is <strong>300 minutes vs 161 nationally</strong> (OP-18b) and sepsis-bundle compliance <strong>24% vs 64%</strong> (SEP-1, July 2024–June 2025) — while left-without-being-seen is <em>better</em> than national (1% vs 2%). And the long-term-care layer barely exists on paper: <strong>9</strong> CMS-certified nursing homes in Puerto Rico, of 14,695 nationwide (June 2026) — consistent with the missing Medicaid nursing-facility benefit documented on the Duals tab. Provenance tier in register [23].</p>
 
+
+<div class="nextlink"><a href="#partd">Continue the argument → Part D · Drug Use &amp; Cost</a></div>
 </section>
 
 <section class="tab" id="tab-muni">
+<div class="datachip">Primary source: CMS SCC full-version file, Sep 2026</div>
 <p class="kicker">Puerto Rico MA · September 2026 · every MA brand · every municipio</p>
 <h2 class="h2">Enrollment</h2>
 <p class="h2-sub">All 78 Puerto Rico municipios, broken down by plan. The table below carries every underlying number; beneath it, the statewide enrollment-by-plan summary for the most recent reporting date.</p>
@@ -1693,10 +1740,13 @@ h2.h2 {
 <p class="muted" id="muni-count" style="text-align:center;margin-top:10px"></p>
 
 <p class="src-line">Source: <a href="https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-advantagepart-d-contract-and-enrollment-data" target="_blank" rel="noopener">CMS Medicare Advantage/Part D Contract and Enrollment Data</a> — Monthly Enrollment by Contract/Plan/State/County (SCC, full version), September 2026 file, retrieved Sept. 14, 2026 (UTC). Every row is the published CMS enrollment count; cells of 10 or fewer enrollees are suppressed and excluded; municipio and brand totals are direct sums of the published rows.</p>
+
+<div class="nextlink"><a href="#duals">Continue the argument → The Invisible Duals</a></div>
 </section>
 
 <!-- ============================================================ INVISIBLE DUALS -->
 <section class="tab" id="tab-duals">
+<div class="datachip">Primary sources: CMS dual tables &amp; T-MSIS · MedPAC Data Books 2021–2026</div>
 <p class="kicker">The invisible duals · CY2023 → March 2026</p>
 <h2 class="h2">The duals Medicare’s data <em>cannot see</em></h2>
 <p class="h2-sub">A <strong>“dual eligible”</strong> is a person enrolled in both Medicare and Medicaid — the poorest, sickest beneficiaries in the program, and the population around which CMS calibrates risk adjustment, D-SNP policy, the Low-Income Subsidy, and quality benchmarks. The mechanism that makes a dual <em>visible</em> to federal data is administrative, not clinical: in the 50 states, a beneficiary receives a federal “dual” flag when the state Medicaid agency reports them to CMS through the <strong>Medicare Savings Program</strong> categories (QMB, SLMB, QI, QDWI) in its monthly MMA state file — an exchange the statute mandates for <em>“the fifty states and the District of Columbia”</em> only. <strong>Puerto Rico is statutorily exempt from operating those programs</strong> — §1905(p)(4)(A) of the Social Security Act. No MSP categories, no MMA flags — and therefore no duals, as far as <strong>Medicare’s dual-status accounting</strong> is concerned. The blindness is precise, not general: CMS’s own T-MSIS-derived Medicaid files count <strong>355,720</strong> Puerto Rico full duals (2022 monthly average). CMS cannot claim the data doesn’t exist — its other ledger has it.</p>
@@ -1775,10 +1825,13 @@ h2.h2 {
 <h3 style="margin-top:30px">The Medicaid floor under the duals</h3>
 <p>For a mainland dual eligible, Medicaid stands under Medicare — it picks up cost-sharing and fills the coverage Medicare leaves. Puerto Rico&rsquo;s Medicaid cannot play that role the way a state&rsquo;s does, by statute. Federal funding is <strong>block-granted</strong>: SSA &sect;1108(g) caps the federal contribution each fiscal year regardless of need (<a href="https://www.gao.gov/products/b-333602" target="_blank" rel="noopener">GAO B-333602</a>). The federal match runs at <strong>76% only through FY2027</strong> — SSA &sect;1905(ff), as amended by the Consolidated Appropriations Act, 2023 (<a href="https://www.everycrsreport.com/reports/R47821.html" target="_blank" rel="noopener">CRS R47821</a>) — after which it reverts toward the 55% territorial baseline of &sect;1905(b), while a state at Puerto Rico&rsquo;s income level would draw roughly the 83% statutory maximum. The benefit package is thinner by design: Puerto Rico does not provide all of Medicaid&rsquo;s mandatory benefits — <strong>no nursing-facility coverage and no non-emergency medical transportation</strong> (<a href="https://www.macpac.gov/wp-content/uploads/2020/08/Medicaid-and-CHIP-in-Puerto-Rico.pdf" target="_blank" rel="noopener">MACPAC</a>). The program itself — <strong>Plan Vital</strong>, roughly 1.3 million enrollees (<a href="https://www.medicaid.gov/state-overviews/puerto-rico.html" target="_blank" rel="noopener">medicaid.gov</a>, January 2026), administered by ASES entirely through managed care — is the floor beneath the ~302,000 duals this tab counts. When the Medicare side underpays and the Medicaid side is capped, there is no third payer to absorb the difference.</p>
 <p class="src-line">[20] SSA &sect;1108(g) / <a href="https://www.law.cornell.edu/uscode/text/42/1308" target="_blank" rel="noopener">42 U.S.C. &sect;1308(g)</a> (<a href="https://www.gao.gov/products/b-333602" target="_blank" rel="noopener">GAO B-333602</a>) · <a href="https://www.law.cornell.edu/uscode/text/42/1396d" target="_blank" rel="noopener">SSA &sect;1905(b), (ff)</a>, <a href="https://www.govinfo.gov/app/details/PLAW-117publ328" target="_blank" rel="noopener">CAA 2023 P.L. 117-328 div. FF &sect;5101(b)</a> (<a href="https://crsreports.congress.gov/product/pdf/R/R47821" target="_blank" rel="noopener">CRS R47821</a>) · <a href="https://www.macpac.gov/publication/medicaid-and-chip-in-puerto-rico/" target="_blank" rel="noopener">MACPAC, &ldquo;Medicaid and CHIP in Puerto Rico&rdquo;</a> · <a href="https://www.medicaid.gov/state-overviews/puerto-rico.html" target="_blank" rel="noopener">medicaid.gov Puerto Rico overview</a> · CMS, &ldquo;Managed Care in Puerto Rico&rdquo; (ASES). Full verification register [20], Circularity tab.</p>
+
+<div class="nextlink"><a href="#circularity">Continue the argument → The Circularity Trap</a></div>
 </section>
 
 <!-- ============================================================ THE CIRCULARITY TRAP -->
 <section class="tab" id="tab-circularity">
+<div class="datachip">Primary sources: CMS ratebooks &amp; FFS data · source lines below</div>
 <style>
 /* ============================================================ CIRCULARITY TRAP
    Re-aligned to the site's editorial system: Source Serif 4 / Inter /
@@ -2669,10 +2722,13 @@ function terrCtick(f) {
 </script>
 
 
+
+<div class="nextlink"><a href="#nontucket">Continue the argument → From Nantucket to Vieques</a></div>
 </section>
 
 <!-- ============================================================ NON-TUCKET -->
 <section class="tab" id="tab-nontucket">
+<div class="datachip">Primary sources: FY2027 IPPS · Census/ACS · MedPAC · GAO</div>
 <p class="kicker">A tale of two islands, one wage index</p>
 <h2 class="h2">From <em>Nantucket</em> to <em>Vieques</em></h2>
 <p class="h2-sub">How one tiny island can reshape Medicare&rsquo;s formula across the nation. Two American islands sit outside every metropolitan area. One of them turned that fact into hundreds of millions of dollars a year. The other one is Vieques. Every figure below carries its source; the irony is supplied free of charge.</p>
@@ -2734,10 +2790,13 @@ function terrCtick(f) {
   <p>The mechanics, the sequencing cautions, and the calendar live one tab over, in FY2028 Watch. This page exists so nobody mistakes the current arrangement for an accident of nature. It is an arrangement. Arrangements can be rearranged.</p>
 </div>
 
+
+<div class="nextlink"><a href="#territories">Continue the argument → The Territories&rsquo; Perspective</a></div>
 </section>
 
 <!-- ============================================================ TERRITORIES -->
 <section class="tab" id="tab-territories" role="tabpanel">
+<div class="datachip">Primary sources: CMS ratebooks &amp; territory files · source lines below</div>
 <style>
 #tab-territories .terr-mech { background:#fff; border:1px solid #d8d4c8; border-left:4px solid #b8893a; padding:16px 20px; margin-bottom:12px; }
 #tab-territories .terr-mech h4 { margin:0 0 6px; font-size:15px; }
@@ -2974,10 +3033,13 @@ function terrCtick(f) {
 <p class="src-line" style="margin-top:16px">Methodology &amp; primary sources for this tab: <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data" target="_blank" rel="noopener">CMS Rate Calculation Data and Ratebooks CY2018–CY2027</a> · <a href="https://www.cms.gov/files/zip/ffs-data-2024.zip" target="_blank" rel="noopener">CMS FFS county claims files CY2016–CY2024</a> and the <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data/2027" target="_blank" rel="noopener">Medicare FFS Glossary 2027</a> · <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/announcements-and-documents" target="_blank" rel="noopener">CMS Advance Notices and Rate Announcements CY2015–CY2027</a> · <a href="https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment" target="_blank" rel="noopener">CMS Medicare Monthly Enrollment (data.cms.gov)</a> · US Census Bureau: <a href="https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv" target="_blank" rel="noopener">Vintage 2025 estimates</a>, <a href="https://data.census.gov/table/DECENNIALDPVI2020.DP1?g=040XX00US78" target="_blank" rel="noopener">USVI 2020 Island Areas Census</a>, <a href="https://data.census.gov/table/DECENNIALDPGU2020.DP1?g=040XX00US66" target="_blank" rel="noopener">Guam 2020 Island Areas Census</a>, <a href="https://data.census.gov/table/ACSST1Y2024.S0101?g=040XX00US72" target="_blank" rel="noopener">PR ACS 2024</a> · <a href="https://www.medpac.gov/wp-content/uploads/import_data/scrape_files/docs/default-source/reports/mar17_medpac_ch13.pdf" target="_blank" rel="noopener">MedPAC March 2017 Report Ch. 13</a> · GAO-06-75 (gao.gov; loads in a browser, blocks automated checks). All figures verified against the primary files on July 15, 2026. Analysis and framing are this console's own; every number carries its source above.</p>
 
 <p class="src-line">Verification on this console: PR enrollment and penetration figures verified live [12]; the Risk2027 engine-room figures (USPCC, AGA, risk scores, caps, the 0.70 model) re-run live on <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data" target="_blank" rel="noopener">the published files</a> — provenance and verification tiers in register [22], Circularity tab.</p>
+
+<div class="nextlink"><a href="#stars">Continue the argument → 5-Star Plans</a></div>
 </section>
 
 <!-- ============================================================ PART D -->
 <section class="tab" id="tab-partd">
+<div class="datachip">Primary source: CMS Part D data · source lines below</div>
 <p class="kicker">More medicine, less money · CY2020–2023</p>
 <h2 class="h2">Prescription drug <em>utilization &amp; cost</em></h2>
 <p class="h2-sub">Puerto Rico's Medicare Advantage members fill <strong>~19% more prescriptions</strong> per year than the national average — at <strong>~15% lower gross drug cost</strong> per enrollee. Roughly <strong>$63 per prescription versus $89 nationally</strong> (CY2023). The pattern holds every year since 2020: the dollars convert into medication adherence, not overhead. The basis is unusually clean: <strong>98.2% of Puerto Rico's 656,529 Part D enrollees are in MA-PD plans</strong> (vs 56.1% nationally), and <strong>97.8% of them filled at least one prescription</strong> in CY2023 (vs 94.8% nationally) — on the island, the drug benefit is not a card in a drawer; it is used, by nearly everyone, every year.</p>
@@ -3074,10 +3136,13 @@ function terrCtick(f) {
 <p class="h2-sub" style="margin:14px 0 4px;font-size:13.5px">The zero is statutory, and CMS's ledger prints it: <em>“In the case of a part D eligible individual who is not a resident of the 50 States or the District of Columbia, the individual is not eligible to be a subsidy eligible individual under this section”</em> — SSA §1860D-14(a)(3)(F). The substitute is the Enhanced Allotment Program (§1935(e)), capped near <strong>$42–49M</strong> a year; full stateside parity would imply on the order of <strong>$2B</strong>. The console's working figure for foregone assistance — <strong>~$250M/yr</strong> — is our own deliberately conservative estimate between those anchors, labeled as such. This one is aimed at Congress as much as CMS. (Technical footnote: PR's per-claim figure isn't exactly zero because the dataset keys on prescriber geography — stateside LIS beneficiaries filling PR-prescribed scripts.)</p>
 <p class="src-line">[16] 42 U.S.C. §1395w-114(a)(3)(F), U.S. Code 2024 ed. (verbatim via GPO) · <a href="https://data.cms.gov/summary-statistics-on-use-and-payments/medicare-part-d-prescribers/medicare-part-d-prescribers-by-geography-and-drug" target="_blank" rel="noopener">Part D Prescribers by Geography &amp; Drug</a> (per-claim LIS recomputed: $599,600 / 30.9M PR claims vs $622.0M / 1.71B national) · CY2024 Part D plan file (zero column; statute-guaranteed construction).</p>
 
+
+<div class="nextlink"><a href="#record">Continue the argument → CMS on the Record</a></div>
 </section>
 
 <!-- ============================================================ FINDINGS -->
 <section class="tab" id="tab-findings">
+<div class="datachip">Each finding carries its numbered sources below</div>
 <p class="kicker">Ten conclusions</p>
 <h2 class="h2">Findings — with <em>provenance</em></h2>
 <p class="h2-sub">The case rests on a single, evidenced premise: <strong>Puerto Rico already delivers the outcomes CMS wants Medicare Advantage to achieve nationally — at the lowest payment levels in the country.</strong> Stabilize its benchmark and it becomes the national model; let underpayment persist and the model erodes. The findings below are deliberately self-critical — they concede where CMS's position holds and isolate the argument that survives scrutiny. Every source links to the original document. The findings open with the proposed remedy — <strong>benchmark parity with the US Virgin Islands (Finding I)</strong> — followed by the evidence that supports it.</p>
@@ -3393,10 +3458,13 @@ function terrCtick(f) {
 </div>
 
 
+
+<div class="nextlink"><a href="#policy">Continue the argument → Policy Position</a></div>
 </section>
 
 <!-- ============================================================ POLICY POSITION -->
 <section class="tab" id="tab-policy">
+<div class="datachip">Grounded in the findings &amp; the source register · sources per claim</div>
 <p class="kicker">The argument, in full</p>
 <h2 class="h2">Policy <em>position</em></h2>
 <p class="h2-sub">The complete policy narrative for CMS, MedPAC, and Congress — Puerto Rico as the national benchmark for high-quality, high-efficiency Medicare Advantage, and <strong>one concrete proposal: benchmark parity with the US Virgin Islands</strong>. Every figure below matches the data shown elsewhere in this console.</p>
@@ -3462,10 +3530,13 @@ function terrCtick(f) {
     Enrollment-weighted figures reflect Puerto Rico MA contracts only (standalone Part D excluded).</div>
 </div>
 
+
+<div class="nextlink"><a href="#data">Continue the argument → Data &amp; Sources</a></div>
 </section>
 
 <!-- ============================================================ GRAPH -->
 <section class="tab" id="tab-fy2028">
+<div class="datachip">Tracking the FY2028 cycle · sources per item below</div>
 <p class="kicker">The hospital wage index and the October 2027 cliff</p>
 <h2 class="h2">FY2028 <em>watch</em></h2>
 <p class="h2-sub">The next structural decision point for Puerto Rico&rsquo;s Medicare payments is the <strong>FY2028 IPPS rulemaking</strong> (proposed rule expected ~April 2027; final ~August 2027; effective October 1, 2027). This page states the verified facts and the two administrative requests before CMS. Sources follow each figure.</p>
@@ -3523,10 +3594,13 @@ function terrCtick(f) {
   <p>This page tracks a live rulemaking cycle and is updated as CMS publishes; figures above are frozen to the FY2027 final rule vintage of August 4, 2026.</p>
 </div>
 
+
+<div class="nextlink"><a href="#findings">Continue the argument → Findings</a></div>
 </section>
 
 <!-- ============================================================ CMS ON THE RECORD -->
 <section class="tab" id="tab-record" role="tabpanel">
+<div class="datachip">CMS publications, quoted verbatim &amp; linked</div>
 <div style="max-width:1080px;margin:0 auto">
   <h2 class="h2">What the administration has done &mdash; and what it can still do</h2>
   <p class="lead">CY2027 rates are final (announced April 6, 2026). The next lever is the <strong>CY2028 rate cycle</strong>: the Advance Notice arrives in early 2027 with a public comment window, and the final CY2028 Rate Announcement follows by the first Monday of April 2027. The record below separates what CMS has already proven it can do administratively from what it says requires Congress &mdash; in its own words, from twelve years of published Rate Announcements, every one linked and page-cited.</p>
@@ -3603,10 +3677,13 @@ function terrCtick(f) {
   <p class="src-line">Methodology &amp; primary sources for this tab: <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data" target="_blank" rel="noopener">CMS Rate Calculation Data and Ratebooks CY2018&ndash;CY2027</a> &middot; <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data" target="_blank" rel="noopener">CMS FFS county claims files CY2016&ndash;CY2024</a> &middot; <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/announcements-and-documents" target="_blank" rel="noopener">CMS Advance Notices and Rate Announcements CY2015&ndash;CY2027</a> (all twelve final-announcement links re-verified live Aug. 28, 2026; CY2020 and CY2027 quotes re-checked verbatim against the fetched PDFs) &middot; CMS Medicare Monthly Enrollment (data.cms.gov) &middot; U.S. Census Bureau &middot; MedPAC March 2017 Report ch. 13 &middot; GAO-06-75 (gao.gov; loads in a browser, blocks automated checks). Companion-console figures ported at content parity; the Risk2027 engine-room figures (USPCC $1,297.74, AGA levels, caps, the 0.70 model) were re-run live on the published files by this console &mdash; provenance and verification tiers in register [22], The Circularity Trap. PR FFS-share updated to this console&rsquo;s live value (3.75%, May 2026, retrieved Sept. 1, 2026).</p></div>
 
 </div>
+
+<div class="nextlink"><a href="#fy2028">Continue the argument → FY2028 Watch</a></div>
 </section>
 
 <!-- ============================================================ DATA -->
 <section class="tab" id="tab-data">
+<div class="datachip">The provenance layer itself: lineage · inventory · SQL</div>
 <p class="kicker">Provenance &amp; reproducibility</p>
 <h2 class="h2">Data &amp; <em>sources</em></h2>
 <p class="h2-sub">Where every number comes from and how it is built. Lineage maps each CMS source to the warehouse table to the finding it supports; Inventory lists all 58 source files with origin URLs and SHA-256 checksums; SQL holds the reproducible DuckDB queries; Architecture documents the five-phase pipeline.</p>
@@ -3767,6 +3844,8 @@ function terrCtick(f) {
 <p>CMS schemas evolve every year (2018 uses "AL"; 2025 uses "ALABAMA"; bonus columns embed the year in their header).
 The parser handles this through year-independent column signatures, header-row scoring, bidirectional state normalization, and tolerant numeric coercion.</p>
 </div>
+
+<div class="nextlink"><a href="#overview">Start again → Overview</a></div>
 </section>
 
 
@@ -4049,7 +4128,7 @@ function openTabFromHash() {
   var t = (location.hash || '').replace('#', '');
   if (!t) return;
   var btn = document.querySelector('nav.tabs button[data-tab="' + t.replace(/[^a-z0-9]/g, '') + '"]');
-  if (btn && !btn.classList.contains('active')) { window._tabFromHash = true; btn.click(); window._tabFromHash = false; }
+  if (btn && !btn.classList.contains('active')) { window._tabFromHash = true; btn.click(); window._tabFromHash = false; window.scrollTo(0, 0); }
 }
 window.addEventListener('hashchange', openTabFromHash);
 // Deferred: clicking a tab mid-script hits const declarations further down (TDZ) and kills the render.
