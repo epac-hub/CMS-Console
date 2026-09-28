@@ -3978,21 +3978,20 @@ const gap = Math.round(D.us_2026_rate - D.pr_2026_rate);
 document.getElementById('hero-gap').textContent = gap;
 const lastTs = D.pr_vs_us_ts[D.pr_vs_us_ts.length-1];
 const viGap = Math.round(lastTs.vi - lastTs.pr);
-const prEnr = D.chart_pr_plan_12mo.total[D.chart_pr_plan_12mo.total.length - 1];
-const annGap = (lastTs.vi - lastTs.pr) * prEnr * 12;
+const annPM = (lastTs.vi - lastTs.pr) * 12;
 document.getElementById('hero-gap-note').innerHTML =
   `— paid to Puerto Rico's <span class="star-tag">★ 5-star plans</span> ` +
   `than to mainland plans, many of which carry lower quality ratings.` +
   `<div class="agg-callout">For every member, every month, the program's highest-rated market is paid ` +
   `less than any state — and <strong>$${viGap} less</strong> than the <strong style="color:#2563eb">US Virgin Islands</strong>, ` +
-  `the territory next door, under the same Medicare statute — a differential that, across the island\'s ` +
-  `${fmt(prEnr)} MA enrollees, compounds to <strong>\u2248 $${(annGap/1e9).toFixed(2)} billion a year</strong>.</div>` +
+  `the territory next door, under the same Medicare statute \u2014 ` +
+  `<strong>\u2248 $${fmt(Math.round(annPM))} less per member, per year</strong>.</div>` +
   `<span class="agg-foot">Mainland average $${Math.round(D.us_2026_rate)}/mo · ` +
   `US Virgin Islands $${Math.round(lastTs.vi)}/mo · ` +
   `Puerto Rico average $${Math.round(D.pr_2026_rate)}/mo · ` +
   `${(D.pr_2026_rate/D.us_2026_rate*100).toFixed(1)}¢ on the dollar · ` +
-  `annual scale: $${(lastTs.vi - lastTs.pr).toFixed(2)}/mo \u00d7 ${fmt(prEnr)} members \u00d7 12 \u2248 $${(annGap/1e9).toFixed(2)}B ` +
-  `(CY2027 ratebook \u00d7 Sep 2026 SCC enrollment) \u2014 benchmark-differential arithmetic, not a payment forecast: ` +
+  `per member, per year: $${(lastTs.vi - lastTs.pr).toFixed(2)}/mo \u00d7 12 \u2248 $${fmt(Math.round(annPM))} ` +
+  `(CY2027 ratebook) \u2014 benchmark-differential arithmetic, not a payment forecast: ` +
   `actual payments run through bids, rebates, quality bonuses and risk adjustment.</span>`;
 
 // Tables overview
