@@ -181,26 +181,24 @@ nav.tabs button.active {
   border-bottom-color: var(--accent);
 }
 .navgroup {
-  display: flex; flex-wrap: wrap; align-items: stretch; flex: 0 1 auto;
+  display: flex; flex-direction: column; flex: 0 1 auto;
   min-width: 0; max-width: 100%;
-  border: 1px solid var(--rule); border-radius: 8px;
-  margin: 7px 10px 7px 0; padding: 0 10px;
+  padding: 9px 22px 0 0; margin-right: 22px;
+  border-right: 1px solid var(--rule);
 }
-.navgroup:last-child { margin-right: 0; }
+.navgroup:last-child { border-right: none; margin-right: 0; padding-right: 0; }
 .navgroup .navlab {
-  align-self: center; flex: 0 0 auto;
   font-family: 'JetBrains Mono', monospace; font-size: 8.5px;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: #fff; background: var(--accent);
-  padding: 4px 8px; border-radius: 4px; margin-right: 12px;
-  text-decoration: none; white-space: nowrap;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent); opacity: .8;
+  text-decoration: none; white-space: nowrap; line-height: 1;
 }
-.navgroup .navlab:hover { opacity: .85; }
-.navgroup button { padding-top: 11px; padding-bottom: 11px; }
-.navgroup button:last-child { margin-right: 0; }
+.navgroup .navlab:hover { opacity: 1; }
+.navgroup .grouprow { display: flex; flex-wrap: wrap; min-width: 0; }
+.navgroup button { padding-top: 7px; padding-bottom: 12px; }
+.navgroup .grouprow button:last-child { margin-right: 0; }
 @media (max-width: 700px) {
-  .navgroup { padding: 0 8px; margin: 6px 8px 6px 0; }
-  .navgroup .navlab { margin-right: 9px; }
+  .navgroup { border-right: none; padding-right: 0; margin-right: 0; flex-basis: 100%; }
 }
 
 main {
@@ -1062,12 +1060,15 @@ h2.h2 {
   <div class="inner">
     <div class="navgroup">
       <a class="navlab" href="#overview">The problem</a>
+      <div class="grouprow">
       <button class="active" data-tab="overview">Overview</button>
       <button data-tab="rates">Trajectory</button>
       <button data-tab="pr">Puerto Rico</button>
+      </div>
     </div>
     <div class="navgroup">
       <a class="navlab" href="#muni">The evidence</a>
+      <div class="grouprow">
       <button data-tab="muni">Enrollment</button>
       <button data-tab="duals">The Invisible Duals</button>
       <button data-tab="circularity">The Circularity Trap</button>
@@ -1075,17 +1076,22 @@ h2.h2 {
       <button data-tab="territories">The Territories&rsquo; Perspective</button>
       <button data-tab="stars">5-Star Plans</button>
       <button data-tab="partd">Part D · Drug Use &amp; Cost</button>
+      </div>
     </div>
     <div class="navgroup">
       <a class="navlab" href="#record">The record</a>
+      <div class="grouprow">
       <button data-tab="record">CMS on the Record</button>
       <button data-tab="fy2028">FY2028 Watch</button>
+      </div>
     </div>
     <div class="navgroup">
       <a class="navlab" href="#findings">The case</a>
+      <div class="grouprow">
       <button data-tab="findings">Findings</button>
       <button data-tab="policy">Policy Position</button>
       <button data-tab="data">Data &amp; Sources</button>
+      </div>
     </div>
   </div>
 </nav>
