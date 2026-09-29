@@ -4228,7 +4228,7 @@ function renderMigrationCharts() {
     margin:{ l:56, r:16, t:24, b:34 },
     xaxis:{ type:'category' },
     yaxis:{ title:{ text:'arrivals in prior 12 months', font:{ size:10.5 } }, gridcolor:'#eceadf', tickformat:',', zeroline:false },
-    annotations:[{ x:'2018', y:mg.flow_vals[mg.flow_years.indexOf(2018)], yanchor:'bottom',
+    annotations:[{ x:mg.flow_years.indexOf(2018), y:mg.flow_vals[mg.flow_years.indexOf(2018)], yanchor:'bottom',
       text:'Hurricane Mar\u00eda exodus', showarrow:false, font:{ size:10, color:'#9b2c2c' } }],
   }), cfgm);
 }
