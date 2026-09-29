@@ -2948,8 +2948,8 @@ function terrCtick(f) {
   </div>
   <div class="chart-card">
     <h4>What the same senior costs, state by state &mdash; all 50 states + DC</h4>
-    <p class="muted" style="font-size:12.5px;line-height:1.55;margin:4px 0 10px"><strong>How to read it:</strong> for each jurisdiction &mdash; the PR-born 65+ population in 2013 and 2023 (ACS PUMS); its average CY2027 MA benchmark (simple average of its counties&rsquo; Parts A&amp;B 0% bonus rates from CMS&rsquo;s published rate book &mdash; Puerto Rico&rsquo;s same-file average is <strong>$777.98</strong>, matching this console&rsquo;s figure to the cent); the monthly gap vs Puerto Rico; and the annual benchmark scale of that gap across that state&rsquo;s PR-born senior population. Sorted by annual scale. <strong>Read it honestly:</strong> this is benchmark-differential arithmetic, not a payment forecast (actual payments run through bids, rebates, quality bonuses and risk adjustment); single-year PUMS estimates for small states carry wide margins of error (the totals are dominated by the large states, where sampling is strong); and the population is <em>only</em> island-born seniors, which understates the full diaspora.</p>
-    <div style="overflow-x:auto;max-height:560px;overflow-y:auto"><table class="mig-table"><thead><tr><th>State</th><th>PR-born 65+ (2013)</th><th>PR-born 65+ (2023)</th><th>CY2027 benchmark/mo</th><th>vs PR ($777.98)</th><th>Annual scale</th></tr></thead><tbody id="mig-tbody"></tbody></table></div>
+    <p class="muted" style="font-size:12.5px;line-height:1.55;margin:4px 0 10px"><strong>How to read it:</strong> one subtraction per row, left to right. For each state: its PR-born 65+ population (2013 and 2023, ACS PUMS); its average CY2027 MA benchmark (simple average of its counties&rsquo; Parts A&amp;B 0% bonus rates from CMS&rsquo;s published rate book &mdash; Puerto Rico&rsquo;s same-file average is <strong>$777.98</strong>, matching this console&rsquo;s figure to the cent); then the three money columns: <strong>what a year of benchmark for those seniors costs in the state</strong> (count &times; state benchmark &times; 12), <strong>what the identical people would cost in Puerto Rico</strong> (count &times; $777.98 &times; 12), and <strong>the difference &mdash; the extra cost of the migration</strong>. Sorted by that difference. <strong>Read it honestly:</strong> this is benchmark-differential arithmetic, not a payment forecast (actual payments run through bids, rebates, quality bonuses and risk adjustment); single-year PUMS estimates for small states carry wide margins of error (the totals are dominated by the large states, where sampling is strong); and the population is <em>only</em> island-born seniors, which understates the full diaspora.</p>
+    <div style="overflow-x:auto;max-height:560px;overflow-y:auto"><table class="mig-table"><thead><tr><th>State</th><th>PR-born 65+ (2013)</th><th>PR-born 65+ (2023)</th><th>Benchmark/mo</th><th>Cost per year IN THE STATE</th><th>Same people, cost per year IN PR</th><th>= Difference (the migration bill)</th></tr></thead><tbody id="mig-tbody"></tbody></table></div>
   </div>
 </div>
 
@@ -4023,14 +4023,14 @@ function renderMigrationCharts() {
   const t13m = mg.states.reduce((a, r) => a + r.n13, 0), t23m = mg.states.reduce((a, r) => a + r.n23, 0);
   const wavgm = mg.states.reduce((a, r) => a + r.n23 * r.bench, 0) / t23m;
   const totExtra = mg.states.reduce((a, r) => a + r.n23 * (r.bench - mg.pr_bench) * 12, 0);
+  const billStates0 = mg.states.reduce((a, r) => a + r.n23 * r.bench * 12, 0);
   document.getElementById('mig-t23').textContent = fmtNm(t23m);
   document.getElementById('mig-t23b').textContent = fmtNm(t23m);
   document.getElementById('mig-t13').textContent = fmtNm(t13m);
   document.getElementById('mig-percap').textContent = '+$' + fmtNm(Math.round((wavgm - mg.pr_bench) * 12)) + '/yr';
   document.getElementById('mig-peak').textContent = fmtNm(mg.flow_vals[mg.flow_years.indexOf(2018)]);
   document.getElementById('mig-total').textContent = '\u2248 $' + (totExtra / 1e9).toFixed(2) + 'B/yr';
-  const billStates = mg.states.reduce((a, r) => a + r.n23 * r.bench * 12, 0);
-  document.getElementById('mig-billstates').textContent = '$' + (billStates / 1e9).toFixed(2) + 'B/yr';
+  document.getElementById('mig-billstates').textContent = '$' + (billStates0 / 1e9).toFixed(2) + 'B/yr';
   document.getElementById('mig-billpr').textContent = '$' + (t23m * mg.pr_bench * 12 / 1e9).toFixed(2) + 'B/yr';
   const pipeTot = mg.states.reduce((a, r) => a + (r.p55 || 0), 0);
   document.getElementById('mig-pipe').textContent = fmtNm(pipeTot);
@@ -4040,13 +4040,16 @@ function renderMigrationCharts() {
   });
 
   const tb = document.getElementById('mig-tbody');
+  const costSt = r => r.n23 * r.bench * 12, costPr = r => r.n23 * mg.pr_bench * 12;
   tb.innerHTML = mg.states.map(r => {
-    const d = r.bench - mg.pr_bench, e = r.n23 * d * 12;
     return '<tr><td>' + r.name + '</td><td>' + fmtNm(r.n13) + '</td><td>' + fmtNm(r.n23) +
-      '</td><td>$' + fmtNm(Math.round(r.bench)) + '</td><td>+$' + fmtNm(Math.round(d)) +
-      '</td><td>$' + fmtNm(Math.round(e)) + '</td></tr>';
+      '</td><td>$' + fmtNm(Math.round(r.bench)) +
+      '</td><td>$' + fmtNm(Math.round(costSt(r))) +
+      '</td><td>$' + fmtNm(Math.round(costPr(r))) +
+      '</td><td><b>$' + fmtNm(Math.round(costSt(r) - costPr(r))) + '</b></td></tr>';
   }).join('') + '<tr class="tot"><td>TOTAL &mdash; 50 states + DC</td><td>' + fmtNm(t13m) + '</td><td>' + fmtNm(t23m) +
-    '</td><td></td><td></td><td>$' + fmtNm(Math.round(totExtra)) + '</td></tr>';
+    '</td><td></td><td>$' + fmtNm(Math.round(billStates0)) + '</td><td>$' + fmtNm(Math.round(t23m * mg.pr_bench * 12)) +
+    '</td><td><b>$' + fmtNm(Math.round(totExtra)) + '</b></td></tr>';
 
   const baseM = { paper_bgcolor:'white', plot_bgcolor:'white',
     font:{ color:'#3a3a3a', family:'Inter, sans-serif', size:11 } };
