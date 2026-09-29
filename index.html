@@ -2943,9 +2943,10 @@ function terrCtick(f) {
   <div class="chart-card">
     <h4>The two bills &mdash; the same 465,286 seniors, priced twice</h4>
     <p class="muted" style="font-size:12.5px;line-height:1.55;margin:4px 0 10px"><strong>How to read it:</strong> take the identical population &mdash; every Puerto Rico&ndash;born senior (65+) living in the 50 states + DC in 2023 &mdash; and price a year of MA benchmark for each person twice: once at their own state&rsquo;s average CY2027 benchmark, once at Puerto Rico&rsquo;s $777.98. Same people, same program; the only variable is which side of the ocean the benchmark comes from. The difference between the two bills is the $2.97 billion.</p>
-    <div class="stat-grid" style="grid-template-columns:1fr 1fr">
-      <div class="stat-cell"><div class="lbl">At their states&rsquo; benchmarks</div><div class="val accent" id="mig-billstates">&mdash;</div><div class="sub">what the migration prices at today</div></div>
+    <div class="stat-grid" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="stat-cell"><div class="lbl">At their states&rsquo; benchmarks</div><div class="val" id="mig-billstates">&mdash;</div><div class="sub">what the migration prices at today</div></div>
       <div class="stat-cell"><div class="lbl">At Puerto Rico&rsquo;s benchmark</div><div class="val" style="color:#2c5f4b" id="mig-billpr">&mdash;</div><div class="sub">what the identical population would price at on the island</div></div>
+      <div class="stat-cell" style="border-left:3px solid #9b2c2c"><div class="lbl">= Difference &mdash; how much MORE it costs</div><div class="val accent" id="mig-billdiff">&mdash;</div><div class="sub">every year, for the same people, because they are in a state and not in Puerto Rico</div></div>
     </div>
   </div>
   <div class="chart-card">
@@ -4035,6 +4036,7 @@ function renderMigrationCharts() {
   document.getElementById('mig-total').textContent = '\u2248 $' + (totExtra / 1e9).toFixed(2) + 'B/yr';
   document.getElementById('mig-billstates').textContent = '$' + (billStates0 / 1e9).toFixed(2) + 'B/yr';
   document.getElementById('mig-billpr').textContent = '$' + (t23m * mg.pr_bench * 12 / 1e9).toFixed(2) + 'B/yr';
+  document.getElementById('mig-billdiff').textContent = '+$' + (totExtra / 1e9).toFixed(2) + 'B/yr';
   const pipeTot = mg.states.reduce((a, r) => a + (r.p55 || 0), 0);
   document.getElementById('mig-pipe').textContent = fmtNm(pipeTot);
   const pipeTop = mg.states.slice().sort((a, b) => (b.p55 || 0) - (a.p55 || 0)).slice(0, 3);
