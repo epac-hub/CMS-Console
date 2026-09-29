@@ -180,6 +180,28 @@ nav.tabs button.active {
   color: var(--ink);
   border-bottom-color: var(--accent);
 }
+.navgroup {
+  display: flex; flex-wrap: wrap; align-items: stretch; flex: 0 1 auto;
+  min-width: 0; max-width: 100%;
+  border: 1px solid var(--rule); border-radius: 8px;
+  margin: 7px 10px 7px 0; padding: 0 10px;
+}
+.navgroup:last-child { margin-right: 0; }
+.navgroup .navlab {
+  align-self: center; flex: 0 0 auto;
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: #fff; background: var(--accent);
+  padding: 4px 8px; border-radius: 4px; margin-right: 12px;
+  text-decoration: none; white-space: nowrap;
+}
+.navgroup .navlab:hover { opacity: .85; }
+.navgroup button { padding-top: 11px; padding-bottom: 11px; }
+.navgroup button:last-child { margin-right: 0; }
+@media (max-width: 700px) {
+  .navgroup { padding: 0 8px; margin: 6px 8px 6px 0; }
+  .navgroup .navlab { margin-right: 9px; }
+}
 
 main {
   max-width: 1180px; margin: 0 auto;
@@ -1038,21 +1060,33 @@ h2.h2 {
 
 <nav class="tabs">
   <div class="inner">
-    <button class="active" data-tab="overview">Overview</button>
-    <button data-tab="rates">Trajectory</button>
-    <button data-tab="pr">Puerto Rico</button>
-    <button data-tab="muni">Enrollment</button>
-    <button data-tab="duals">The Invisible Duals</button>
-    <button data-tab="circularity">The Circularity Trap</button>
-    <button data-tab="nontucket">From Nantucket to Vieques</button>
-    <button data-tab="territories">The Territories&rsquo; Perspective</button>
-    <button data-tab="stars">5-Star Plans</button>
-    <button data-tab="partd">Part D · Drug Use &amp; Cost</button>
-    <button data-tab="record">CMS on the Record</button>
-    <button data-tab="fy2028">FY2028 Watch</button>
-    <button data-tab="findings">Findings</button>
-    <button data-tab="policy">Policy Position</button>
-    <button data-tab="data">Data &amp; Sources</button>
+    <div class="navgroup">
+      <a class="navlab" href="#overview">The problem</a>
+      <button class="active" data-tab="overview">Overview</button>
+      <button data-tab="rates">Trajectory</button>
+      <button data-tab="pr">Puerto Rico</button>
+    </div>
+    <div class="navgroup">
+      <a class="navlab" href="#muni">The evidence</a>
+      <button data-tab="muni">Enrollment</button>
+      <button data-tab="duals">The Invisible Duals</button>
+      <button data-tab="circularity">The Circularity Trap</button>
+      <button data-tab="nontucket">From Nantucket to Vieques</button>
+      <button data-tab="territories">The Territories&rsquo; Perspective</button>
+      <button data-tab="stars">5-Star Plans</button>
+      <button data-tab="partd">Part D · Drug Use &amp; Cost</button>
+    </div>
+    <div class="navgroup">
+      <a class="navlab" href="#record">The record</a>
+      <button data-tab="record">CMS on the Record</button>
+      <button data-tab="fy2028">FY2028 Watch</button>
+    </div>
+    <div class="navgroup">
+      <a class="navlab" href="#findings">The case</a>
+      <button data-tab="findings">Findings</button>
+      <button data-tab="policy">Policy Position</button>
+      <button data-tab="data">Data &amp; Sources</button>
+    </div>
   </div>
 </nav>
 
