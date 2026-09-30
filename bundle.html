@@ -4304,17 +4304,17 @@ function renderMigrationCharts() {
   const flowNarrow = document.getElementById('chart_mig_flow').offsetWidth < 560;
   Plotly.newPlot('chart_mig_flow', [
     { type:'bar', name:'Everyone who moved (any age)', x:mg.flow_years.map(String), y:mg.flow_pums, width:0.74,
-      marker:{ color:'#e2dcc9', line:{ color:'#c9c0a6', width:1 } },
+      marker:{ color:'#eae5d6', line:{ color:'#cfc7ae', width:1 } },
       text:flowNarrow ? null : mg.flow_pums.map(v => '<b>' + v.toLocaleString('en-US') + '</b>'),
       textposition:'outside', cliponaxis:false,
-      textfont:{ size:10.5, color:'#3a3a3a', family:'Inter, sans-serif' },
+      textfont:{ size:11, color:'#6b6b6b', family:'Inter, sans-serif' },
       customdata:flowCd,
       hovertemplate:'<b>%{x}</b><br>Everyone who moved (any age): %{y:,}<br>Published table B07204: %{customdata[1]:,}<extra></extra>' },
-    { type:'bar', name:'Of them, seniors 65+', x:mg.flow_years.map(String), y:mg.flow_65p, width:0.38,
+    { type:'bar', name:'Of them, seniors 65+', x:mg.flow_years.map(String), y:mg.flow_65p, width:0.5,
       marker:{ color:'#9b2c2c' },
-      text:flowNarrow ? null : mg.flow_65p.map((v, i) => '<b>' + v.toLocaleString('en-US') + '</b> (' + (mg.flow_65p[i] / mg.flow_pums[i] * 100).toFixed(1) + '%)'),
+      text:flowNarrow ? null : mg.flow_65p.map((v, i) => '<b>' + v.toLocaleString('en-US') + '</b><br>' + (mg.flow_65p[i] / mg.flow_pums[i] * 100).toFixed(1) + '%'),
       textposition:'outside', cliponaxis:false,
-      textfont:{ size:10.5, color:'#9b2c2c', family:'Inter, sans-serif' },
+      textfont:{ size:12, color:'#9b2c2c', family:'Inter, sans-serif' },
       customdata:flowCd,
       hovertemplate:'<b>%{x}</b><br>Seniors 65+ who moved: %{y:,} \u2014 %{customdata[2]:.1f}% of the year\u2019s %{customdata[0]:,}<extra></extra>' },
   ], Object.assign({}, baseM, {
