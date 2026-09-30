@@ -2918,10 +2918,10 @@ function terrCtick(f) {
 <p class="src-line" style="margin:-4px 0 14px">Source: U.S. Census Bureau, ACS 1-Year PUMS person files &mdash; <a href="https://www2.census.gov/programs-surveys/acs/data/pums/2013/1-Year/" target="_blank" rel="noopener">2013</a> and <a href="https://www2.census.gov/programs-surveys/acs/data/pums/2024/1-Year/" target="_blank" rel="noopener">2024</a> for the resident counts, every survey year 2013&ndash;2024 for the arrivals; every file linked live in the register at the foot of this tab. Benchmarks: <a href="https://www.cms.gov/files/zip/2027-ma-rate-book.zip" target="_blank" rel="noopener">CMS CY2027 Rate Book</a>. 2024 is the latest ACS published &mdash; the 2025 release is delayed by the Census Bureau (official note in Method 4).</p>
 
 <div class="stat-grid">
-  <div class="stat-cell"><div class="lbl">Per person, per year</div><div class="val accent" id="mig-percap">&mdash;</div><div class="sub">more at the states&rsquo; weighted benchmark than at PR&rsquo;s</div></div>
-  <div class="stat-cell"><div class="lbl">Seniors that moved to the states</div><div class="val" id="mig-t23b">&mdash;</div><div class="sub">born in PR, now living stateside &middot; age 65+, all 50 states + DC, ACS PUMS 2024 &middot; was <span id="mig-t13">&mdash;</span> in 2013</div></div>
-  <div class="stat-cell"><div class="lbl">Peak exodus year</div><div class="val" style="color:#2563eb" id="mig-peak">&mdash;</div><div class="sub">arrivals from PR in the 2018 survey year (post-Mar&iacute;a), all ages &mdash; <strong>16,316 of them seniors 65+</strong> (PUMS)</div></div>
-  <div class="stat-cell"><div class="lbl">Annual benchmark scale</div><div class="val accent" id="mig-total">&mdash;</div><div class="sub">PR-born 65+ &times; (state &minus; PR benchmark) &times; 12, summed over 51 jurisdictions</div></div>
+  <div class="stat-cell"><div class="lbl">Per person, per year</div><div class="val accent" id="mig-percap">&mdash;</div><div class="sub">the extra Medicare benchmark for one senior the moment they live in a state instead of Puerto Rico</div></div>
+  <div class="stat-cell"><div class="lbl">Seniors that moved to the states</div><div class="val" id="mig-t23b">&mdash;</div><div class="sub">people born in Puerto Rico, now aged 65+, living in the 50 states + DC as of 2024 (the latest Census data) &mdash; up from <span id="mig-t13">&mdash;</span> in 2013</div></div>
+  <div class="stat-cell"><div class="lbl">Peak exodus year</div><div class="val" style="color:#2563eb" id="mig-peak">&mdash;</div><div class="sub">people who moved from Puerto Rico to a state in the year after Hurricane Mar&iacute;a (2018 survey), all ages &mdash; <strong>16,316 of them seniors 65+</strong></div></div>
+  <div class="stat-cell"><div class="lbl">The migration bill, per year</div><div class="val accent" id="mig-total">&mdash;</div><div class="sub">what a year of those seniors&rsquo; benchmarks costs in the states, minus what the identical people would cost in Puerto Rico</div></div>
 </div>
 
 <div class="supporting-charts" style="grid-template-columns:1fr">
@@ -2952,8 +2952,8 @@ function terrCtick(f) {
   </div>
   <div class="chart-card">
     <h4>What the same senior costs, state by state &mdash; all 50 states + DC</h4>
-    <p class="muted" style="font-size:12.5px;line-height:1.55;margin:4px 0 10px"><strong>How to read it:</strong> one subtraction per row, left to right. For each state: its PR-born 65+ population (2013 and 2024, ACS PUMS); its average CY2027 MA benchmark (simple average of its counties&rsquo; Parts A&amp;B 0% bonus rates from CMS&rsquo;s published rate book: <a href="https://www.cms.gov/files/zip/2027-ma-rate-book.zip" target="_blank" rel="noopener">2027-ma-rate-book.zip</a> &middot; <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data/2027" target="_blank" rel="noopener">CMS landing page</a> &mdash; Puerto Rico&rsquo;s same-file average is <strong>$777.98</strong>, matching this console&rsquo;s figure to the cent); then the three money columns: <strong>what a year of benchmark for those seniors costs in the state</strong> (count &times; state benchmark &times; 12), <strong>what the identical people would cost in Puerto Rico</strong> (count &times; $777.98 &times; 12), and <strong>the difference &mdash; the extra cost of the migration</strong>. Sorted by that difference &mdash; click any column header to re-sort. <strong>Read it honestly:</strong> this is benchmark-differential arithmetic, not a payment forecast (actual payments run through bids, rebates, quality bonuses and risk adjustment); single-year PUMS estimates for small states carry wide margins of error (the totals are dominated by the large states, where sampling is strong); and the population is <em>only</em> island-born seniors, which understates the full diaspora.</p>
-    <div style="overflow-x:auto;max-height:560px;overflow-y:auto"><table class="mig-table"><thead><tr><th data-k="name" data-lab="State" title="Click to sort">State</th><th data-k="n13" data-lab="PR-born 65+ (2013)" title="Click to sort">PR-born 65+ (2013)</th><th data-k="n24" data-lab="PR-born 65+ (2024)" title="Click to sort">PR-born 65+ (2024)</th><th data-k="bench" data-lab="Benchmark/mo" title="Click to sort">Benchmark/mo</th><th data-k="cs" data-lab="Cost per year IN THE STATE" title="Click to sort">Cost per year IN THE STATE</th><th data-k="cp" data-lab="Same people, cost per year IN PR" title="Click to sort">Same people, cost per year IN PR</th><th data-k="diff" data-lab="= Difference (the migration bill)" title="Click to sort">= Difference (the migration bill)</th></tr></thead><tbody id="mig-tbody"></tbody></table></div>
+    <p class="muted" style="font-size:12.5px;line-height:1.55;margin:4px 0 10px"><strong>How to read it:</strong> one subtraction per row, left to right. For each state: its PR-born 65+ population (2013 and 2024, ACS PUMS) and the percent change between them &mdash; green if it grew, red if it shrank; its average CY2027 MA benchmark (simple average of its counties&rsquo; Parts A&amp;B 0% bonus rates from CMS&rsquo;s published rate book: <a href="https://www.cms.gov/files/zip/2027-ma-rate-book.zip" target="_blank" rel="noopener">2027-ma-rate-book.zip</a> &middot; <a href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data/2027" target="_blank" rel="noopener">CMS landing page</a> &mdash; Puerto Rico&rsquo;s same-file average is <strong>$777.98</strong>, matching this console&rsquo;s figure to the cent); then the three money columns: <strong>what a year of benchmark for those seniors costs in the state</strong> (count &times; state benchmark &times; 12), <strong>what the identical people would cost in Puerto Rico</strong> (count &times; $777.98 &times; 12), and <strong>the difference &mdash; the extra cost of the migration</strong>. Sorted by that difference &mdash; click any column header to re-sort. <strong>Read it honestly:</strong> this is benchmark-differential arithmetic, not a payment forecast (actual payments run through bids, rebates, quality bonuses and risk adjustment); single-year PUMS estimates for small states carry wide margins of error (the totals are dominated by the large states, where sampling is strong); and the population is <em>only</em> island-born seniors, which understates the full diaspora.</p>
+    <div style="overflow-x:auto;max-height:560px;overflow-y:auto"><table class="mig-table"><thead><tr><th data-k="name" data-lab="State" title="Click to sort">State</th><th data-k="n13" data-lab="PR-born 65+ (2013)" title="Click to sort">PR-born 65+ (2013)</th><th data-k="n24" data-lab="PR-born 65+ (2024)" title="Click to sort">PR-born 65+ (2024)</th><th data-k="pct" data-lab="Change 2013&rarr;2024" title="Click to sort">Change 2013&rarr;2024</th><th data-k="bench" data-lab="Benchmark/mo" title="Click to sort">Benchmark/mo</th><th data-k="cs" data-lab="Cost per year IN THE STATE" title="Click to sort">Cost per year IN THE STATE</th><th data-k="cp" data-lab="Same people, cost per year IN PR" title="Click to sort">Same people, cost per year IN PR</th><th data-k="diff" data-lab="= Difference (the migration bill)" title="Click to sort">= Difference (the migration bill)</th></tr></thead><tbody id="mig-tbody"></tbody></table></div>
   </div>
 </div>
 
@@ -4054,10 +4054,17 @@ function renderMigrationCharts() {
 
   const tb = document.getElementById('mig-tbody');
   const costSt = r => r.n24 * r.bench * 12, costPr = r => r.n24 * mg.pr_bench * 12;
+  const pctTd = (a, b) => {
+    if (!a) return '<td>\u2014</td>';
+    const p = (b - a) / a * 100, up = p >= 0;
+    return '<td><span style="color:' + (up ? '#2c5f4b' : '#9b2c2c') + ';font-weight:600">' +
+      (up ? '+' : '\u2212') + Math.abs(p).toFixed(0) + '%</span></td>';
+  };
   const totalsRow = '<tr class="tot"><td>TOTAL &mdash; 50 states + DC</td><td>' + fmtNm(t13m) + '</td><td>' + fmtNm(t24m) +
-    '</td><td></td><td>$' + fmtNm(Math.round(billStates0)) + '</td><td>$' + fmtNm(Math.round(t24m * mg.pr_bench * 12)) +
+    '</td>' + pctTd(t13m, t24m) + '<td></td><td>$' + fmtNm(Math.round(billStates0)) + '</td><td>$' + fmtNm(Math.round(t24m * mg.pr_bench * 12)) +
     '</td><td><b>$' + fmtNm(Math.round(totExtra)) + '</b></td></tr>';
-  const migSorts = { name: r => r.name, n13: r => r.n13, n24: r => r.n24, bench: r => r.bench,
+  const migSorts = { name: r => r.name, n13: r => r.n13, n24: r => r.n24,
+    pct: r => r.n13 > 0 ? (r.n24 - r.n13) / r.n13 : -1e9, bench: r => r.bench,
     cs: costSt, cp: costPr, diff: r => costSt(r) - costPr(r) };
   let migKey = 'diff', migDir = -1;
   function buildMigTable() {
@@ -4067,7 +4074,7 @@ function renderMigrationCharts() {
     });
     tb.innerHTML = rows.map(r =>
       '<tr><td>' + r.name + '</td><td>' + fmtNm(r.n13) + '</td><td>' + fmtNm(r.n24) +
-      '</td><td>$' + fmtNm(Math.round(r.bench)) +
+      '</td>' + pctTd(r.n13, r.n24) + '<td>$' + fmtNm(Math.round(r.bench)) +
       '</td><td>$' + fmtNm(Math.round(costSt(r))) +
       '</td><td>$' + fmtNm(Math.round(costPr(r))) +
       '</td><td><b>$' + fmtNm(Math.round(costSt(r) - costPr(r))) + '</b></td></tr>'
