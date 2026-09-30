@@ -4117,11 +4117,11 @@ function renderMigrationCharts() {
       hovertemplate:'<b>%{y}</b> \u2014 2024<br>%{x:,} PR-born residents 65+<extra></extra>' },
   ], Object.assign({}, baseM, {
     barmode:'group', bargap:0.32, bargroupgap:0.08,
-    margin:{ l:120, r:76, t:8, b:36 },
+    margin:{ l:120, r:76, t:stNarrow ? 64 : 92, b:36 },
     xaxis:{ title:{ text:'PR-born residents aged 65+', font:{ size:10.5 } }, gridcolor:'#eceadf', tickformat:',',
       zeroline:false, range:[0, Math.max.apply(null, top.map(r => r.n24)) * (stNarrow ? 1.32 : 1.1)] },
     yaxis:{ automargin:true },
-    legend:{ orientation:'h', x:0.5, xanchor:'center', y:stNarrow ? 1.045 : 1.06, font:{ size:stNarrow ? 16 : 26 } },
+    legend:{ orientation:'v', x:0, xanchor:'left', y:1.0, yanchor:'bottom', font:{ size:stNarrow ? 16 : 26 }, tracegroupgap:0 },
     annotations:stNarrow ? [] : [
       { x:0, y:namesM.length - 1 + 0.17, xanchor:'left', xshift:8, text:'<b>2024</b>', showarrow:false,
         font:{ size:12.5, color:'#ffffff', family:'Inter, sans-serif' } },
