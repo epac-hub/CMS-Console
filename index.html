@@ -2927,8 +2927,8 @@ function terrCtick(f) {
 <div class="supporting-charts" style="grid-template-columns:1fr">
   <div class="chart-card">
     <h4>Puerto Rico&ndash;born population 65+ by state &mdash; 2013 vs 2024 (top 15 states)</h4>
-    <p class="muted" style="font-size:12.5px;line-height:1.55;margin:4px 0 10px"><strong>How to read it:</strong> the red bar is how many people born in Puerto Rico, now aged 65 or older, live in that state as of 2024, with the exact count at the end of the bar; the blue tick on the same row is where that number stood in 2013 &mdash; the gap is eleven years of migration. Florida&rsquo;s senior boricua population grew 55%; Ohio&rsquo;s more than doubled; Georgia&rsquo;s more than tripled; all 50 states + DC together: 336,455 &rarr; 473,944 (+41%). Weighted counts from the Census Bureau&rsquo;s ACS 1-Year PUMS microdata (place of birth = Puerto Rico, code verified in both years&rsquo; dictionaries); the chart shows the top 15, the table below carries every jurisdiction. Hover any bar for the exact count.</p>
-    <div class="plot" id="chart_mig_states" style="height:560px"></div>
+    <p class="muted" style="font-size:12.5px;line-height:1.55;margin:4px 0 10px"><strong>How to read it:</strong> the red bar is how many people born in Puerto Rico, now aged 65 or older, live in that state as of 2024, with the exact count at the end of the bar; the blue bar under it is the same count in 2013 &mdash; the distance between the two bars is eleven years of migration. Florida&rsquo;s senior boricua population grew 55%; Ohio&rsquo;s more than doubled; Georgia&rsquo;s more than tripled; all 50 states + DC together: 336,455 &rarr; 473,944 (+41%). Weighted counts from the Census Bureau&rsquo;s ACS 1-Year PUMS microdata (place of birth = Puerto Rico, code verified in both years&rsquo; dictionaries); the chart shows the top 15, the table below carries every jurisdiction. Hover any bar for the exact count.</p>
+    <div class="plot" id="chart_mig_states" style="height:720px"></div>
     <p class="src-line" style="margin:10px 0 0">Source: U.S. Census Bureau, ACS 1-Year PUMS person files, <a href="https://www2.census.gov/programs-surveys/acs/data/pums/2013/1-Year/" target="_blank" rel="noopener">2013 (directory)</a> &amp; <a href="https://www2.census.gov/programs-surveys/acs/data/pums/2024/1-Year/" target="_blank" rel="noopener">2024 (directory)</a>, all 50 states + DC &mdash; filter POBP=072 &ldquo;Puerto Rico&rdquo; (<a href="https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMSDataDict13.txt" target="_blank" rel="noopener">2013 dictionary</a> &middot; <a href="https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2024.csv" target="_blank" rel="noopener">2024 dictionary</a>), AGEP&ge;65, PWGTP-weighted; every one of the 102 per-state files individually linked in the register below. Retrieved and tabulated 09-30-2026 (UTC).</p>
   </div>
   <div class="chart-card">
@@ -4101,24 +4101,27 @@ function renderMigrationCharts() {
 
   const top = mg.states.slice().sort((a, b) => b.n24 - a.n24).slice(0, 15);
   const namesM = top.map(r => r.name).reverse();
+  const stNarrow = document.getElementById('chart_mig_states').offsetWidth < 560;
   Plotly.newPlot('chart_mig_states', [
-    { type:'scatter', mode:'markers', name:'Where it stood in 2013',
-      y:namesM, x:top.map(r => r.n13).reverse(),
-      marker:{ symbol:'line-ns-open', size:14, color:'#2563eb', line:{ width:3, color:'#2563eb' } },
+    { type:'bar', orientation:'h', name:'2013', y:namesM, x:top.map(r => r.n13).reverse(),
+      marker:{ color:'#2563eb' },
+      text:stNarrow ? null : top.map(r => r.n13.toLocaleString('en-US')).reverse(),
+      textposition:'outside', cliponaxis:false,
+      textfont:{ size:10, color:'#2563eb', family:'Inter, sans-serif' },
       hovertemplate:'<b>%{y}</b> \u2014 2013<br>%{x:,} PR-born residents 65+<extra></extra>' },
-    { type:'bar', orientation:'h', name:'Living there in 2024',
-      y:namesM, x:top.map(r => r.n24).reverse(), marker:{ color:'#9b2c2c' },
+    { type:'bar', orientation:'h', name:'2024', y:namesM, x:top.map(r => r.n24).reverse(),
+      marker:{ color:'#9b2c2c' },
+      text:stNarrow ? null : top.map(r => '<b>' + r.n24.toLocaleString('en-US') + '</b>').reverse(),
+      textposition:'outside', cliponaxis:false,
+      textfont:{ size:10.5, color:'#9b2c2c', family:'Inter, sans-serif' },
       hovertemplate:'<b>%{y}</b> \u2014 2024<br>%{x:,} PR-born residents 65+<extra></extra>' },
-    { type:'scatter', mode:'text', showlegend:false, hoverinfo:'skip', cliponaxis:false,
-      y:namesM, x:top.map(r => Math.max(r.n24, r.n13) + 1800).reverse(),
-      text:top.map(r => r.n24.toLocaleString('en-US')).reverse(),
-      textposition:'middle right', textfont:{ size:10.5, color:'#3a3a3a', family:'Inter, sans-serif' } },
   ], Object.assign({}, baseM, {
-    bargap:0.38,
-    margin:{ l:120, r:70, t:8, b:36 },
-    xaxis:{ title:{ text:'PR-born residents aged 65+', font:{ size:10.5 } }, gridcolor:'#eceadf', tickformat:',', zeroline:false },
+    barmode:'group', bargap:0.32, bargroupgap:0.08,
+    margin:{ l:120, r:76, t:8, b:36 },
+    xaxis:{ title:{ text:'PR-born residents aged 65+', font:{ size:10.5 } }, gridcolor:'#eceadf', tickformat:',',
+      zeroline:false, range:[0, Math.max.apply(null, top.map(r => r.n24)) * 1.1] },
     yaxis:{ automargin:true },
-    legend:{ orientation:'h', x:0.5, y:0.04, font:{ size:11 } },
+    legend:{ orientation:'h', x:0.5, xanchor:'center', y:1.03, font:{ size:12.5 }, traceorder:'reversed' },
   }), cfgm);
 
   const flowCd = mg.flow_years.map((y, i) => [mg.flow_pums[i], mg.flow_vals[i], mg.flow_65p[i] / mg.flow_pums[i] * 100]);
