@@ -4121,7 +4121,7 @@ function renderMigrationCharts() {
     xaxis:{ title:{ text:'PR-born residents aged 65+', font:{ size:10.5 } }, gridcolor:'#eceadf', tickformat:',',
       zeroline:false, range:[0, Math.max.apply(null, top.map(r => r.n24)) * (stNarrow ? 1.32 : 1.1)] },
     yaxis:{ automargin:true },
-    legend:{ orientation:'v', x:0.5, xanchor:'center', y:1.0, yanchor:'bottom', font:{ size:stNarrow ? 16 : 26 }, tracegroupgap:0, traceorder:'reversed',
+    legend:{ orientation:'v', x:0.5, xanchor:'center', y:1.0, yanchor:'bottom', font:{ size:stNarrow ? 16 : 26 }, tracegroupgap:0,
       title:{ text:'<b>Year</b>', font:{ size:stNarrow ? 15 : 22, color:'#3a3a3a', family:'Inter, sans-serif' }, side:'top' } },
     annotations:stNarrow ? [] : [
       { x:0, y:namesM.length - 1 + 0.17, xanchor:'left', xshift:8, text:'<b>2024</b>', showarrow:false,
