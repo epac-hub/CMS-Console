@@ -4300,7 +4300,13 @@ function renderMigrationCharts() {
     xaxis:{ title:{ text:'PR-born residents aged 65+', font:{ size:10.5 } }, gridcolor:'#eceadf', tickformat:',',
       zeroline:false, range:[0, Math.max.apply(null, top.map(r => r.n24)) * 1.1] },
     yaxis:{ automargin:true },
-    legend:{ orientation:'h', x:0.5, xanchor:'center', y:1.03, font:{ size:12.5 }, traceorder:'reversed' },
+    legend:{ orientation:'h', x:0.5, xanchor:'center', y:1.045, font:{ size:14 }, traceorder:'reversed' },
+    annotations:stNarrow ? [] : [
+      { x:top[0].n24, y:namesM.length - 1 + 0.17, xanchor:'right', xshift:-8, text:'<b>2024</b>', showarrow:false,
+        font:{ size:12, color:'#ffffff', family:'Inter, sans-serif' } },
+      { x:top[0].n13, y:namesM.length - 1 - 0.17, xanchor:'right', xshift:-8, text:'<b>2013</b>', showarrow:false,
+        font:{ size:12, color:'#ffffff', family:'Inter, sans-serif' } },
+    ],
   }), cfgm);
 
   const flowCd = mg.flow_years.map((y, i) => [mg.flow_pums[i], mg.flow_vals[i], mg.flow_65p[i] / mg.flow_pums[i] * 100]);
