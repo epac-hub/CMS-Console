@@ -63,6 +63,22 @@
   td:first-child{ text-align:left; font-weight:500; }
   td.y13{ color:var(--data); }
   td.y24{ color:var(--red); font-weight:700; }
+  .leg{ font-size:10px; color:var(--mut); font-weight:600; letter-spacing:.05em;
+    text-transform:uppercase; margin-bottom:7px; }
+  .leg i{ display:inline-block; width:9px; height:9px; border-radius:2px; vertical-align:-1px; margin:0 3px 0 10px; }
+  .leg i.l13{ background:var(--data); } .leg i.l24{ background:var(--red); }
+  .srow{ margin-bottom:7px; }
+  .sname{ font-size:11.5px; font-weight:600; margin-bottom:2px; }
+  .sname em{ font-style:normal; font-weight:600; color:var(--mut); font-size:10px; margin-left:5px; }
+  .strack{ display:flex; align-items:center; gap:6px; margin-bottom:2px; }
+  .sbar{ height:9px; border-radius:2px; }
+  .sbar.s24{ background:var(--red); }
+  .sbar.s13{ background:var(--data); }
+  .sval{ font-size:10px; font-variant-numeric:tabular-nums; font-weight:600; line-height:1; }
+  .sval.v24{ color:var(--red); } .sval.v13{ color:var(--data); }
+  .stotal{ border-top:1px solid var(--line); margin-top:8px; padding-top:7px;
+    font-size:11.5px; font-weight:600; }
+  .stotal b{ color:var(--red); } .stotal i{ font-style:normal; color:var(--data); }
   .pts{ list-style:none; }
   .pts li{ margin-bottom:7px; padding-left:15px; position:relative; font-size:12px; line-height:1.45;
     color:var(--ink2); }
@@ -104,6 +120,12 @@
     h2{ font-size:14px; margin-bottom:5px; }
     table{ font-size:9.8px; }
     td{ padding:3px 5px; }
+    .srow{ margin-bottom:5px; }
+    .sname{ font-size:10px; margin-bottom:1px; }
+    .sbar{ height:7px; }
+    .sval{ font-size:8.8px; }
+    .stotal{ font-size:10px; margin-top:6px; padding-top:5px; }
+    .leg{ font-size:8.8px; margin-bottom:5px; }
     .pts li{ font-size:10px; margin-bottom:5px; line-height:1.38; }
     .closer{ padding:8px 14px; font-size:13px; margin-bottom:8px; }
     .src{ font-size:8.1px; line-height:1.42; }
@@ -117,7 +139,7 @@
   <div class="kick">The Healthcare Paradox</div>
   <h1>The Relocation Bill</h1>
   <div class="tag">One ticket, one flight, no passport needed &mdash; and a 1.68&times; surcharge included.</div>
-  <div class="site">A finding of the CMS Console &middot; <a href="https://healthconsole.org/">healthconsole.org</a> &middot; every figure verified against the primary federal file</div>
+  <div class="site">A finding of the CMS Console &middot; <a href="https://healthconsole.org/">healthconsole.org</a> &middot; every figure verified against the primary federal file &middot; data verified 10-05-2026 (UTC)</div>
 
   <div class="lead">Medicare&rsquo;s underpayment of Puerto Rico does not save the federal government money
   &mdash; it relocates the cost: every senior who leaves the island becomes, on arrival in a state, the same
@@ -177,17 +199,23 @@
   <div class="cols">
     <div class="card">
       <h2>Where they live &mdash; 2013 vs 2024</h2>
-      <table>
-        <thead><tr><th>State</th><th>2013</th><th>2024</th><th>Change</th></tr></thead>
-        <tbody>
-          <tr><td>Florida</td><td class="y13">81,639</td><td class="y24">126,754</td><td>+55%</td></tr>
-          <tr><td>New York</td><td class="y13">103,658</td><td class="y24">103,926</td><td>0%</td></tr>
-          <tr><td>New Jersey</td><td class="y13">32,703</td><td class="y24">45,687</td><td>+40%</td></tr>
-          <tr><td>Pennsylvania</td><td class="y13">21,228</td><td class="y24">33,421</td><td>+57%</td></tr>
-          <tr><td>Massachusetts</td><td class="y13">13,347</td><td class="y24">24,618</td><td>+84%</td></tr>
-          <tr><td><b>All 50 states + DC</b></td><td class="y13"><b>336,455</b></td><td class="y24"><b>473,944</b></td><td><b>+41%</b></td></tr>
-        </tbody>
-      </table>
+      <div class="leg">Year:<i class="l13"></i>2013<i class="l24"></i>2024</div>
+      <div class="srow"><div class="sname">Florida <em>+55%</em></div>
+        <div class="strack"><div class="sbar s24" style="width:72%"></div><span class="sval v24">126,754</span></div>
+        <div class="strack"><div class="sbar s13" style="width:46.4%"></div><span class="sval v13">81,639</span></div></div>
+      <div class="srow"><div class="sname">New York <em>0%</em></div>
+        <div class="strack"><div class="sbar s24" style="width:59%"></div><span class="sval v24">103,926</span></div>
+        <div class="strack"><div class="sbar s13" style="width:58.9%"></div><span class="sval v13">103,658</span></div></div>
+      <div class="srow"><div class="sname">New Jersey <em>+40%</em></div>
+        <div class="strack"><div class="sbar s24" style="width:25.9%"></div><span class="sval v24">45,687</span></div>
+        <div class="strack"><div class="sbar s13" style="width:18.6%"></div><span class="sval v13">32,703</span></div></div>
+      <div class="srow"><div class="sname">Pennsylvania <em>+57%</em></div>
+        <div class="strack"><div class="sbar s24" style="width:19%"></div><span class="sval v24">33,421</span></div>
+        <div class="strack"><div class="sbar s13" style="width:12.1%"></div><span class="sval v13">21,228</span></div></div>
+      <div class="srow"><div class="sname">Massachusetts <em>+84%</em></div>
+        <div class="strack"><div class="sbar s24" style="width:14%"></div><span class="sval v24">24,618</span></div>
+        <div class="strack"><div class="sbar s13" style="width:7.6%"></div><span class="sval v13">13,347</span></div></div>
+      <div class="stotal">All 50 states + DC: <i>336,455</i> &rarr; <b>473,944</b> &nbsp;(+41%)</div>
     </div>
     <div class="card">
       <h2>What the numbers mean</h2>
