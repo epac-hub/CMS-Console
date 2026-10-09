@@ -76,6 +76,14 @@ product. The established, non-negotiable norms visible across the PR history:
   live re-run). Do not launder an estimate into a "reproduces to the cent" claim.
 - Prefer live-verifiable, reproducible checks. If you add a figure, add its
   source line too.
+- **Annual Star Ratings cycle**: CMS publishes next-year Star Ratings in
+  early–mid October (2027 ratings: Oct 8, 2026). File URLs change naming
+  year to year (2027 used date-suffixed names like
+  `2027-star-ratings-data-tables-oct-8-2026.zip`) — never conclude "not
+  published" from a 404 on a guessed URL; check the newsroom fact-sheet
+  page and the Part C & D Performance Data page, and a news search if in
+  doubt. Mid-year (June–July) QBP recalculations can revise the prior
+  year's published counts (2026: 18 five-star contracts → 22).
 
 ## Verification before you commit
 
