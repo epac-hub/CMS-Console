@@ -84,6 +84,17 @@ product. The established, non-negotiable norms visible across the PR history:
   page and the Part C & D Performance Data page, and a news search if in
   doubt. Mid-year (June–July) QBP recalculations can revise the prior
   year's published counts (2026: 18 five-star contracts → 22).
+  **CALENDAR MANDATE (Elliot, 10-09-2026): every October is a scheduled
+  Star Ratings update.** The console must reflect the new ratings across
+  every touchpoint (5-Star tab, PR tab, Enrollment, Overview,
+  Territories, Findings, payload `pr_star_ratings`, `STARS5`) within
+  days of the CMS release — never more than 7. Two standing Routines
+  enforce this and must not be removed: the weekly refresh's C6 watch
+  (probes every Monday, Sept 15–Nov 30) and the annual October trigger
+  (fires Oct 1/8/15/22 each year). Every figure links to the live CMS
+  fact sheet and data-tables URLs of the new cycle — and watch for
+  stragglers: chart-internal label strings (trace names, axis titles,
+  printed bar text) have lagged a payload update before (PR #127).
 
 ## Verification before you commit
 
