@@ -1517,7 +1517,7 @@ h2.h2 {
 <div class="stat-grid">
   <div class="stat-cell">
     <div class="lbl">Active MA contracts</div>
-    <div class="val">6</div>
+    <div class="val" id="pr-active-contracts">7</div>
     <div class="sub">H-contracts, 78 municipios</div>
   </div>
   <div class="stat-cell">
@@ -5313,6 +5313,8 @@ D.pr_star_ratings.forEach(r => {
   };
 });
 const prTotal = D.pr_market_2026.reduce((s,r)=>s+(r.enr||0),0);
+const pacEl = document.getElementById('pr-active-contracts');
+if (pacEl) pacEl.textContent = D.pr_market_2026.length;
 const prMarketBody = document.getElementById('pr-market-body');
 D.pr_market_2026.forEach(r => {
   const rating = ratingsByContract[r.contract_number];
