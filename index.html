@@ -5927,11 +5927,29 @@ function renderGraph() {
 <script>
 /* Vercel Web Analytics (anonymous, cookieless). Loads ONLY on healthconsole.org;
    a no-op on GitHub Pages, the Claude artifact, and local files — no external host is
-   ever contacted from those contexts. */
+   ever contacted from those contexts. Engagement milestones (added 10-25-2026, per
+   Elliot): fires one event when a visitor's VISIBLE time on the page crosses
+   30s / 2min / 5min / 15min — counts only while the tab is actually in view,
+   no cookies, no identifiers, nothing per-user. */
 if (/(^|\.)healthconsole\.org$/.test(location.hostname)) {
   var _va = document.createElement('script');
   _va.defer = true; _va.src = '/_vercel/insights/script.js';
   document.head.appendChild(_va);
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  var _etSec = 0, _etLast = Date.now(), _etFired = {};
+  var _etMarks = [[30, 'engaged-30s'], [120, 'engaged-2min'], [300, 'engaged-5min'], [900, 'engaged-15min']];
+  setInterval(function () {
+    var _now = Date.now();
+    if (!document.hidden) _etSec += (_now - _etLast) / 1000;
+    _etLast = _now;
+    for (var _i = 0; _i < _etMarks.length; _i++) {
+      if (_etSec >= _etMarks[_i][0] && !_etFired[_etMarks[_i][1]]) {
+        _etFired[_etMarks[_i][1]] = 1;
+        window.va('event', { name: _etMarks[_i][1] });
+      }
+    }
+  }, 5000);
+  document.addEventListener('visibilitychange', function () { _etLast = Date.now(); });
 }
 </script>
 </body>
